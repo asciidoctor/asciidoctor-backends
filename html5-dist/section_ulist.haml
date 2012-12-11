@@ -1,0 +1,5 @@
+-#%div{:id=>(!anchor.nil? ? anchor : nil), :class=>"ulist#{!role.nil? ? ' ' + role : ''}"}
+.ulist
+  %ul
+    - content.each do |li|
+      %li=li

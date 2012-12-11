@@ -1,0 +1,10 @@
+[float]
+= Asciidoctor Backends
+
+This repository contains backends (i.e., templates) for https://github.com/erebor/asciidoctor[asciidoctor], a Ruby port of http://asciidoc.org[AsciiDoc].
+
+The -dist suffix on a backend indicates it aims to be a replica of one of the backends distributed with AsciiDoc.
+
+== Usage Instructions
+
+Coming soon...

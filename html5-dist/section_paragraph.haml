@@ -1,0 +1,9 @@
+- if content.chomp.empty?
+- elsif content.chomp == '<hr>'
+  =content
+- else
+  .paragraph<
+    - if not title.nil?
+      .title=title
+    -#%p=content.tr("\n", ' ')
+    %p=content

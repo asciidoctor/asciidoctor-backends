@@ -1,0 +1,5 @@
+- if content.chomp.empty?
+- elsif content.chomp == '<hr>'
+  %simpara <?asciidoc-hr?>
+- else
+  %simpara=content
