@@ -1,7 +1,14 @@
-.dlist
+%div{:id=>id, :class=>['dlist', attr(:role)]}
+  - if title
+    .title=title
   %dl
     - content.each do |dt, dd|
-      %dt.hdlist1=dt
-      - unless dd.nil? || dd.empty?
-        %dd=dd
-
+      %dt.hdlist1<
+        - if !dt.anchor.nil? and !dt.anchor.empty?
+          %a{:id=>dt.anchor}>
+        =dt.text
+      - if !dd.nil?
+        %dd
+          %p=dd.text
+          - if !dd.blocks.empty?
+            =dd.content

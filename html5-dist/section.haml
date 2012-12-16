@@ -1,4 +1,4 @@
 %div{:class=>"sect#{level}"}
-  - haml_tag "h#{level+1}##{!anchor.nil? ? anchor : section_id}", name
+  - haml_tag "h#{level+1}##{id ? id : section_id}", name
   .sectionbody
     =content

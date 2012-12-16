@@ -1,4 +1,9 @@
-.olist.arabic
-  %ol.arabic
+%div{:id=>id, :class=>['olist', attr(:style), attr(:role)]}
+  - if title
+    .title=title
+  %ol{:class=>attr(:style), :start=>attr(:start)}
     - content.each do |li|
-      %li=li
+      %li
+        %p=li.text
+        - if !li.blocks.empty?
+          =li.content

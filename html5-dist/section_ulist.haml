@@ -1,5 +1,9 @@
--#%div{:id=>(!anchor.nil? ? anchor : nil), :class=>"ulist#{!role.nil? ? ' ' + role : ''}"}
-.ulist
+%div{:id=>id, :class=>['ulist', attr(:role)]}
+  - if title
+    .title=title
   %ul
     - content.each do |li|
-      %li=li
+      %li
+        %p=li.text
+        - if !li.blocks.empty?
+          =li.content

@@ -1,19 +1,22 @@
 !!! 5
 %html(lang='en')
   %head
-    -#%meta(http-equiv='Content-Type' charset='UTF-8')
     %meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
-    %meta(name='generator' content="Asciidoctor #{Asciidoctor::VERSION}")
-    %title=header.name
-  %body.article
-    - if header
-      #header
-        %h1=header.name
-      #content
-        -# TODO preamble missing
-        =content
-      #footnotes<
-        %hr
-      #footer
-        #footer-text
-          Lasted updated #{::Time.new.strftime('%Y-%m-%d %H:%m:%s %Z')}
+    %meta(name='generator' content="Asciidoctor #{attr :asciidoctor_version}")
+    %title="#{title ? title : doctitle}"
+    %link(rel="stylesheet" href="asciidoc.css" type="text/css")
+  %body{:class=>attr(:doctype)}
+    -# asciidoc does leave in an empty header div even if there's no doctitle
+    #header
+      - if !notitle and doctitle
+        %h1=doctitle
+        - if defined?(author)
+          %span#author=author
+          %br
+    #content
+      =content
+    -##footnotes<
+    -#  %hr
+    #footer
+      #footer-text
+        Lasted updated #{attr :localdatetime}
