@@ -1,0 +1,12 @@
+- if type == 'emphasis'
+  %emphasis=content
+- elsif type == 'strong'
+  %emphasis(role='strong')=content
+- elsif type == 'literal'
+  %literal=content
+- elsif type == 'superscript'
+  %superscript=content
+- elsif type == 'subscript'
+  %subscript=content
+- else
+  =content
