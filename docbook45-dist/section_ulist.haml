@@ -1,3 +1,8 @@
 %itemizedlist
+  - if title
+    %title=title
   - content.each do |li|
-    %listitem=li
+    %listitem
+      %simpara=li.text
+      - if !li.blocks.empty?
+        =li.content
