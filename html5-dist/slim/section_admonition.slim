@@ -1,0 +1,10 @@
+.admonitionblock class=attr(:role) id=id
+  table
+    tr
+      td.icon
+        - if attr? :caption
+          .title==attr :caption
+      td
+        - if title
+          .title=title
+        ==content

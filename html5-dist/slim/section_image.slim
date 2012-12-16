@@ -1,0 +1,9 @@
+.imageblock class=attr(:role) id=id
+  .content
+    - if attr :link
+      a.image href=attr(:link)
+        img src=attr(:target) alt=attr(:alt) width=attr(:width) height=attr(:height)
+    - else
+      img src=attr(:target) alt=attr(:alt) width=attr(:width) height=attr(:height)
+  - if title
+    .title==title
