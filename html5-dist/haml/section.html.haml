@@ -1,4 +1,7 @@
 %div{:class=>"sect#{level}"}
   - haml_tag "h#{level+1}##{id ? id : section_id}", name
-  .sectionbody
+  - if level == 1
+    .sectionbody
+      =content
+  - else
     =content

@@ -7,8 +7,8 @@
         - if !dt.anchor.nil? and !dt.anchor.empty?
           %a{:id=>dt.anchor}>
         =dt.text
-      - if !dd.nil?
+      - unless dd.nil?
         %dd
           %p=dd.text
-          - if !dd.blocks.empty?
+          - unless dd.blocks.empty?
             =dd.content

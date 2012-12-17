@@ -1,18 +1,24 @@
 !!! 5
 %html(lang='en')
   %head
-    %meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
-    %meta(name='generator' content="Asciidoctor #{attr :asciidoctor_version}")
-    %title="#{title ? title : doctitle}"
+    %meta(http-equiv='Content-Type' content="text/html; charset=#{attr :encoding}")
+    %meta(name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}")
+    - if attr? :description
+      %meta(name='description'){:content=>(attr :description)}
+    - if attr? :keywords 
+      %meta(name='keywords'){:content=>(attr :keywords)}
+    %title=doctitle
     %link(rel="stylesheet" href="asciidoc.css" type="text/css")
   %body{:class=>attr(:doctype)}
-    -# asciidoc does leave in an empty header div even if there's no doctitle
-    #header
-      - if !notitle and doctitle
-        %h1=doctitle
-        - if defined?(author)
-          %span#author=author
-          %br
+    -# Asciidoctor-specific feature to disable header entirely
+    - unless noheader
+      -# asciidoc leaves an empty header div even if there's no doctitle
+      #header
+        - unless notitle or !has_header
+          %h1=doctitle
+          - if attr? :author
+            %span#author=attr(:author)
+            %br
     #content
       =content
     -##footnotes<
