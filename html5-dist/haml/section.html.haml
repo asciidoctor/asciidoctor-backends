@@ -1,7 +1,10 @@
-%div{:class=>"sect#{level}"}
-  - haml_tag "h#{level+1}##{id ? id : section_id}", name
-  - if level == 1
-    .sectionbody
+- if attr(:doctype) == 'book'
+  %h1{id => id ? id : section_id}=title
+- else
+  %div{:class=>"sect#{level}"}
+    - haml_tag "h#{level+1}##{id ? id : section_id}", title
+    - if level == 1
+      .sectionbody
+        =content
+    - else
       =content
-  - else
-    =content
