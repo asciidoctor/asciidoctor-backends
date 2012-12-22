@@ -1,0 +1,11 @@
+.admonitionblock class=(attr :role) id=id
+  table
+    tr
+      td.icon
+        / if icons are enabled, an icon would go here
+        - if attr? :caption
+          .title=attr :caption
+      td
+        - if title
+          .title=title
+        =content

@@ -1,9 +1,9 @@
-.ulist class=attr(:role) id=id
+.ulist class=(attr :role) id=id
   - if title
     .title=title
   ul
     - content.each do |li|
       li
-        p==li.text
+        p=li.text
         - if !li.blocks.empty?
-          ==li.content
+          =li.content

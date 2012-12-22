@@ -1,0 +1,34 @@
+doctype 5
+html
+  head lang=(attr :lang, 'en')
+    meta http-equiv='Content-Type' content='text/html; charset=#{attr :encoding, 'UTF-8'}'
+    - if attr? :description
+      meta name='generator' content=(attr :description)
+    - if attr? :keywords
+      meta name='description' content=(attr :keywords)
+    title=doctitle
+    link rel='stylesheet' href='asciidoc.css' type='text/css'
+  body class=(attr :doctype)
+    / Asciidoctor-specific feature to disable header entirely
+    - unless noheader
+      / AsciiDoc leaves an empty header div even if there's no doctitle
+      #header
+        - unless notitle or !has_header
+          h1=header.title
+        - if attr? :author
+          span#author=attr :author
+          br
+        - if attr? :email
+          span#email.monospaced &lt;#{attr :email}&gt;
+          br
+        - if attr? :revnumber
+          span#revnumber version #{attr :revnumber}#{(attr? :revdate) ? ',' : ''}
+        - if attr? :revdate
+          span#revdate=attr :revdate
+        - if attr? :revremark
+          br
+          span#revremark=attr :revremark
+      #content
+        =content
+      #footer
+        #footer-text Lasted updated #{attr :localdatetime}
