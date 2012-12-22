@@ -1,4 +1,4 @@
-%div{:id=>id, :class=>['quoteblock', attr(:role)]}
+%div{:id=>id, :class=>['quoteblock', (attr :role)]}
   - if title
     .title=title
   .content=content
@@ -8,4 +8,4 @@
     - if attr? :attribution
       - if attr? :citetitle
         %br
-      = "&#8212; #{attr :attribution}"
+      ="&#8212; #{attr :attribution}"

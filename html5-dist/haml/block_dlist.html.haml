@@ -1,4 +1,4 @@
-%div{:id=>id, :class=>['dlist', attr(:role)]}
+%div{:id=>id, :class=>['dlist', (attr :role)]}
   - if title
     .title=title
   %dl
@@ -9,6 +9,7 @@
         =dt.text
       - unless dd.nil?
         %dd
-          %p=dd.text
+          - unless dd.text.empty?
+            %p=dd.text
           - unless dd.blocks.empty?
             =dd.content

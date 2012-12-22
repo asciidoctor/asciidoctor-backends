@@ -1,6 +1,6 @@
-%div{:id=>id, :class=>['listingblock', attr(:role)]}
+%div{:id=>id, :class=>['listingblock', (attr :role)]}
   - if title
     .title=title
   .content
-    %pre{:class=>attr(:language)}
+    %pre{:class=>(attr :language)}
       %code=content

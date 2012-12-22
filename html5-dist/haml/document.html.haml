@@ -1,5 +1,5 @@
 !!! 5
-%html(lang='en')
+%html{:lang=>(attr :lang, 'en')}
   %head
     %meta(http-equiv='Content-Type' content="text/html; charset=#{attr :encoding}")
     %meta(name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}")
@@ -9,20 +9,29 @@
       %meta(name='keywords'){:content=>(attr :keywords)}
     %title=doctitle
     %link(rel="stylesheet" href="asciidoc.css" type="text/css")
-  %body{:class=>attr(:doctype)}
+  %body{:class=>(attr :doctype)}
     -# Asciidoctor-specific feature to disable header entirely
     - unless noheader
-      -# asciidoc leaves an empty header div even if there's no doctitle
+      -# AsciiDoc leaves an empty header div even if there's no doctitle
       #header
         - unless notitle or !has_header
-          %h1=doctitle
-          - if attr? :author
-            %span#author=attr(:author)
-            %br
+          %h1=header.title
+        - if attr? :author
+          %span#author=(attr :author)
+          %br
+        - if attr? :email
+          %span#email.monospaced &lt;#{attr :email}&gt;
+          %br
+        - if attr? :revnumber
+          %span#revnumber version #{attr :revnumber}#{(attr? :revdate) ? ',' : ''}
+        - if attr? :revdate
+          %span#revdate=(attr :revdate)
+        - if attr? :revremark
+          %br
+          %span#revremark=(attr :revremark)
     #content
       =content
     -##footnotes<
     -#  %hr
     #footer
-      #footer-text
-        Lasted updated #{attr :localdatetime}
+      #footer-text Lasted updated #{attr :localdatetime}
