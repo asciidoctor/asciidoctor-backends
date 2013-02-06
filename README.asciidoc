@@ -23,91 +23,6 @@ If you are planning to split your slides you also need to copy to _extensions_ d
 
 Also if you want to use the fullscreen photo feature you must create an _images_ directory.
 
-```
-.
-├── deck.js
-│   ├── boilerplate.html
-│   ├── core
-│   │   ├── deck.core.css
-│   │   ├── deck.core.js
-│   │   └── deck.core.scss
-│   ├── extensions
-│   │   ├── deck.split.js
-│   │   ├── goto
-│   │   │   ├── deck.goto.css
-│   │   │   ├── deck.goto.html
-│   │   │   ├── deck.goto.js
-│   │   │   └── deck.goto.scss
-│   │   ├── hash
-│   │   │   ├── deck.hash.css
-│   │   │   ├── deck.hash.html
-│   │   │   ├── deck.hash.js
-│   │   │   └── deck.hash.scss
-│   │   ├── menu
-│   │   │   ├── deck.menu.css
-│   │   │   ├── deck.menu.js
-│   │   │   └── deck.menu.scss
-│   │   ├── navigation
-│   │   │   ├── deck.navigation.css
-│   │   │   ├── deck.navigation.html
-│   │   │   ├── deck.navigation.js
-│   │   │   └── deck.navigation.scss
-│   │   ├── scale
-│   │   │   ├── deck.scale.css
-│   │   │   ├── deck.scale.js
-│   │   │   └── deck.scale.scss
-│   │   └── status
-│   │       ├── deck.status.css
-│   │       ├── deck.status.html
-│   │       ├── deck.status.js
-│   │       └── deck.status.scss
-│   ├── GPL-license.txt
-│   ├── introduction
-│   │   └── index.html
-│   ├── jquery-1.7.2.min.js
-│   ├── MIT-license.txt
-│   ├── modernizr.custom.js
-│   ├── README.md
-│   ├── test
-│   │   ├── fixtures
-│   │   │   ├── complex.html
-│   │   │   ├── empty.html
-│   │   │   ├── iframes.html
-│   │   │   ├── iframe_simple.html
-│   │   │   ├── nesteds.html
-│   │   │   └── standard.html
-│   │   ├── index.html
-│   │   ├── lib
-│   │   │   ├── jasmine.css
-│   │   │   ├── jasmine-html.js
-│   │   │   ├── jasmine-jquery.js
-│   │   │   └── jasmine.js
-│   │   ├── settings.js
-│   │   ├── spec.core.js
-│   │   ├── spec.goto.js
-│   │   ├── spec.hash.js
-│   │   ├── spec.menu.js
-│   │   ├── spec.navigation.js
-│   │   ├── spec.scale.js
-│   │   └── spec.status.js
-│   └── themes
-│       ├── style
-│       │   ├── neon.css
-│       │   ├── neon.scss
-│       │   ├── swiss.css
-│       │   ├── swiss.scss
-│       │   ├── web-2.0.css
-│       │   └── web-2.0.scss
-│       └── transition
-│           ├── fade.css
-│           ├── fade.scss
-│           ├── horizontal-slide.css
-│           ├── horizontal-slide.scss
-│           ├── vertical-slide.css
-│           └── vertical-slide.scss
-├── example-template.asciidoc
-├── images
-``` 
 === Headers
 
 There are some attributes that can be set at the top of the document which they are specific of _deckjs_ backend.
@@ -179,6 +94,12 @@ And the same can be applied to lists, images, quotes, code:
 ```
 
 In this case each bullet will appear to screen each time you try to go to next slide.
+
+=== Running
+
+To run you simply should execute next command:
+
+> asciidoctor -T <backend directory> <asciidoc file>
 
 === Stay Connected
 
