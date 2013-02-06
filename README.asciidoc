@@ -8,3 +8,178 @@ The -dist suffix on a backend indicates it aims to be a replica of one of the ba
 == Usage Instructions
 
 Coming soon...
+
+== Deckjs
+
+Deckjs backend is a set of haml files which transforms an asciidoctor document to html5 slides using [deckjs](http://imakewebthings.com/deck.js/) library.
+
+=== Installation
+
+You should download backends kit and copy them into a directory.
+
+Then from your working directory (that is where your asciidoc document resides) you must create a _deck.js_ directory and copy there the __deck.js__ file with its directories (extensions, themes, ...).
+
+If you are planning to split your slides you also need to copy to _extensions_ directory the __deck.split.js__ file which can be downloaded from  [Github](https://github.com/houqp/deck.split.js).
+
+Also if you want to use the fullscreen photo feature you must create an _images_ directory.
+
+```
+.
+├── deck.js
+│   ├── boilerplate.html
+│   ├── core
+│   │   ├── deck.core.css
+│   │   ├── deck.core.js
+│   │   └── deck.core.scss
+│   ├── extensions
+│   │   ├── deck.split.js
+│   │   ├── goto
+│   │   │   ├── deck.goto.css
+│   │   │   ├── deck.goto.html
+│   │   │   ├── deck.goto.js
+│   │   │   └── deck.goto.scss
+│   │   ├── hash
+│   │   │   ├── deck.hash.css
+│   │   │   ├── deck.hash.html
+│   │   │   ├── deck.hash.js
+│   │   │   └── deck.hash.scss
+│   │   ├── menu
+│   │   │   ├── deck.menu.css
+│   │   │   ├── deck.menu.js
+│   │   │   └── deck.menu.scss
+│   │   ├── navigation
+│   │   │   ├── deck.navigation.css
+│   │   │   ├── deck.navigation.html
+│   │   │   ├── deck.navigation.js
+│   │   │   └── deck.navigation.scss
+│   │   ├── scale
+│   │   │   ├── deck.scale.css
+│   │   │   ├── deck.scale.js
+│   │   │   └── deck.scale.scss
+│   │   └── status
+│   │       ├── deck.status.css
+│   │       ├── deck.status.html
+│   │       ├── deck.status.js
+│   │       └── deck.status.scss
+│   ├── GPL-license.txt
+│   ├── introduction
+│   │   └── index.html
+│   ├── jquery-1.7.2.min.js
+│   ├── MIT-license.txt
+│   ├── modernizr.custom.js
+│   ├── README.md
+│   ├── test
+│   │   ├── fixtures
+│   │   │   ├── complex.html
+│   │   │   ├── empty.html
+│   │   │   ├── iframes.html
+│   │   │   ├── iframe_simple.html
+│   │   │   ├── nesteds.html
+│   │   │   └── standard.html
+│   │   ├── index.html
+│   │   ├── lib
+│   │   │   ├── jasmine.css
+│   │   │   ├── jasmine-html.js
+│   │   │   ├── jasmine-jquery.js
+│   │   │   └── jasmine.js
+│   │   ├── settings.js
+│   │   ├── spec.core.js
+│   │   ├── spec.goto.js
+│   │   ├── spec.hash.js
+│   │   ├── spec.menu.js
+│   │   ├── spec.navigation.js
+│   │   ├── spec.scale.js
+│   │   └── spec.status.js
+│   └── themes
+│       ├── style
+│       │   ├── neon.css
+│       │   ├── neon.scss
+│       │   ├── swiss.css
+│       │   ├── swiss.scss
+│       │   ├── web-2.0.css
+│       │   └── web-2.0.scss
+│       └── transition
+│           ├── fade.css
+│           ├── fade.scss
+│           ├── horizontal-slide.css
+│           ├── horizontal-slide.scss
+│           ├── vertical-slide.css
+│           └── vertical-slide.scss
+├── example-template.asciidoc
+├── images
+``` 
+=== Headers
+
+There are some attributes that can be set at the top of the document which they are specific of _deckjs_ backend.
+
+* :deckjs_theme: <theme> where you set the __deckjs__ theme. For example: web-2.0
+* :deckjs_transition: <type> where you set the kind of transition. For example: horizontal-slide
+* :customjs <javascript location>: where you set a custom javascript file. It can be used as a __deckjs__ custom configuration.
+* :customcss <css location>: where you set a custom css file.
+* :navigation: the presence of this attribute makes __deckjs__ to render a back/next icons.
+* :status: the presence of this attribute makes __deckjs__ to render current slide and total number of slides.
+* :split: with this attribute we are registering _deck.split.js_ file.
+
+> Also keep in mind that _asciidoc.css_ file is registered as css, so it can be used as customization of asciidocument elements like section, paragraph, images, ...
+
+=== Examples
+
+Let's see some examples of _deckjs_ backend features:
+
+```asciidoc
+== Slide Zero
+
+Foo
+
+Bar
+
+[pagebreak="true"]
+World
+```
+
+In previous example we are creating two slides both with title __Slide Zero__. The first slide will contain the title and two paragraphs (Foo and Bar), and the second one will contain the title too but only a paragraph with the word World.
+
+> Remember to add :split: before using it.
+
+```asciidoc
+[fullbackgroundimage="./images/cosplay.jpg"]
+== Slide One
+
+[position="center-up", fullbackgroundtext="true"]
+Hello World - Good Bye Cruel World
+```
+
+In previous snippet we are creating a slide without a title (Slide One will not be shown), but a fullscreen image as background will be embedded, and centered at top of the slide and over the image the message Hello World - Good Bye Cruel World.
+
+Some things to consider:
+
+* [fullbackground] attribute receives as parameter the location of image we want to use and always must go before section.
+* if you are planning to add a message over the image, you can do it as usually, but probably won't be read good, using [position] attribute which positions text into the slide (bottom-left, top-left, bottom-right, top-right, center-up, center-down) and [fullbackgroundtext] attribute will improve so much how text is rendered.
+
+```asciidoc
+== Slide Two
+
+[incremental="true"]
+That's all.
+
+[incremental="true"]
+My Folks
+```
+
+In previous example we are creating one slide which instead of showing both paragraphs at the same time, will be presented each time you try to go to next slide.
+
+And the same can be applied to lists, images, quotes, code:
+
+```asciidoc
+== Slide Three
+
+[incremental="true"]
+* A
+* B
+```
+
+In this case each bullet will appear to screen each time you try to go to next slide.
+
+=== Stay Connected
+
+If you need any other feature supported by __deckjs__ to be ported to this backend, any way to make it better or you find any bug do not hesitate to open an issue. 

@@ -1,0 +1,5 @@
+%div{:id=>id, :class=>['exampleblock', (attr :role), ("slide" if attr :incremental )]}
+  .content
+    - if title
+      .title=title
+    =content

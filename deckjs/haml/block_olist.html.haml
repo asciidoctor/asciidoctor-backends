@@ -1,0 +1,9 @@
+%div{:id=>id, :class=>[(attr :style), (attr :role)]}
+  - if title
+    .title=title
+  %ol{:class=>(attr :style), :start=>(attr :start)}
+    - content.each do |li|
+      %li{:class => ("slide" if attr :incremental )}
+        %p=li.text
+        - if !li.blocks.empty?
+          =li.content

@@ -1,0 +1,14 @@
+%blockquote{:class => ("slide" if attr :incremental )}
+  - if title
+    .title=title
+  %p=content
+  .attribution
+    - if attr? :attribution
+      %p
+        %em=attr :attribution
+        - if attr? :citetitle
+          %cite=attr :citetitle
+    - else
+      %p
+        - if attr? :citetitle
+          %cite=attr :citetitle
