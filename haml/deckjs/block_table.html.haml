@@ -1,0 +1,37 @@
+%table{:id=>@id, :class=>['tableblock', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", (attr :role), ("slide" if attr :incremental )],
+    :style=>((style = [("width: #{attr :tablepcwidth}%" unless attr? 'autowidth-option'),
+                       ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : style)}
+  - if title?
+    %caption.title="#{@caption}#{title}"
+  - unless (attr :rowcount).zero?
+    %colgroup
+      - if attr? 'autowidth-option'
+        - @columns.each do
+          %col
+      - else
+        - @columns.each do |col|
+          %col(style="width: #{col.attr :colpcwidth}%")
+    - [:head, :foot, :body].select {|tblsec| !@rows[tblsec].empty? }.each do |tblsec|
+      - haml_tag "t#{tblsec}" do
+        - @rows[tblsec].each do |row|
+          %tr
+            - row.each do |cell|
+              - haml_tag (tblsec == :head ? 'th' : 'td'), :<, :class=>['tableblock', "halign-#{cell.attr :halign}", "valign-#{cell.attr :valign}"],
+                  :colspan=>cell.colspan, :rowspan=>cell.rowspan do
+                - if tblsec == :head
+                  =cell.text
+                - else
+                  - case cell.attr(:style)
+                  - when :asciidoc
+                    %div=cell.content
+                  - when :verse
+                    .verse~cell.text
+                  - when :literal
+                    .literal.monospaced
+                      %pre=cell.text
+                  - when :header
+                    - cell.content.each do |text|
+                      %p.tableblock.header<=text
+                  - else
+                    - cell.content.each do |text|
+                      %p.tableblock<=text

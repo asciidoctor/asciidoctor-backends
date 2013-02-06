@@ -1,0 +1,11 @@
+%div{:id=>@id, :class=>['listingblock', (attr :role), ("slide" if attr :incremental )]}
+  - if title?
+    .title="#{attr :caption}#{title}"
+  .content.monospaced
+    -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;
+    - if attr? :style, 'source'
+      %pre{:class=>['highlight', ('CodeRay' if attr? 'source-highlighter', 'coderay')]}
+        -# ...but I'm not sure about the <code> tag
+        %code{:class=>(attr :language)}~content
+    - else
+      %pre=content

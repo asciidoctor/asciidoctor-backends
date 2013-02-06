@@ -1,0 +1,4 @@
+%div{:id=>@id, :class=>['paragraph', (attr :role), ("slide" if attr :incremental )]}
+  - if title?
+    .title=title
+  %p{:class => [(attr :position), ("full-background-text" if attr :fullbackgroundtext)]}=content

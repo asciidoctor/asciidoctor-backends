@@ -1,0 +1,12 @@
+%div{:id=>@id, :class=>['verseblock', (attr :role), ("slide" if attr :incremental )]}
+  - if title?
+    .title=title
+  -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;
+  %pre.content=content
+  .attribution
+    - if attr? :citetitle
+      %cite=attr :citetitle
+    - if attr? :attribution
+      - if attr? :citetitle
+        %br
+      &#8212; #{attr :attribution}

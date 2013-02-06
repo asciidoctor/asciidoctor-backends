@@ -1,0 +1,7 @@
+- if attr? :fullbackgroundimage
+  %section{:id=>id, :class => ['slide', 'full-background'], :style=> "background-image: url(#{attr :fullbackgroundimage});"}
+    =content.chomp
+- else
+  %section{:id=>id, :class => ['slide']}
+    %h2=title
+    =content.chomp

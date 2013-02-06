@@ -1,0 +1,9 @@
+%div{:id=>@id, :class=>['olist', (attr :style), (attr :role)]}
+  - if title?
+    .title=title
+  %ol{:class=>(attr :style), :start=>(attr :start)}
+    - content.each do |item|
+      %li{:class => ("slide" if attr :incremental )}
+        %p=item.text
+        - if item.blocks?
+          =item.content.chomp

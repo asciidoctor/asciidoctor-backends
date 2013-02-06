@@ -1,0 +1,4 @@
+- if attr? :icons
+  %img{:src=>icon_uri("callouts/#{@text}"), :alt=>@text}
+- else
+  %b="&lt;#{@text}&gt;"
