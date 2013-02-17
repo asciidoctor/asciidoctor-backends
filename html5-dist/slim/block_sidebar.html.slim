@@ -1,5 +1,5 @@
-.sidebarblock class=attr(:role) id=id
+.sidebarblock id=@id class=attr(:role)
   .content
-    - if title
+    - if title?
       .title=title
     =content

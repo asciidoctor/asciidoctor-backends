@@ -1,7 +1,4 @@
-- if content.chomp.empty?
-  | FIXME EMPTY!!
-- else
-  .paragraph class=(attr :role) id=id
-    - if title
-      .title=title
-    p=content
+.paragraph id=@id class=(attr :role)
+  - if title?
+    .title=title
+  p=content

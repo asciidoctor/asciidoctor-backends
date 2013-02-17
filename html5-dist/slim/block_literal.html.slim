@@ -1,5 +1,5 @@
-.literalblock class=(attr :role) id=id
-  - if title
+.literalblock id=@id class=(attr :role)
+  - if title?
     .title=title
   .content.monospaced
     pre=content

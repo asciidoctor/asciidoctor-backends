@@ -1,10 +1,10 @@
-- if (attr :doctype) == 'book'
-  h1 id=id =title
+- if @level.zero?
+  h1 id=@id 
   =content
 - else
-  div class='sect#{level}'
-    *{:tag=>"h#{level+1}"} id=id =title
-    - if level == 1
+  div class=["sect#@level",(attr :role)]
+    *{:tag=>"h#{@level + 1}", :id=>@id} =(!@special && (attr :numbered) ? "#{sectnum} #{attr :caption}#{title}" : "#{attr :caption}#{title}")
+    - if @level == 1
       .sectionbody
         =content
     - else

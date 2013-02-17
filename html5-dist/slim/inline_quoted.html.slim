@@ -1,0 +1,23 @@
+- if attr? :role
+  - def capture_slim(*args); yield(*args).join; end
+  - wrapped_text = capture_slim(@text) do |text|
+    span class=(attr :role) =text
+- else
+  - wrapped_text = @text
+- case @type
+- when :emphasis
+  em=wrapped_text
+- when :strong
+  strong=wrapped_text
+- when :monospaced
+  tt=wrapped_text
+- when :superscript
+  sup=wrapped_text
+- when :subscript
+  sub=wrapped_text
+- when :double
+  ="&#8220;#{wrapped_text}&#8221;"
+- when :single
+  ="&#8216;#{wrapped_text}&#8217;"
+- else
+  =wrapped_text
