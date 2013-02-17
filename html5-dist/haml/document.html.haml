@@ -8,17 +8,17 @@
     - if attr? :keywords 
       %meta(name='keywords'){:content=>(attr :keywords)}
     %title=doctitle
-    - unless attr(:stylesheet, '').empty?
+    - unless (attr :stylesheet, '').empty?
       %link(rel="stylesheet"){:href => File.join((attr :stylesdir, '.'), (attr :stylesheet))}
     - case attr 'source-highlighter'
     - when 'coderay'
       - if (attr 'coderay-css', 'class') == 'class'
-        =template.default_coderay_stylesheet
+        - Asciidoctor::Helpers.require_library 'coderay'
+        =::CodeRay::Encoders[:html]::CSS.new(:default).stylesheet
     - when 'highlightjs'
       %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css")
       %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js")
-      %script<
-        hljs.initHighlightingOnLoad();
+      %script hljs.initHighlightingOnLoad()
   %body{:id => @id, :class=>(attr :doctype), :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     - unless noheader
       -# AsciiDoc leaves an empty header div even if there's no doctitle
@@ -41,7 +41,7 @@
             %span#revremark=attr :revremark
     #content
       =content.chomp
-    - if !@references[:footnotes].empty?
+    - unless @references[:footnotes].empty?
       #footnotes
         %hr
         - @references[:footnotes].each do |fn|

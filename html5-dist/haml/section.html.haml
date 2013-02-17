@@ -1,9 +1,9 @@
 - if @level.zero?
-  %h1{:id => @id} 
+  %h1{:id=>@id} 
   =content.chomp
 - else
   %div{:class=>["sect#{@level}", (attr :role)]}
-    - haml_tag "h#{level + 1}##{@id}", !@special && (attr :numbered) ? "#{sectnum} #{attr :caption}#{title}" : "#{attr :caption}#{title}"
+    - haml_tag "h#{@level + 1}##{@id}", !@special && (attr :numbered) ? "#{sectnum} #{attr :caption}#{title}" : "#{attr :caption}#{title}"
     - if @level == 1
       .sectionbody
         =content.chomp

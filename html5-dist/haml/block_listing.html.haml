@@ -5,7 +5,7 @@
     -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;
     - if (attr :style) == 'source'
       %pre{:class=>['highlight', ('CodeRay' if (attr? 'source-highlighter') == 'coderay')]}
-        -# I'm not sure about the <code> tag
+        -# ...but I'm not sure about the <code> tag
         %code{:class=>(attr :language)}~content
     - else
       %pre=content

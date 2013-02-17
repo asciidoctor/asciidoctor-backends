@@ -25,9 +25,9 @@
                   - when :asciidoc
                     %div=cell.content
                   - when :verse
-                    %div.verse~cell.text
+                    .verse~cell.text
                   - when :literal
-                    %div.literal.monospaced
+                    .literal.monospaced
                       %pre=cell.text
                   - when :header
                     - cell.content.each do |text|
