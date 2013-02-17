@@ -1,9 +1,9 @@
-%div{:id=>id, :class=>['ulist', (attr :role)]}
-  - if title
+%div{:id=>@id, :class=>['ulist', (attr :role)]}
+  - if title?
     .title=title
   %ul
-    - content.each do |li|
+    - content.each do |item|
       %li
-        %p=li.text
-        - if !li.blocks.empty?
-          =li.content
+        %p=item.text
+        - if item.blocks?
+          =item.content.chomp

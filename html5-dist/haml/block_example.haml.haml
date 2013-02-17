@@ -1,5 +1,5 @@
-%div{:id=>id, :class=>['exampleblock', (attr :role)]}
+%div{:id=>@id, :class=>['exampleblock', (attr :role)]}
+  - if title?
+    .title="#{attr :caption}#{title}"
   .content
-    - if title
-      .title=title
-    =content
+    =content.chomp

@@ -1,8 +1,5 @@
-- if content.chomp.empty?
-  FIXME EMPTY!!
-- else
-  -# don't use .paragraph shorthand so that we can control the order of classes
-  %div{:id=>id, :class=>['paragraph', (attr :role)]}
-    - if title
-      .title=title
-    %p=content
+-# don't use .paragraph shorthand so that we can control the order of classes
+%div{:id=>@id, :class=>['paragraph', (attr :role)]}
+  - if title?
+    .title=title
+  %p><=content

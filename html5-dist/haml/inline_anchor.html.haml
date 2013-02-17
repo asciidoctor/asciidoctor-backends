@@ -1,0 +1,12 @@
+- case @type
+- when :xref
+  %a(href="##{@target}")<=(@text || @document.references[:ids].fetch(@target, "[#{@target}]")).tr_s("\n", ' ')
+- when :ref
+  %a(id=@target)
+- when :bibref
+  %a(id=@target)
+  = surround '[', ']' do
+    =@target
+- else
+  -#%a(href=@target)<=@text
+  %a(href=@target){:target=>(attr :window)}=@text

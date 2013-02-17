@@ -1,11 +1,11 @@
-- if (attr :doctype) == 'book'
-  %h1{:id => id ? id : section_id}=title
-  =content
+- if @level.zero?
+  %h1{:id => @id} 
+  =content.chomp
 - else
-  %div{:class=>"sect#{level}"}
-    - haml_tag "h#{level+1}##{id ? id : section_id}", title
-    - if level == 1
+  %div{:class=>["sect#{@level}", (attr :role)]}
+    - haml_tag "h#{level + 1}##{@id}", !@special && (attr :numbered) ? "#{sectnum} #{attr :caption}#{title}" : "#{attr :caption}#{title}"
+    - if @level == 1
       .sectionbody
-        =content
+        =content.chomp
     - else
-      =content
+      =content.chomp

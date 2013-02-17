@@ -8,30 +8,49 @@
     - if attr? :keywords 
       %meta(name='keywords'){:content=>(attr :keywords)}
     %title=doctitle
-    %link(rel="stylesheet" href="asciidoc.css" type="text/css")
-  %body{:class=>(attr :doctype)}
-    -# Asciidoctor-specific feature to disable header entirely
+    - unless attr(:stylesheet, '').empty?
+      %link(rel="stylesheet"){:href => File.join((attr :stylesdir, '.'), (attr :stylesheet))}
+    - case attr 'source-highlighter'
+    - when 'coderay'
+      - if (attr 'coderay-css', 'class') == 'class'
+        =template.default_coderay_stylesheet
+    - when 'highlightjs'
+      %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css")
+      %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js")
+      %script<
+        hljs.initHighlightingOnLoad();
+  %body{:id => @id, :class=>(attr :doctype), :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     - unless noheader
       -# AsciiDoc leaves an empty header div even if there's no doctitle
       #header
-        - unless notitle or !has_header
-          %h1=header.title
-        - if attr? :author
-          %span#author=(attr :author)
-          %br
-        - if attr? :email
-          %span#email.monospaced &lt;#{attr :email}&gt;
-          %br
-        - if attr? :revnumber
-          %span#revnumber version #{attr :revnumber}#{(attr? :revdate) ? ',' : ''}
-        - if attr? :revdate
-          %span#revdate=(attr :revdate)
-        - if attr? :revremark
-          %br
-          %span#revremark=(attr :revremark)
+        - if has_header?
+          - unless notitle
+            %h1=@header.title
+          - if attr? :author
+            %span#author=attr :author
+            %br
+          - if attr? :email
+            %span#email.monospaced &lt;#{attr :email}&gt;
+            %br
+          - if attr? :revnumber
+            %span#revnumber version #{attr :revnumber}#{',' if (attr? :revdate)}
+          - if attr? :revdate
+            %span#revdate=attr :revdate
+          - if attr? :revremark
+            %br
+            %span#revremark=attr :revremark
     #content
-      =content
-    -##footnotes<
-    -#  %hr
+      =content.chomp
+    - if !@references[:footnotes].empty?
+      #footnotes
+        %hr
+        - @references[:footnotes].each do |fn|
+          .footnote{:id=>['_footnote', fn.index]}
+            = succeed ". #{fn.text}" do
+              %a(href="#_footnoteref_#{fn.index}")=fn.index
     #footer
-      #footer-text Lasted updated #{attr :localdatetime}
+      #footer-text
+        - if attr? :revnumber
+          Version #{attr :revnumber}
+          %br
+        Lasted updated #{attr :localdatetime}
