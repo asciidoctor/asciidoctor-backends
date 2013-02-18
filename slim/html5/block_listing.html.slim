@@ -2,8 +2,8 @@
   - if title?
     .title="#{attr :caption}#{title}"
   .content.monospaced
-    - if (attr :style) == 'source'
-      pre class=['highlight',('CodeRay' if (attr? 'source-highlighter') == 'coderay')]
+    - if attr? :style, 'source'
+      pre class=['highlight',('CodeRay' if attr? 'source-highlighter', 'coderay')]
         code class=(attr :language) =content
     - else
       pre=content

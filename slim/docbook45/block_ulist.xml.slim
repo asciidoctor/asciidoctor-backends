@@ -1,4 +1,4 @@
-- if (attr :style) == 'bibliography'
+- if attr? :style, 'bibliography'
   bibliodiv id=@id role=(attr :role) xreflabel=(attr :reftext)
     - if title?
       title=title
