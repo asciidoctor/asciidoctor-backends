@@ -1,6 +1,6 @@
 - case attr :style
 - when 'qanda'
-  qandaset id=@id role=(attr :role) xreflabel=(attr :reftext) 
+  qandaset id=@id role=(attr :role) xreflabel=(attr :reftext)
     - if title?
       title=title
     - content.each do |dt, dd|
@@ -27,7 +27,7 @@
       :tabstyle=>'horizontal', :frame=>'none', :colsep=>0, :rowsep=>0}
     - if title?
       title=title
-    tgroup cols=2 
+    tgroup cols=2
       colspec colwidth="#{attr :labelwidth, 15}*"
       colspec colwidth="#{attr :labelwidth, 85}*"
       tbody valign='top'
@@ -41,7 +41,7 @@
                 - if dd.blocks?
                   =dd.content
 - else
-  variablelist id=@id role=(attr :role) xreflabel=(attr :reftext) 
+  variablelist id=@id role=(attr :role) xreflabel=(attr :reftext)
     - if title?
       title=title
     - content.each do |dt, dd|

@@ -1,5 +1,5 @@
 - if (attr :style) == 'bibliography'
-  bibliodiv id=@id role=(attr :role) xreflabel=(attr :reftext) 
+  bibliodiv id=@id role=(attr :role) xreflabel=(attr :reftext)
     - if title?
       title=title
     - content.each do |item|
@@ -8,7 +8,7 @@
         - if item.blocks?
           =item.content
 - else
-  itemizedlist id=@id role=(attr :role) xreflabel=(attr :reftext) 
+  itemizedlist id=@id role=(attr :role) xreflabel=(attr :reftext)
     - if title?
       title=title
     - content.each do |item|
