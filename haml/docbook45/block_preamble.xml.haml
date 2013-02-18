@@ -1,0 +1,7 @@
+- if @document.doctype == 'book'
+  %preface{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+    -# title is mandatory, but can be an empty tag
+    %title=title
+    =content
+- else
+  =content

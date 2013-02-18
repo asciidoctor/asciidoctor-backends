@@ -1,1 +1,13 @@
-%blockquote=content
+%blockquote{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+  - if title?
+    %title=title
+  - if (attr? :attribution) || (attr? :citetitle)
+    %attribution
+      - if attr? :attribution
+        =attr :attribution
+      - if attr? :citetitle
+        %citetitle=attr :citetitle
+  - if !@buffer.nil?
+    %simpara=content
+  - else
+    =content

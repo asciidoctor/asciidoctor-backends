@@ -1,5 +1,6 @@
-- if content.chomp.empty?
-- elsif content.chomp == '<hr>'
-  %simpara <?asciidoc-hr?>
+- if !title?
+  %simpara{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}=content
 - else
-  %simpara=content
+  %formalpara{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+    %title=title
+    %para=content

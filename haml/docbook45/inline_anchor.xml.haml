@@ -1,0 +1,13 @@
+- case @type
+- when :ref
+  %anchor{:id=>@target, :xreflabel=>@text}
+- when :xref
+  - if @text.nil?
+    %xref{:linkend=>@target}
+  - else
+    %link{:linkend=>@target}=@text
+- when :link
+  %ulink{:url=>@target}=@text
+- when :bibref
+  %anchor{:id=>@target, :xreflabel=>"[#@target]"}
+  [#@target]
