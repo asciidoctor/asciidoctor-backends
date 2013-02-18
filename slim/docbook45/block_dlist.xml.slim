@@ -1,0 +1,55 @@
+- case attr :style
+- when 'qanda'
+  qandaset id=@id role=(attr :role) xreflabel=(attr :reftext) 
+    - if title?
+      title=title
+    - content.each do |dt, dd|
+      qandaentry
+        question: simpara=dt.text
+        - unless dd.nil?
+          answer
+            - if dd.text?
+              simpara=dd.text
+            - if dd.blocks?
+              =dd.content
+- when 'glossary'
+  - content.each do |dt, dd|
+    glossentry
+      glossterm=dt.text
+      - unless dd.nil?
+        glossdef
+          - if dd.text?
+            simpara=dd.text
+          - if dd.blocks?
+            =dd.content
+- when 'horizontal'
+  *{:tag=>title? ? 'table' : 'informaltable', :id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext),
+      :tabstyle=>'horizontal', :frame=>'none', :colsep=>0, :rowsep=>0}
+    - if title?
+      title=title
+    tgroup cols=2 
+      colspec colwidth="#{attr :labelwidth, 15}*"
+      colspec colwidth="#{attr :labelwidth, 85}*"
+      tbody valign='top'
+        - content.each do |dt, dd|
+          row
+            entry: simpara=dt.text
+            - unless dd.nil?
+              entry
+                - if dd.text?
+                  simpara=dd.text
+                - if dd.blocks?
+                  =dd.content
+- else
+  variablelist id=@id role=(attr :role) xreflabel=(attr :reftext) 
+    - if title?
+      title=title
+    - content.each do |dt, dd|
+      varlistentry
+        term=dt.text
+        - unless dd.nil?
+          listitem
+            - if dd.text?
+              simpara=dd.text
+            - if dd.blocks?
+              =dd.content

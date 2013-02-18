@@ -1,0 +1,16 @@
+- if @type == :visible
+  indexterm: primary=@text
+  =@text
+- else
+  - terms = (attr :terms)
+  - numterms = terms.size
+  - if numterms > 2
+    indexterm
+      primary=terms[0]
+      secondary=terms[1]
+      tertiary=terms[2]
+  - if numterms > 1
+    indexterm
+      primary=terms[numterms - 2]
+      secondary=terms[numterms - 1]
+  indexterm: primary=terms[numterms - 1]
