@@ -1,9 +1,8 @@
-[float]
 = Asciidoctor Backends
 
-This repository contains backends (i.e., templates) for https://github.com/erebor/asciidoctor[asciidoctor], a Ruby port of http://asciidoc.org[AsciiDoc].
+This repository contains backends (i.e., templates) for https://github.com/asciidoctor/asciidoctor[asciidoctor], a Ruby port of http://asciidoc.org[AsciiDoc].
 
-The -dist suffix on a backend indicates it aims to be a replica of one of the backends distributed with AsciiDoc. Within those directories are folders for each templating engine, the default being Haml (haml).
+It includes replicas of both the html5 and docbook45 backends from AsciiDoc in http://haml.info[Haml] and http://slim-lang.com[Slim].
 
 == Usage Instructions
 
