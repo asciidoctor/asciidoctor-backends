@@ -9,12 +9,12 @@
       %meta(name='keywords'){:content=>(attr :keywords)}
     %title=doctitle
     - unless (attr :stylesheet, '').empty?
-      %link(rel="stylesheet"){:href => File.join((attr :stylesdir, '.'), (attr :stylesheet))}
+      %link(rel="stylesheet"){:href => (attr? :stylesdir) ? File.join((attr :stylesdir), (attr :stylesheet)) : (attr :stylesheet)}
     - case attr 'source-highlighter'
     - when 'coderay'
       - if (attr 'coderay-css', 'class') == 'class'
-        - Asciidoctor::Helpers.require_library 'coderay'
-        =::CodeRay::Encoders[:html]::CSS.new(:default).stylesheet
+        -# hackish, find a way to locate this function in a more generic namespace
+        =Asciidoctor::HTML5::DocumentTemplate.default_coderay_stylesheet
     - when 'highlightjs'
       %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css")
       %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js")
@@ -39,12 +39,17 @@
           - if attr? :revremark
             %br
             %span#revremark=attr :revremark
+        - if attr? :toc
+          #toc
+            #toctitle=attr 'toc-title'
+            -# hackish, find a way to make the toc generator more generic
+            =Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i)
     #content
       =content.chomp
-    - unless @references[:footnotes].empty?
+    - if footnotes?
       #footnotes
         %hr
-        - @references[:footnotes].each do |fn|
+        - footnotes.each do |fn|
           .footnote{:id=>['_footnote', fn.index]}
             = succeed ". #{fn.text}" do
               %a(href="#_footnoteref_#{fn.index}")=fn.index

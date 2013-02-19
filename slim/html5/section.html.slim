@@ -1,9 +1,9 @@
 - if @level.zero?
-  h1 id=@id 
+  h1 id=@id =title
   =content
 - else
   div class=["sect#@level",(attr :role)]
-    *{:tag=>"h#{@level + 1}", :id=>@id} =(!@special && (attr :numbered) ? "#{sectnum} #{attr :caption}#{title}" : "#{attr :caption}#{title}")
+    *{:tag=>"h#{@level + 1}", :id=>@id} =(!@special && (attr :numbered) && @level < 4 ? "#{sectnum} #{attr :caption}#{title}" : "#{attr :caption}#{title}")
     - if @level == 1
       .sectionbody
         =content

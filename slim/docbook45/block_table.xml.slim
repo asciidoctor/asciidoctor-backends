@@ -27,10 +27,10 @@
                   - when :verse
                     literallayout=cell.text
                   - when :literal
-                    literallayout class="monospaced" =cell.text
+                    literallayout class='monospaced' =cell.text
                   - when :header
                     - cell.content.each do |text|
-                      simpara: emphasis role="strong" =text
+                      simpara: emphasis role='strong' =text
                   - else
                     - cell.content.each do |text|
                       simpara=text
