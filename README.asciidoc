@@ -48,13 +48,8 @@ Foo
 
 Bar
 
-[pagebreak="true"]
 World
 ```
-
-In previous example we are creating two slides both with title __Slide Zero__. The first slide will contain the title and two paragraphs (Foo and Bar), and the second one will contain the title too but only a paragraph with the word World.
-
-> Remember to add :split: before using it.
 
 ```asciidoc
 [fullbackgroundimage="./images/cosplay.jpg"]
