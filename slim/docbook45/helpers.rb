@@ -3,6 +3,7 @@
 # (unless someone can show me how to include them in the evaluation context).
 # You can change the namespace to whatever you want.
 module Helpers
-  #def self.a_helper_function
-  #end
+  def self.capture_output(*args, &block)
+    Proc.new { block.call(*args) }
+  end
 end

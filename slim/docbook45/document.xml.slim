@@ -1,4 +1,4 @@
-- docinfo = Asciidoctor::Helpers.capture_output do
+- docinfo = Helpers.capture_output do
   - if has_header? && !notitle
     title=@header.title
   date=(attr? :revdate) ? (attr :revdate) : (attr :docdate)
@@ -33,12 +33,12 @@
   <?asciidoc-numbered?>
 - case doctype
 - when 'book'
-  book lang=(attr :lang, 'en')
+  book lang=(attr :lang, 'en' unless attr? :nolang)
     bookinfo
       - docinfo.yield
     =content
 - when 'article'
-  article lang=(attr :lang, 'en')
+  article lang=(attr :lang, 'en' unless attr? :nolang)
     articleinfo
       - docinfo.yield
     =content

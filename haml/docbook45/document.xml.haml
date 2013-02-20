@@ -33,12 +33,12 @@
   <?asciidoc-numbered?>
 - case doctype
 - when 'book'
-  %book{:lang=>(attr :lang, 'en')}
+  %book{:lang=>(attr :lang, 'en' unless attr? :nolang)}
     %bookinfo
       =docinfo
     =content
 - when 'article'
-  %article{:lang=>(attr :lang, 'en')}
+  %article{:lang=>(attr :lang, 'en' unless attr? :nolang)}
     %articleinfo
       =docinfo
     =content
