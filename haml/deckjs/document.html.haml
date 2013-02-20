@@ -8,7 +8,17 @@
     - if attr? :keywords 
       %meta(name='keywords'){:content=>(attr :keywords)}
     %title=doctitle
-    %link(rel="stylesheet" href="asciidoc.css" type="text/css")
+    - unless (attr :stylesheet, '').empty?
+      %link(rel="stylesheet"){:href => (attr? :stylesdir) ? File.join((attr :stylesdir), (attr :stylesheet)) : (attr :stylesheet)}
+    - case attr 'source-highlighter'
+    - when 'coderay'
+      - if (attr 'coderay-css', 'class') == 'class'
+        -# hackish, find a way to locate this function in a more generic namespace
+        =Asciidoctor::HTML5::DocumentTemplate.default_coderay_stylesheet
+    - when 'highlightjs'
+      %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css")
+      %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js")
+      %script hljs.initHighlightingOnLoad()
     %link(rel="stylesheet" href="deck.js/core/deck.core.css")
     %link(rel="stylesheet" href="deck.js/extensions/goto/deck.goto.css")
     %link(rel="stylesheet" href="deck.js/extensions/menu/deck.menu.css")
@@ -24,7 +34,7 @@
     - if attr? :customcss
       %link(rel="stylesheet" href="#{:customcss}.css")
     %script(src="deck.js/modernizr.custom.js")
-  %body.deck-container
+  %body{:id => @id, :class=>['deck-container',(attr :doctype)], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     -# Asciidoctor-specific feature to disable header entirely
     - unless noheader
       -# AsciiDoc leaves an empty header div even if there's no doctitle

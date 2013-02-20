@@ -1,0 +1,15 @@
+%div{:id=>@id, :class=>['colist', (attr :style), (attr :role)]}
+  - if title?
+    .title=title
+  - if attr? :icons
+    %table
+      - content.each_with_index do |item, i|
+        %tr
+          %td<
+            %img{:src=>icon_uri("callouts/#{i + 1}"), :alt=>(i + 1)}
+          %td=item.text
+  - else
+    %ol
+      - content.each do |item|
+        %li
+          %p=item.text

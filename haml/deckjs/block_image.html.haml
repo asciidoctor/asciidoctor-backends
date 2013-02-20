@@ -1,0 +1,11 @@
+%div{:id=>@id, :class=>['imageblock', (attr :role), ("slide" if attr :incremental )],
+    :style=>((style = [("text-align: #{attr :align}" if attr? :align),
+                       ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : style)}
+  .content
+    - if attr? :link
+      %a.image{:href=>(attr :link)}
+        %img{:src=>image_uri(attr :target), :alt=>(attr :alt), :width=>(attr :width), :height=>(attr :height)}
+    - else
+      %img{:src=>image_uri(attr :target), :alt=>(attr :alt), :width=>(attr :width), :height=>(attr :height)}
+  - if title?
+    .title="#{attr :caption}#{title}"
