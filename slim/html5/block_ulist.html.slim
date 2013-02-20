@@ -1,0 +1,9 @@
+.ulist id=@id class=[(attr :style),(attr :role)]
+  - if title?
+    .title=title
+  ul
+    - content.each do |item|
+      li
+        p=item.text
+        - if item.blocks?
+          =item.content

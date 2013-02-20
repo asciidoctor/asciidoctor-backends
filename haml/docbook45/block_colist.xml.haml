@@ -1,0 +1,8 @@
+%calloutlist{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+  - if title?
+    %title=title
+  - content.each do |item|
+    %callout{:arearefs=>(item.attr :coids)}
+      %para=item.text
+      - if item.blocks?
+        =item.content

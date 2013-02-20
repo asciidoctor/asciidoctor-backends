@@ -1,0 +1,7 @@
+- haml_tag((attr :name), :id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)) do
+  - if title?
+    %title=title
+  - if blocks?
+    =content
+  - else
+    %simpara=content.chomp

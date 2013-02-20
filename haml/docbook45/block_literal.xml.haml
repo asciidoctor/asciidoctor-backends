@@ -1,0 +1,7 @@
+- if !title?
+  %literallayout{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext), :class=>'monospaced'}=content
+- else
+  %formalpara{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+    %title=title
+    %para
+      %literallayout(class='monospaced')=content

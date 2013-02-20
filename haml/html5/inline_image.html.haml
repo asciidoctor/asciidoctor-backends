@@ -1,0 +1,6 @@
+%span{:class=>['image', (attr :role)]}<
+  - if attr? :link
+    %a.image{:href=>(attr :link)}
+      %img{:src=>image_uri(@target), :alt=>(attr :alt), :width=>(attr :width), :height=>(attr :height), :title=>(attr :title)}
+  - else
+    %img{:src=>image_uri(@target), :alt=>(attr :alt), :width=>(attr :width), :height=>(attr :height), :title=>(attr :title)}

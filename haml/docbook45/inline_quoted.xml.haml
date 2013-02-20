@@ -1,0 +1,21 @@
+- if attr? :role
+  - text = "<phrase role=\"#{attr :role}\">#@text</phrase>"
+- else
+  - text = @text
+- case @type
+- when :emphasis
+  %emphasis=text
+- when :strong
+  %emphasis(role='strong')=text
+- when :monospaced
+  %literal=text
+- when :superscript
+  %superscript=text
+- when :subscript
+  %subscript=text
+- when :double
+  \&#8220;#{text}&#8221;
+- when :single
+  \&#8216;#{text}&#8217;
+- else
+  =text

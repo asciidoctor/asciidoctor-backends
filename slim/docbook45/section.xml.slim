@@ -1,0 +1,5 @@
+*{:tag=>(@special ? (@level <= 1 ? @sectname : 'section') : (@document.doctype == 'book' && @level <= 1 ? 'chapter' : 'section')),
+    :id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+  - if title?
+    title=title
+  =content

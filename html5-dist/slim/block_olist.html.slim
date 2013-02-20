@@ -1,9 +1,0 @@
-.olist class=[(attr :style),(attr :role)] id=id
-  - if title
-    .title=title
-  ol class=(attr :style) start=(attr :start)
-    - content.each do |li|
-      li
-        p=li.text
-        - if !li.blocks.empty?
-          =li.content

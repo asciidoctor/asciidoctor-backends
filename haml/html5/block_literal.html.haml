@@ -1,0 +1,5 @@
+%div{:id=>@id, :class=>['literalblock', (attr :role)]}
+  - if title?
+    .title=title
+  .content.monospaced
+    %pre=content

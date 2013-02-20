@@ -1,0 +1,8 @@
+%figure{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+  - if title?
+    %title=title
+  %mediaobject
+    %imageobject
+      %imagedata{:fileref=>image_uri(attr :target), :contentwidth=>(attr :width), :contentdepth=>(attr :height)}
+    %textobject
+      %phrase=attr :alt

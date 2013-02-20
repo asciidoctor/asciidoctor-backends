@@ -1,9 +1,0 @@
-%div{:id=>id, :class=>['ulist', (attr :role)]}
-  - if title
-    .title=title
-  %ul
-    - content.each do |li|
-      %li
-        %p=li.text
-        - if !li.blocks.empty?
-          =li.content

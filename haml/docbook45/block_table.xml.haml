@@ -1,0 +1,37 @@
+- haml_tag((title? ? 'table' : 'informaltable'), :id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext),
+    :frame=>(attr :frame, 'all'), :rowsep=>['none', 'cols'].include?(attr :grid) ? 0 : 1, :colsep=>['none', 'rows'].include?(attr :grid) ? 0 : 1) do
+  - if title?
+    %title=title
+  - if attr? :width
+    <?dbhtml table-width="#{attr :width}"?>
+    <?dbfo table-width="#{attr :width}"?>
+    <?dblatex table-width="#{attr :width}"?>
+  %tgroup{:cols=>(attr :colcount)}
+    - @columns.each do |col|
+      %colspec(colname="col_#{col.attr :colnumber}" colwidth="#{col.attr((attr? :width) ? :colabswidth : :colpcwidth)}*")
+    - [:head, :foot, :body].select {|tblsec| !@rows[tblsec].empty? }.each do |tblsec|
+      - haml_tag "t#{tblsec}" do
+        - @rows[tblsec].each do |row|
+          %row
+            - row.each do |cell|
+              %entry{:align=>(cell.attr :halign), :valign=>(cell.attr :valign),
+                  :namest=>(cell.colspan && "col_#{cell.column.attr :colnumber}"),
+                  :nameend=>(cell.colspan && "col_#{(cell.column.attr :colnumber) + cell.colspan - 1}"),
+                  :morerows=>(cell.rowspan && (cell.rowspan - 1))}
+                - if tblsec == :head
+                  =cell.text
+                - else
+                  - case cell.attr :style
+                  - when :asciidoc
+                    =cell.content
+                  - when :verse
+                    %literallayout=cell.text
+                  - when :literal
+                    %literallayout(class='monospaced')=cell.text
+                  - when :header
+                    - cell.content.each do |text|
+                      %simpara
+                        %emphasis(role='strong')=text
+                  - else
+                    - cell.content.each do |text|
+                      %simpara=text

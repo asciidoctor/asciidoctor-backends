@@ -1,0 +1,11 @@
+.verseblock id=@id class=(attr :role)
+  - if title?
+    .title=title
+  pre.content=content
+  .attribution
+    - if attr? :citetitle
+      cite=attr :citetitle
+    - if attr? :attribution
+      - if attr? :citetitle
+        br
+      | &#8212; #{attr :attribution}

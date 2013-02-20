@@ -1,0 +1,25 @@
+- if attr? :role
+  - wrapped_text = capture_haml(@text) do |text|
+    %span{:class=>(attr :role)}=text
+  - wrapped_text.chomp!
+- else
+  - wrapped_text = @text
+- case @type
+- when :emphasis
+  %em=wrapped_text
+- when :strong
+  %strong=wrapped_text
+- when :monospaced
+  %tt=wrapped_text
+- when :superscript
+  %sup=wrapped_text
+- when :subscript
+  %sub=wrapped_text
+- when :double
+  =surround '&#8220;', '&#8221;' do
+    =wrapped_text
+- when :single
+  =surround '&#8216;', '&#8217;' do
+    =wrapped_text
+- else
+  =wrapped_text

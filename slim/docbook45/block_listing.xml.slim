@@ -1,0 +1,14 @@
+- if !title?
+  - if attr? :style, 'source'
+    programlisting(id=@id role=(attr :role) xreflabel=(attr :reftext) language=(attr :language)
+        linenumbering=((attr? :linenums) ? 'numbered' : 'unnumbered')) =content
+  - else
+    screen id=@id role=(attr :role) xreflabel=(attr :reftext) =content
+- else
+  formalpara id=@id role=(attr :role) xreflabel=(attr :reftext)
+    title=title
+    para
+      - if attr? :style, 'source'
+        programlisting language=(attr :language) linenumbering=((attr? :linenums) ? 'numbered' : 'unnumbered') =content
+      - else
+        screen=content
