@@ -1,0 +1,19 @@
+doctype 5
+html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
+  head
+    meta http-equiv='Content-Type' content='text/html; charset=#{attr :encoding}'
+    meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}"
+    - if attr? :description
+      meta name='description' content=(attr :description)
+    - if attr? :keywords
+      meta name='keywords' content=(attr :keywords)
+    title=doctitle
+    - if attr? 'dzslides-fonts'
+      link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts'}"
+  body id=@id
+    section.title
+      h1=doctitle
+      footer
+        | #{attr :author}#{(attr? :corpname) ? ", #{attr :corpname}" : nil}
+    #content
+      =content
