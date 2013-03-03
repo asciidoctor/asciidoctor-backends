@@ -50,6 +50,7 @@ Let's see some examples of +deckjs+ backend features:
 
 ----
 = Title Slide
+Presenter Name
 
 == Slide One
 
