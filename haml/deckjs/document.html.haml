@@ -9,7 +9,7 @@
       %meta(name='keywords'){:content=>(attr :keywords)}
     %title=doctitle
     - unless (attr :stylesheet, '').empty?
-      %link(rel="stylesheet"){:href => (attr? :stylesdir) ? File.join((attr :stylesdir), (attr :stylesheet)) : (attr :stylesheet)}
+      %link(rel="stylesheet"){:href=>(attr? :stylesdir) ? File.join((attr :stylesdir), (attr :stylesheet)) : (attr :stylesheet)}
     - case attr 'source-highlighter'
     - when 'coderay'
       - if (attr 'coderay-css', 'class') == 'class'
@@ -34,7 +34,7 @@
     - if attr? :customcss
       %link(rel="stylesheet" href="#{:customcss}.css")
     %script(src="deck.js/modernizr.custom.js")
-  %body{:id => @id, :class=>['deck-container',(attr :doctype)], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
+  %body{:id=>@id, :class=>['deck-container',(attr :doctype)], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     -# Asciidoctor-specific feature to disable header entirely
     - unless noheader
       -# AsciiDoc leaves an empty header div even if there's no doctitle
@@ -82,7 +82,7 @@
         $.deck('.slide');
       });
     :css
-      .slide.full-background {
+      .slide.canvas-image {
       -moz-background-size: cover;
       -webkit-background-size: cover;
       -o-background-size: cover;
@@ -129,7 +129,7 @@
         right: 50%;
         bottom: 1%;
       }
-      .full-background .full-background-text {
+      .canvas-image .canvas-caption p {
         text-align: center;
         padding-top: 0;
         padding: 0;

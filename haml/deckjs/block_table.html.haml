@@ -1,4 +1,4 @@
-%table{:id=>@id, :class=>['tableblock', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", (attr :role), ("slide" if attr :incremental )],
+%table{:id=>@id, :class=>['tableblock', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", (attr :role), ('slide' if attr? 'step-option')],
     :style=>((style = [("width: #{attr :tablepcwidth}%" unless attr? 'autowidth-option'),
                        ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : style)}
   - if title?
