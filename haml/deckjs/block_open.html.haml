@@ -1,4 +1,4 @@
-%div{:id=>@id, :class=>['openblock', (attr :role), ("slide" if attr :incremental )]}
+%div{:id=>@id, :class=>['openblock', (attr :role), ('slide' if attr? 'step-option')]}
   - if title?
     .title=title
   .content

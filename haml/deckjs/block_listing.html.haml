@@ -1,4 +1,4 @@
-%div{:id=>@id, :class=>['listingblock', (attr :role), ("slide" if attr :incremental )]}
+%div{:id=>@id, :class=>['listingblock', (attr :role), ('slide' if attr? 'step-option')]}
   - if title?
     .title="#{attr :caption}#{title}"
   .content.monospaced
