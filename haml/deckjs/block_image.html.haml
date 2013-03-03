@@ -1,4 +1,4 @@
-%div{:id=>@id, :class=>['imageblock', (attr :role), ("slide" if attr :incremental )],
+%div{:id=>@id, :class=>['imageblock', (attr :role), ('slide' if attr? 'step-option')],
     :style=>((style = [("text-align: #{attr :align}" if attr? :align),
                        ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : style)}
   .content

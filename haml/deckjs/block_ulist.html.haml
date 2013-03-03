@@ -3,7 +3,9 @@
     .title=title
   %ul
     - content.each do |item|
-      %li{:class => ("slide" if attr :incremental)}
-        %p=item.text
+      %li{:class=>('slide' if attr? 'step-option')}<
         - if item.blocks?
+          %p=item.text
           =item.content.chomp
+        - else
+          =item.text
