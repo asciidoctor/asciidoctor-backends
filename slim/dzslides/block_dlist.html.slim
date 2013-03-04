@@ -1,0 +1,9 @@
+dl class=(attr :role)
+  - content.each do |dt, dd|
+    dt=dt.text
+    - unless dd.nil?
+      dd
+        - if dd.text?
+          =dd.text
+        - if dd.blocks?
+          =dd.content

@@ -1,0 +1,14 @@
+- if title? || (attr :caption)
+  figure
+    - if attr? :link
+      a.image href=(attr :link)
+        img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
+    - else
+      img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
+    figcaption class=(attr :crole) #{attr :caption}#{title}
+- else
+  - if attr? :link
+    a.image href=(attr :link)
+      img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
+  - else
+    img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)

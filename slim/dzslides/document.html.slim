@@ -1,19 +1,35 @@
 doctype 5
 html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
   head
-    meta http-equiv='Content-Type' content='text/html; charset=#{attr :encoding}'
-    meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}"
-    - if attr? :description
-      meta name='description' content=(attr :description)
-    - if attr? :keywords
-      meta name='keywords' content=(attr :keywords)
+    meta charset=(attr :encoding)
+    meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}, dzslides backend"
     title=doctitle
+    - [:description, :author, :copyright].each do |key|
+      - if attr? key
+        meta name=key content=(attr key)
+    - if attr? :revdate
+      meta name='presdate' content=(attr :revdate)
+    - if attr? :corpname
+      meta name='company' content=(attr :corpname)
     - if attr? 'dzslides-fonts'
       link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts'}"
+    - if attr? 'dzslides-highlight'
+      link rel='stylesheet' href="dzslides/themes/highlight/#{attr 'dzslides-highlight'}.css"
+      link rel='stylesheet' href="dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
+    css:
+      section:not(.topic) > h2 {
+        display: none;
+      }
+    /bug in full screen image if include dzslides.css before ours
+    link rel='stylesheet' href='dzslides/core/dzslides.css'
+    link rel='stylesheet' href="dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
   body id=@id
     section.title
-      h1=doctitle
-      footer
-        | #{attr :author}#{(attr? :corpname) ? ", #{attr :corpname}" : nil}
-    #content
-      =content
+      h1=@header.title
+      footer #{attr :author}#{(attr? :corpname) ? ", #{attr :corpname}" : nil}
+    =content
+    script src='dzslides/core/dzslides.js' 
+    - if attr? 'dzslides-highlight'
+      script src='dzslides/highlight/highlight.pack.js'
+    javascript:
+      hljs.initHighlightingOnLoad()

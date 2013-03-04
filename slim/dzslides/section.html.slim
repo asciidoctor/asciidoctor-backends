@@ -1,0 +1,4 @@
+section class=(attr :role)
+  - if (attr? :role) && (attr :role).split(' ').include?('topic')
+    h2 class=(attr :hrole) =@title
+  =content
