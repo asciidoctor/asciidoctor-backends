@@ -1,4 +1,5 @@
 doctype 5
+/ This should really be a media query in the css
 html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
   head
     meta charset=(attr :encoding)
@@ -15,6 +16,7 @@ html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
       link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts'}"
     - if attr? 'dzslides-highlight'
       link rel='stylesheet' href="dzslides/themes/highlight/#{attr 'dzslides-highlight'}.css"
+    - if attr? 'dzslides-style'
       link rel='stylesheet' href="dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
     css:
       section:not(.topic) > h2 {
