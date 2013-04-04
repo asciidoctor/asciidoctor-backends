@@ -1,4 +1,5 @@
 doctype 5
+/ This should really be a media query in the css
 html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
   head
     meta charset=(attr :encoding)
@@ -15,6 +16,7 @@ html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
       link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts'}"
     - if attr? 'dzslides-highlight'
       link rel='stylesheet' href="dzslides/themes/highlight/#{attr 'dzslides-highlight'}.css"
+    - if attr? 'dzslides-style'
       link rel='stylesheet' href="dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
     css:
       section:not(.topic) > h2 {
@@ -24,12 +26,12 @@ html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
     link rel='stylesheet' href='dzslides/core/dzslides.css'
     link rel='stylesheet' href="dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
   body id=@id
-    section.title
+    section.opening-slide
       h1=@header.title
       footer #{attr :author}#{(attr? :corpname) ? ", #{attr :corpname}" : nil}
     =content
     script src='dzslides/core/dzslides.js' 
     - if attr? 'dzslides-highlight'
       script src='dzslides/highlight/highlight.pack.js'
-    javascript:
-      hljs.initHighlightingOnLoad()
+      javascript:
+        hljs.initHighlightingOnLoad()

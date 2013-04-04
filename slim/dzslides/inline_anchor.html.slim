@@ -1,0 +1,9 @@
+- case @type
+- when :xref
+  a.inline-link href="##@target" =(@text || @document.references[:ids].fetch(@target, "[#@target]")).tr_s("\n", ' ')
+- when :ref
+  a.ref-link id=@target
+- when :bibref
+  a.bib-link id=@target ="[#@target]"
+- else
+  a.link href=@target target=(attr :window) =@text
