@@ -26,7 +26,7 @@ html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
     link rel='stylesheet' href='dzslides/core/dzslides.css'
     link rel='stylesheet' href="dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
   body id=@id
-    section.title
+    section.title.slide
       h1=@header.title
       footer #{attr :author}#{(attr? :corpname) ? ", #{attr :corpname}" : nil}
     =content

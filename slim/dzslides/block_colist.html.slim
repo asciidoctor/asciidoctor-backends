@@ -8,7 +8,7 @@
           td: img src=icon_uri("callouts/#{i + 1}") alt=(i + 1)
           td=item.text
   - else
-    ol
+    ol.ordered-list
       - content.each do |item|
-        li
+        li.item
           p=item.text

@@ -1,4 +1,4 @@
-section class=(attr :role)
+section class=['slide', (attr :role)]
   - if (attr? :role) && (attr :role).split(' ').include?('topic')
-    h2 class=(attr :role) =@title
+    h2 class=['slide-title', (attr :role)] =@title
   =content
