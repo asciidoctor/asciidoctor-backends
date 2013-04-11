@@ -1,9 +1,12 @@
-%div{:id=>@id, :class=>['admonitionblock', (attr :role)]}
+%div{:id=>@id, :class=>['admonitionblock', (attr :name), (attr :role)]}
   %table
     %tr
       %td.icon
         - if attr? :icons
-          %img{:src=>icon_uri(attr :name), :alt=>(attr :caption)}
+          - if attr? :icons, 'awesome'
+            %i{:class=>"icon-#{attr :name}"}
+          - else
+            %img{:src=>icon_uri(attr :name), :alt=>(attr :caption)}
         - else
           .title=attr :caption
       %td.content

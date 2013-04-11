@@ -1,4 +1,4 @@
-- haml_tag((@special ? (@level <= 1 ? @sectname : 'section') : (@document.doctype == 'book' && @level <= 1 ? 'chapter' : 'section')),
+- haml_tag((@special ? (@level <= 1 ? @sectname : 'section') : (@document.doctype == 'book' && @level <= 1 ? (@level == 0 ? 'part' : 'chapter') : 'section')),
     :id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)) do
   - if title?
     %title=title

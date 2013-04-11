@@ -3,7 +3,10 @@
   =content.chomp
 - else
   %div{:class=>["sect#{@level}", (attr :role)]}
-    - haml_tag "h#{@level + 1}##{@id}", !@special && (attr :numbered) && @level < 4 ? "#{sectnum} #{attr :caption}#{title}" : "#{attr :caption}#{title}"
+    - title_html = "#{attr :caption}#{title}"
+    - if attr? :anchors
+      - title_html = "<a name=\"#{@id}\" class=\"anchor\" href=\"##{@id}\">#{title_html}</a>"
+    - haml_tag "h#{@level + 1}##{@id}", !@special && (attr :numbered) && @level < 4 ? "#{sectnum} #{title_html}" : "#{title_html}"
     - if @level == 1
       .sectionbody
         =content.chomp
