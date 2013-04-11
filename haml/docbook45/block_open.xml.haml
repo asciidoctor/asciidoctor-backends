@@ -1,1 +1,7 @@
-=content
+- if attr? 1, 'partintro'
+  %partintro
+    - if title?
+      %title=title
+    =content
+- else
+  =content
