@@ -20,6 +20,7 @@
       %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css")
       %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js")
       %script hljs.initHighlightingOnLoad()
+    =docinfo
   %body{:id => @id, :class=>(attr :doctype), :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     - unless noheader
       -# AsciiDoc leaves an empty header div even if there's no doctitle
@@ -31,7 +32,7 @@
             %span#author=attr :author
             %br
           - if attr? :email
-            %span#email.monospaced &lt;#{attr :email}&gt;
+            %span#email=sub_macros(attr :email)
             %br
           - if attr? :revnumber
             %span#revnumber version #{attr :revnumber}#{',' if (attr? :revdate)}
@@ -41,13 +42,13 @@
             %br
             %span#revremark=attr :revremark
         - if attr? :toc
-          #toc
+          #toc{:class=>(attr 'toc-class', 'toc')}
             #toctitle=attr 'toc-title'
             -# hackish, find a way to make the toc generator more generic
             =Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i)
     #content
       =content.chomp
-    - if footnotes?
+    - unless !footnotes? || attr?(:nofootnotes)
       #footnotes
         %hr
         - footnotes.each do |fn|

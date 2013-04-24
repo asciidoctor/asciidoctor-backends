@@ -1,19 +1,37 @@
 - docinfo = Helpers.capture_output do
   - if has_header? && !notitle
-    title=@header.title
+    - segments = @header.title.rpartition(': ')
+    - if segments.first.empty?
+      title=segments.last
+    - else
+      title=segments.first
+      subtitle=segments.last
   date=(attr? :revdate) ? (attr :revdate) : (attr :docdate)
   - if has_header?
     - if attr? :author
-      author
-        - if attr? :firstname
-          firstname=attr :firstname
-        - if attr? :middlename
-          othername=attr :middlename
-        - if attr? :lastname
-          surname=attr :lastname
-        - if attr? :email
-          email=attr :email
-      authorinitials=attr :authorinitials
+      - if attr? :authorcount, 1
+        author
+          - if attr? :firstname
+            firstname=attr :firstname
+          - if attr? :middlename
+            othername=attr :middlename
+          - if attr? :lastname
+            surname=attr :lastname
+          - if attr? :email
+            email=attr :email
+        authorinitials=attr :authorinitials
+      - else
+        authorgroup
+          - (1..(attr :authorcount)).each do |idx|
+            author
+              - if attr? "firstname_#{idx}"
+                firstname=attr "firstname_#{idx}"
+              - if attr? "middlename_#{idx}"
+                othername=attr "middlename_#{idx}"
+              - if attr? "lastname_#{idx}"
+                surname=attr "lastname_#{idx}"
+              - if attr? "email_#{idx}"
+                email=attr "email_#{idx}"
     / this check seems weak
     - if (attr? :revnumber) || (attr? :revremark)
       revhistory
