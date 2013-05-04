@@ -6,7 +6,7 @@
       - content.each_with_index do |item, i|
         %tr
           %td<
-            - if attr? :icons, 'awesome'
+            - if attr? :icons, 'font'
               %i.conum=i + 1
             - else
               %img{:src=>icon_uri("callouts/#{i + 1}"), :alt=>(i + 1)}

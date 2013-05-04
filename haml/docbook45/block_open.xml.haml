@@ -1,7 +1,25 @@
-- if attr? 1, 'partintro'
-  %partintro
-    - if title?
-      %title=title
-    =content
+- case attr 'style'
+- when 'abstract'
+  - if @parent == @document && @document.doctype == 'book'
+    - puts 'asciidoctor: WARNING: abstract block cannot be used in a document without a title when doctype is book. Excluding block content.'
+  - else
+    %abstract
+      - if title?
+        %title=title
+      - if blocks?
+        =content
+      - else
+        %simpara=content
+- when 'partintro'
+  - unless @document.doctype == 'book' && @parent.context == :section && @level == 0
+    - puts 'asciidoctor: ERROR: partintro block can only be used when doctype is book and its a child of a part section. Excluding block content.'
+  - else
+    %partintro{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
+      - if title?
+        %title=title
+      - if blocks?
+        =content
+      - else
+        %simpara=content
 - else
   =content

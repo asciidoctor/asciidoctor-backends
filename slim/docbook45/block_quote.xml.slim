@@ -7,7 +7,7 @@ blockquote id=@id role=(attr :role) xreflabel=(attr :reftext)
         =attr :attribution
       - if attr? :citetitle
         citetitle=attr :citetitle
-  - if !@buffer.nil?
-    simpara=content
-  - else
+  - if blocks?
     =content
+  - else
+    simpara=content

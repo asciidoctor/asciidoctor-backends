@@ -8,7 +8,7 @@
     <?dblatex table-width="#{attr :width}"?>
   %tgroup{:cols=>(attr :colcount)}
     - @columns.each do |col|
-      %colspec(colname="col_#{col.attr :colnumber}" colwidth="#{col.attr((attr? :width) ? :colabswidth : :colpcwidth)}*")
+      %colspec(colname="col_#{col.attr :colnumber}" colwidth="#{col.attr((attr? :width) ? :colabswidth : :colpcwidth)}*")/
     - [:head, :foot, :body].select {|tblsec| !@rows[tblsec].empty? }.each do |tblsec|
       - haml_tag "t#{tblsec}" do
         - @rows[tblsec].each do |row|

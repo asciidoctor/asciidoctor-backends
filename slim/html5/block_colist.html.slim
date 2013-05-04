@@ -5,7 +5,11 @@
     table
       - content.each_with_index do |item, i|
         tr
-          td: img src=icon_uri("callouts/#{i + 1}") alt=(i + 1)
+          td
+            - if attr? :icons, 'font'
+              i.conum=i + 1
+            - else
+              img src=icon_uri("callouts/#{i + 1}") alt=(i + 1)
           td=item.text
   - else
     ol

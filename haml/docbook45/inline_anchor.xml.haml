@@ -1,9 +1,9 @@
 - case @type
 - when :ref
-  %anchor{:id=>@target, :xreflabel=>@text}
+  %anchor{:id=>@target, :xreflabel=>@text}/
 - when :xref
   - if @text.nil?
-    %xref{:linkend=>@target}
+    %xref{:linkend=>@target}/
   - else
     %link{:linkend=>@target}=@text
 - when :link
