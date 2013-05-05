@@ -1,0 +1,12 @@
+.admonition-block id=@id class=(attr :role)
+  table
+    tr
+      td.icon
+        - if attr? :icons
+          img src=icon_uri(attr :name) alt=(attr :caption)
+        - else
+          .title=attr :caption
+      td.content
+        - if title?
+          .title=title
+        =content.chomp
