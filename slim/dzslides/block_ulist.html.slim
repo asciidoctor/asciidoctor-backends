@@ -1,6 +1,6 @@
-ul.unorderd-list class=(attr :role)
+ul class=(attr :role)
   - content.each do |item|
-    li.item
+    li
       =item.text
       - if item.blocks?
         =item.content

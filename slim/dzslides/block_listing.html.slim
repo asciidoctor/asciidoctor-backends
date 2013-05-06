@@ -1,4 +1,7 @@
-.listing
+.listingblock id=@id class=(attr :role)
   - if title?
     .title #{attr :caption}#{title}
-  pre.highlight: code class=(attr :language) =content
+  - if (attr? :style, 'source') && (attr? :language)
+    pre.highlight class=('CodeRay' if attr? 'source-highlighter', 'coderay') : code class=(attr :language) =content
+  - else
+    pre=content

@@ -1,8 +1,8 @@
-dl class=['definition', ( attr :role )]
+dl class=[(attr :style),(attr :role)]
   - content.each do |dt, dd|
-    dt.definition-term=dt.text
+    dt=dt.text
     - unless dd.nil?
-      dd.definition-text
+      dd
         - if dd.text?
           =dd.text
         - if dd.blocks?

@@ -1,4 +1,6 @@
-- if attr? :icons
-  img.callout-icon src=icon_uri("callouts/#@text") alt=@text
+- if attr? :icons, 'font'
+  i.conum=@text
+- elsif attr? :icons
+  img.conum src=icon_uri("callouts/#{@text}") alt=@text
 - else
-  b.callout="&lt;#{@text}&gt;"
+  b.conum &lt;#{@text}&gt;

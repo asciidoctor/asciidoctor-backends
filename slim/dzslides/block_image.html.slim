@@ -1,14 +1,13 @@
-- if title? || (attr :caption)
+/begin captures
+- image_tmpl = Helpers.capture_output do
+  img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
+- linked_image_tmpl = Helpers.capture_output do
+  a.image href=(attr :link)
+    - image_tmpl.yield
+/end captures
+- if title? || (attr? :caption)
   figure
-    - if attr? :link
-      a.image href=(attr :link)
-        img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
-    - else
-      img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
+    - (attr? :link) ? linked_image_tmpl.yield : image_tmpl.yield
     figcaption class=(attr :crole) #{attr :caption}#{title}
 - else
-  - if attr? :link
-    a.image href=(attr :link)
-      img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
-  - else
-    img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
+  - (attr? :link) ? linked_image_tmpl.yield : image_tmpl.yield

@@ -4,11 +4,15 @@
   - if attr? :icons
     table
       - content.each_with_index do |item, i|
+        - num = i + 1
         tr
-          td: img src=icon_uri("callouts/#{i + 1}") alt=(i + 1)
+          td
+            - if attr? :icons, 'font'
+              i.conum=num
+            - else
+              img src=icon_uri("callouts/#{num}") alt=num
           td=item.text
   - else
-    ol.ordered-list
+    ol
       - content.each do |item|
-        li.item
-          p=item.text
+        li.item: p=item.text

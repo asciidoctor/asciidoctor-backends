@@ -1,5 +1,4 @@
-.example-block id=@id class=(attr :role)
+.exampleblock id=@id class=(attr :role)
   - if title?
-    .title="#{attr :caption}#{title}"
-  .content
-    =content
+    .title #{attr :caption}#{title}
+  .content=content

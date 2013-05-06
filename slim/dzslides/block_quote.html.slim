@@ -1,8 +1,8 @@
-blockquote class=['quote', (attr :role)]
+blockquote class=(attr :role)
   =content
-  - if attr? :citetitle
-    em.cite-title=attr :citetitle
+  - if (attr? :citetitle) || (attr? :attribution)
+    - if attr? :citetitle
+      em=attr :citetitle
+    br
     - if attr? :attribution
-        br
-  - if attr? :attribution
-    cite.attribution=attr :attribution
+      cite=attr :attribution

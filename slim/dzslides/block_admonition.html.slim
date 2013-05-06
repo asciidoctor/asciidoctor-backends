@@ -1,12 +1,19 @@
-.admonition-block id=@id class=(attr :role)
-  table
-    tr
-      td.icon
-        - if attr? :icons
-          img src=icon_uri(attr :name) alt=(attr :caption)
-        - else
-          .title=attr :caption
-      td.content
-        - if title?
-          .title=title
-        =content.chomp
+- if attr? :role, 'details'
+  details
+    details: summary Notes
+    =content
+- else
+  .admonitionblock id=@id class=[(attr :name),(attr :role)]
+    table
+      tr
+        td.icon
+          - if attr? :icons, 'font'
+            i class icon#{attr :name}
+          - elsif attr? :icons
+            img src=icon_uri(attr :name) alt=(attr :caption)
+          - else
+            .title=attr :caption
+        td.content
+          - if title?
+            .title=title
+          =content

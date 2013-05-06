@@ -1,37 +1,33 @@
 doctype 5
 / This should really be a media query in the css
-html lang=(attr :lang, 'en') class="aspect-#{attr 'dzslides-aspect', '4-3'}"
+html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides-aspect', '4-3'}"
   head
     meta charset=(attr :encoding)
     meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}, dzslides backend"
     title=doctitle
-    - [:description, :author, :copyright].each do |key|
+    - {:description => 'description', :author => 'author', :copyright => 'copyright',
+       :revdate => 'presdate', :corpname => 'company'}.each do |key, name|
       - if attr? key
-        meta name=key content=(attr key)
-    - if attr? :revdate
-      meta name='presdate' content=(attr :revdate)
-    - if attr? :corpname
-      meta name='company' content=(attr :corpname)
-    - if attr? 'dzslides-fonts'
-      link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts'}"
-    - if attr? 'dzslides-highlight'
-      link rel='stylesheet' href="dzslides/themes/highlight/#{attr 'dzslides-highlight'}.css"
-    - if attr? 'dzslides-style'
-      link rel='stylesheet' href="dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
-    css:
-      section:not(.topic) > h2 {
-        display: none;
-      }
+        meta name=name content=(attr key)
+    link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts', 'family=Oswald'}"
+    - if attr? 'source-highlighter'
+      link rel='stylesheet' href="./dzslides/themes/highlight/#{attr 'dzslides-highlight', 'default'}.css"
+    link rel='stylesheet' href="./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
+    /FIXME move this CSS into stylesheet
+    style
+      |section:not(.topic) > h2 {
+      |  display: none;
+      |}
     /bug in full screen image if include dzslides.css before ours
-    link rel='stylesheet' href='dzslides/core/dzslides.css'
-    link rel='stylesheet' href="dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
+    link rel='stylesheet' href='./dzslides/core/dzslides.css'
+    link rel='stylesheet' href="./dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
   body id=@id
-    section.opening-slide
+    section.title
       h1=@header.title
-      footer #{attr :author}#{(attr? :corpname) ? ", #{attr :corpname}" : nil}
+      footer #{attr :author}#{(attr :corpname) && ", #{attr :corpname}"}
     =content
-    script src='dzslides/core/dzslides.js' 
+    script src='./dzslides/core/dzslides.js' 
     - if attr? 'dzslides-highlight'
-      script src='dzslides/highlight/highlight.pack.js'
-      javascript:
-        hljs.initHighlightingOnLoad()
+      script src='./dzslides/highlight/highlight.pack.js'
+      script
+        |hljs.initHighlightingOnLoad()
