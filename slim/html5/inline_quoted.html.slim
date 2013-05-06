@@ -1,5 +1,5 @@
 - if attr? :role
-  - text = "<span class=\"#{attr :role}\">#@text</span>"
+  - text = %(<span class="#{attr :role}">#{@text}</span>)
 - else
   - text = @text
 - case @type

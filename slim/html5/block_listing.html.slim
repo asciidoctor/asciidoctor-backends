@@ -1,6 +1,6 @@
 .listingblock id=@id class=(attr :role)
   - if title?
-    .title="#{attr :caption}#{title}"
+    .title #{attr :caption}#{title}
   .content.monospaced
     - if attr? :style, 'source'
       pre class=['highlight',('CodeRay' if attr? 'source-highlighter', 'coderay')]
