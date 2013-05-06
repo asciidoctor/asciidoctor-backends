@@ -4,10 +4,9 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
     meta http-equiv='Content-Type' content='text/html; charset=#{attr :encoding}'
     meta name='viewport' content='width=device-width, initial-scale=1.0'
     meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}"
-    - if attr? :description
-      meta name='description' content=(attr :description)
-    - if attr? :keywords
-      meta name='keywords' content=(attr :keywords)
+    - [:description, :author, :copyright].each do |key|
+      - if attr? key
+        meta name=key content=(attr key)
     title=doctitle
     - if Asciidoctor::DEFAULT_STYLESHEET_KEYS.include?(attr :stylesheet)
       - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
@@ -56,8 +55,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
             / hackish, find a way to make the toc generator more generic
             / also need a no-indent mode
             =Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i)
-    #content
-      =content
+    #content=content
     - unless !footnotes? || attr?(:nofootnotes)
       #footnotes
         hr
@@ -69,4 +67,4 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
         - if attr? :revnumber
           | Version #{attr :revnumber}
           br
-        | Lasted updated #{attr :localdatetime}
+        | Last updated #{attr :docdatetime}
