@@ -6,6 +6,7 @@
     - image_tmpl.yield
 /end captures
 - if title? || (attr? :caption)
+  /perhaps the role should go on the figure
   figure
     - (attr? :link) ? linked_image_tmpl.yield : image_tmpl.yield
     figcaption class=(attr :crole) #{attr :caption}#{title}

@@ -21,13 +21,13 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
     /bug in full screen image if include dzslides.css before ours
     link rel='stylesheet' href='./dzslides/core/dzslides.css'
     link rel='stylesheet' href="./dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
+    =docinfo '.html'
   body id=@id
     section.title
       h1=@header.title
-      footer #{attr :author}#{(attr :corpname) && ", #{attr :corpname}"}
+      footer #{attr :author}#{(attr :corpname) && " - #{attr :corpname}"}
     =content
     script src='./dzslides/core/dzslides.js' 
     - if attr? 'dzslides-highlight'
       script src='./dzslides/highlight/highlight.pack.js'
-      script
-        |hljs.initHighlightingOnLoad()
+      script hljs.initHighlightingOnLoad()
