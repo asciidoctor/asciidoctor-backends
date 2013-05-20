@@ -1,0 +1,5 @@
+<%#encoding:UTF-8%><span class="image<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%
+if attr? 'link' %><a class="image" href="<%= attr 'link' %>"><%
+end %><img src="<%= image_uri(@target) %>" alt="<%= attr 'alt' %><%= attr?('width') ? %( width="#{attr 'width'}") : nil %><%= attr?('height') ? %( height="#{attr 'height'}") : nil %>"><%
+if attr? 'link' %></a><%
+end %></span>

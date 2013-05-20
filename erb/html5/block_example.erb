@@ -1,0 +1,6 @@
+<%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="exampleblock<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
+<div class="title">#{attr?('caption') ? attr('caption') : nil}#{@title}</div>) : nil %>
+<div class="content">
+<%= content.chomp %>
+</div>
+</div>

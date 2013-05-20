@@ -1,0 +1,14 @@
+<%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="imageblock<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"<%
+if (attr? 'align') || (attr? 'float') %> style="<%
+if attr? 'align' %>text-align: <%= attr 'align' %><%= attr?('float') ? '; ' : nil %><% end %><%
+if attr? 'float' %>float: <%= attr 'float' %><% end %>"<%
+end %>>
+<div class="content"><%
+if attr? 'link' %>
+<a class="image" href="<%= attr 'link' %>"><img src="<%= image_uri(attr 'target') %>" alt="<%= attr 'alt' %>"<%= attr?('width') ? %( width="#{attr 'width'}") : nil %><%= attr?('height') ? %( width="#{attr 'height'}") : nil %>></a><%
+else %>
+<img src="<%= image_uri(attr 'target') %>" alt="<%= attr 'alt' %>"<%= attr?('width') ? %( width="#{attr 'width'}") : nil %><%= attr?('height') ? %( height="#{attr 'height'}") : nil %>><%
+end %>
+</div><%= title? ? %(
+<div class="title">#{attr?('caption') ? attr('caption') : nil}#{@title}</div>) : nil %>
+</div>

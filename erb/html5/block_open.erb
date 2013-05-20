@@ -1,0 +1,22 @@
+<%#encoding:UTF-8%><%
+if attr?('style', 'abstract')
+  if @parent == @document && @document.attr?('doctype', 'book')
+    puts 'asciidoctor: WARNING: abstract block cannot be used in a document without a title when doctype is book. Excluding block content.'
+  else %>
+<div<%= @id && %( id="#{@id}") %> class="quoteblock abstract<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
+<div class="title">#{@title}</div>) : nil %>
+<blockquote>
+<%= content.chomp %>
+</blockquote>
+</div><%
+  end
+elsif attr?('style', 'partintro') && (!@document.attr?('doctype', 'book') || @parent.context != :section || @level != 0)
+  puts 'asciidoctor: ERROR: partintro block can only be used when doctype is book and it\'s a child of a book part. Excluding block content.'
+else %>
+<div<%= @id && %( id="#{@id}") %> class="<%= ['openblock', (attr?('style', 'open') ? nil : (attr 'style')), attr('role')].compact * ' ' %>"><%= title? ? %(
+<div class="title">#{@title}</div>) : nil %>
+<div class="content">
+<%= content.chomp %>
+</div>
+</div><%
+end %>

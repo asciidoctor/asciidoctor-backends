@@ -1,0 +1,6 @@
+<%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="sidebarblock<%= attr?('role') ? %( #{attr 'role'}) : nil %>">
+<div class="content"><%= title? ? %(
+<div class="title">#{@title}</div>) : nil %>
+<%= content.chomp %>
+</div>
+</div>

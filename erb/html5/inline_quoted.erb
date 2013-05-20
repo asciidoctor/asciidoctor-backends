@@ -1,0 +1,11 @@
+<%#encoding:UTF-8%><% text_span = attr?('role') ? %|<span class="#{attr 'role'}">#@text</span>| : @text %><%
+case @type
+when :emphasis %><%= %|<em>#{text_span}</em>| %><%
+when :strong %><%= %|<strong>#{text_span}</strong>| %><%
+when :monospaced %><%= %|<code>#{text_span}</code>| %><%
+when :superscript %><%= %|<sup>#{text_span}</sup>| %><%
+when :subscript %><%= %|<sub>#{text_span}</sub>| %><%
+when :double %><%= %|&#8220;#{text_span}&#8221;| %><%
+when :single %><%= %|&#8216;#{text_span}&#8217;| %><%
+else %><%= text_span %><%
+end %>
