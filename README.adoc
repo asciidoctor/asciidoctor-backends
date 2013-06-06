@@ -110,6 +110,11 @@ First, make sure Asciidoctor is installed:
 Then, to render your presentation as HTML5, simply execute the command:
 
  asciidoctor -T <backend directory> <asciidoc file>
+ 
+So for the above deckjs backend you'd use
+ 
+ asciidoctor -T <base>/asciidoctor-backends-haml/deckjs <asciidoc file> 
+ 
 
 === Stay Connected
 
