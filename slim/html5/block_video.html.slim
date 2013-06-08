@@ -1,6 +1,6 @@
 .videoblock id=@id class=[(attr :style),(attr :role)]
   - if title?
-    .title #{attr :caption}#{title}
+    .title #{@caption}#{title}
   .content
     video(src=media_uri(attr :target) width=(attr :width) height=(attr :height)
         poster=((attr :poster) ? media_uri(attr :poster) : nil) autoplay=(attr? 'autoplay-option')

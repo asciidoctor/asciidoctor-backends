@@ -1,6 +1,6 @@
 .audioblock id=@id class=[(attr :style),(attr :role)]
   - if title?
-    .title #{attr :caption}#{title}
+    .title #{@caption}#{title}
   .content
     audio src=media_uri(attr :target) autoplay=(attr? 'autoplay-option') controls=!(attr? 'nocontrols-option') loop=(attr? 'loop-option')
       |Your browser does not support the audio tag.
