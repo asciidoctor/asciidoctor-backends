@@ -2,10 +2,10 @@
 - anchor = nil
 - link = nil
 - if @id
-  - if @document.attr? 'sectanchors'
+  - if @document.attr? :sectanchors
     - anchor = %(<a class="anchor" href="##{@id}"></a>)
     - link = nil
-  - elsif @document.attr? 'sectlinks'
+  - elsif @document.attr? :sectlinks
     - anchor = nil 
     - link = %(<a class="link" href="##{@id}">)
 - if slevel == 0
