@@ -1,6 +1,6 @@
 %div{:id=>@id, :class=>['listingblock', (attr :role), ('slide' if attr? 'step-option')]}
   - if title?
-    .title="#{attr :caption}#{title}"
+    .title="#{@caption}#{title}"
   .content.monospaced
     -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;
     - if attr? :style, 'source'

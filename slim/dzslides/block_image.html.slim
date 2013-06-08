@@ -5,10 +5,10 @@
   a.image href=(attr :link)
     - image_tmpl.yield
 /end captures
-- if title? || (attr? :caption)
+- if title? || @caption
   /perhaps the role should go on the figure
   figure
     - (attr? :link) ? linked_image_tmpl.yield : image_tmpl.yield
-    figcaption class=(attr :crole) #{attr :caption}#{title}
+    figcaption class=(attr :crole) #{@caption}#{title}
 - else
   - (attr? :link) ? linked_image_tmpl.yield : image_tmpl.yield

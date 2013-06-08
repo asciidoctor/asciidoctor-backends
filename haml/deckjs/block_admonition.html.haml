@@ -3,9 +3,9 @@
     %tr
       %td.icon
         - if attr? :icons
-          %img{:src=>icon_uri(attr :name), :alt=>(attr :caption)}
+          %img{:src=>icon_uri(attr :name), :alt=>@caption}
         - else
-          .title=attr :caption
+          .title=@caption
       %td.content
         - if title?
           .title=title

@@ -1,5 +1,5 @@
 %div{:id=>@id, :class=>['exampleblock', (attr :role), ('slide' if attr? 'step-option')]}
   - if title?
-    .title="#{attr :caption}#{title}"
+    .title="#{@caption}#{title}"
   .content
     =content.chomp

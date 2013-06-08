@@ -8,4 +8,4 @@
     - else
       %img{:src=>image_uri(attr :target), :alt=>(attr :alt), :width=>(attr :width), :height=>(attr :height)}
   - if title?
-    .title="#{attr :caption}#{title}"
+    .title="#{@caption}#{title}"

@@ -1,5 +1,8 @@
 blockquote class=(attr :role)
-  =content
+  - if blocks?
+    =content
+  - else
+    p=content
   - if (attr? :citetitle) || (attr? :attribution)
     - if attr? :citetitle
       em=attr :citetitle
