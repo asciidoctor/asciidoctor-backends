@@ -8,5 +8,4 @@
   = surround '[', ']' do
     =@target
 - else
-  -#%a(href=@target)<=@text
-  %a(href=@target){:target=>(attr :window)}=@text
+  %a(href=@target){:class=>(attr :role), :target=>(attr :window)}=@text

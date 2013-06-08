@@ -1,13 +1,20 @@
-- if @level.zero?
-  %h1{:id=>@id}=title 
+- slevel = @level == 0 && @special ? 1 : @level
+- anchor = nil
+- link = nil
+- if @id
+  - if @document.attr? 'sectanchors'
+    - anchor = %(<a class="anchor" href="##{@id}"></a>)
+    - link = nil
+  - elsif @document.attr? 'sectlinks'
+    - anchor = nil 
+    - link = %(<a class="link" href="##{@id}">)
+- if slevel == 0
+  %h1{:id=>@id, :class=>"sect0"}=%(#{anchor}#{link}#{title}#{link && '</a>'})
   =content.chomp
 - else
-  %div{:class=>["sect#{@level}", (attr :role)]}
-    - title_html = "#{attr :caption}#{title}"
-    - if attr? :anchors
-      - title_html = %(<a name="#{@id}" class="anchor" href="##{@id}">#{title_html}</a>)
-    - haml_tag "h#{@level + 1}##{@id}", !@special && (attr :numbered) && @level < 4 ? "#{sectnum} #{title_html}" : title_html
-    - if @level == 1
+  %div{:class=>["sect#{slevel}", (attr :role)]}
+    - haml_tag "h#{slevel + 1}##{@id}", %(#{anchor}#{link}#{@numbered ? sectnum : nil}#{@caption}#{title}#{link && '</a>'})
+    - if slevel == 1
       .sectionbody
         =content.chomp
     - else
