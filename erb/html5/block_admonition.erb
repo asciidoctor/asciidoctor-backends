@@ -2,11 +2,11 @@
 <table>
 <tr>
 <td class="icon">
-<% if attr? 'icons' %><img src="<%= icon_uri(attr 'name') %>" alt="<%= attr 'caption' %>">
-<% else %><div class="title"><%= attr 'caption' %></div><% end %>
+<% if attr? 'icons' %><img src="<%= icon_uri(attr 'name') %>" alt="<%= @caption %>">
+<% else %><div class="title"><%= @caption %></div><% end %>
 </td>
 <td class="content"><%= title? ? %(
-<div class="title">#{@title}</div>) : nil %>
+<div class="title">#{title}</div>) : nil %>
 <%= content.chomp %>
 </td>
 </tr>

@@ -1,7 +1,7 @@
 <%#encoding:UTF-8%><%
 if attr? 'style', 'qanda', false %>
 <div<%= @id && %( id="#{@id}") %> class="qlist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{@title}</div>) : nil %>
+<div class="title">#{title}</div>) : nil %>
 <ol><%
 content.each do |dt, dd| %>
 <li>
@@ -20,7 +20,7 @@ end %>
 </div><%
 elsif attr? 'style', 'horizontal', false %>
 <div<%= @id && %( id="#{@id}") %> class="hdlist<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{@title}</div>) : nil %>
+<div class="title">#{title}</div>) : nil %>
 <table>
 <colgroup>
 <col<% if attr? 'labelwidth' %> style="width:<%= attr 'labelwidth' %>%;"<% end %>>
@@ -48,7 +48,7 @@ end %>
 </div><%
 else %>
 <div<%= @id && %( id="#{@id}") %> class="dlist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{@title}</div>) : nil %>
+<div class="title">#{title}</div>) : nil %>
 <dl><%
 content.each do |dt, dd| %>
 <dt<%= !(attr? 'style', nil, false) ? ' class="hdlist"' : nil %>>

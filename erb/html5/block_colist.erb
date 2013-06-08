@@ -1,5 +1,5 @@
 <%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="colist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{@title}</div>) : nil %><%
+<div class="title">#{title}</div>) : nil %><%
 if attr? 'icons' %>
 <table><% content.each_with_index do |item, i| %>
 <tr>

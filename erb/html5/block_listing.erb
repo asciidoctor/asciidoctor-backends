@@ -1,5 +1,5 @@
 <%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="listingblock<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{attr?('caption') ? attr('caption') : nil}#{@title}</div>) : nil %>
+<div class="title">#{@caption}#{title}</div>) : nil %>
 <div class="content monospaced"><%
 if attr? 'style', 'source', false %>
 <pre class="highlight"><code class="<%= attr('language') %>"><%= content %></code></pre><%

@@ -10,5 +10,5 @@ else %>
 <img src="<%= image_uri(attr 'target') %>" alt="<%= attr 'alt' %>"<%= attr?('width') ? %( width="#{attr 'width'}") : nil %><%= attr?('height') ? %( height="#{attr 'height'}") : nil %>><%
 end %>
 </div><%= title? ? %(
-<div class="title">#{attr?('caption') ? attr('caption') : nil}#{@title}</div>) : nil %>
+<div class="title">#{@caption}#{title}</div>) : nil %>
 </div>

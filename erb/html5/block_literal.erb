@@ -1,5 +1,5 @@
 <%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="literalblock<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{@title}</div>) : nil %>
+<div class="title">#{title}</div>) : nil %>
 <div class="content monospaced">
 <pre><%= content %></pre>
 </div>

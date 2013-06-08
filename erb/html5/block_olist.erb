@@ -1,5 +1,5 @@
 <%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="olist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{@title}</div>) : nil %>
+<div class="title">#{title}</div>) : nil %>
 <ol class="<%= attr 'style', nil, false %>"<%= attr?('start') ? %( start="#{attr 'start'}") : nil %>><% content.each do |item| %>
 <li>
 <p><%= item.text %></p><% if item.blocks? %>
