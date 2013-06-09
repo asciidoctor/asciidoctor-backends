@@ -1,6 +1,6 @@
 - case attr :style
 - when 'qanda'
-  %div{:id=>@id, :class=>['qlist', (attr :style), (attr :role)]}
+  %div{:id=>@id, :class=>['qlist', 'qanda', (attr :role)]}
     - if title?
       .title=title
     %ol
@@ -18,9 +18,10 @@
     - if title?
       .title=title
     %table
-      %colgroup
-        %col{:style=>("width: #{attr :labelwidth}%;" if (attr? :labelwidth))}
-        %col{:style=>("width: #{attr :itemwidth}%;" if (attr? :itemwidth))}
+      - if (attr? :labelwidth) || (attr? :itemwidth)
+        %colgroup
+          %col{:style=>("width:#{attr :labelwidth}%;" if (attr? :labelwidth))}
+          %col{:style=>("width:#{attr :itemwidth}%;" if (attr? :itemwidth))}
       - content.each do |dt, dd|
         %tr
           %td{:class=>['hdlist1', ('strong' if (attr? 'strong-option'))]}
@@ -29,16 +30,16 @@
           %td.hdlist2
             - unless dd.nil?
               - if dd.text?
-                %p(style="margin-top: 0")<=dd.text
+                %p<=dd.text
               - if dd.blocks?
                 =dd.content.chomp
 - else
-  %div{:id=>@id, :class=>['dlist', (attr :style), (attr :role)]}
+  %div{:id=>@id, :class=>['dlist', (attr :style, nil, false), (attr :role)]}
     - if title?
       .title=title
     %dl
       - content.each do |dt, dd|
-        %dt{:class=>('hdlist1' if !(attr? :style))}<
+        %dt{:class=>('hdlist1' unless (attr? :style, nil, false))}<
           =dt.text
         - unless dd.nil?
           %dd

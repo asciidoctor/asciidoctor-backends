@@ -13,7 +13,7 @@
   =content.chomp
 - else
   %div{:class=>["sect#{slevel}", (attr :role)]}
-    - haml_tag "h#{slevel + 1}##{@id}", %(#{anchor}#{link}#{@numbered ? sectnum : nil}#{@caption}#{title}#{link && '</a>'})
+    - haml_tag "h#{slevel + 1}##{@id}", %(#{anchor}#{link}#{@numbered ? "#{sectnum} " : nil}#{@caption}#{title}#{link && '</a>'})
     - if slevel == 1
       .sectionbody
         =content.chomp

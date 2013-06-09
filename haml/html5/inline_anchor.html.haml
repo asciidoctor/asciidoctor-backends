@@ -4,8 +4,7 @@
 - when :ref
   %a(id=@target)
 - when :bibref
-  %a(id=@target)
-  = surround '[', ']' do
-    =@target
+  %a(id=@target)>
+  =%([#{@target}])
 - else
   %a(href=@target){:class=>(attr :role), :target=>(attr :window)}=@text

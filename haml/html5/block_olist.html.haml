@@ -1,7 +1,7 @@
-%div{:id=>@id, :class=>['olist', (attr :style), (attr :role)]}
+%div{:id=>@id, :class=>['olist', (attr :style, nil, false), (attr :role)]}
   - if title?
     .title=title
-  %ol{:class=>(attr :style), :start=>(attr :start)}
+  %ol{:class=>(attr :style, nil, false), :start=>(attr :start), :type=>(Asciidoctor::ORDERED_LIST_KEYWORDS[attr :style, nil, false])}
     - content.each do |item|
       %li
         %p=item.text

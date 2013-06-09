@@ -1,4 +1,4 @@
-%div{:id=>@id, :class=>['audioblock', (attr :style), (attr :role)]}
+%div{:id=>@id, :class=>['audioblock', (attr :style, nil, false), (attr :role)]}
   - if title?
     .title="#{@caption}#{title}"
   .content

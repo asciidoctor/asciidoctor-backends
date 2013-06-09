@@ -9,11 +9,11 @@
     - anchor = nil 
     - link = %(<a class="link" href="##{@id}">)
 - if slevel == 0
-  h1 id=@id class="sect0" =%(#{anchor}#{link}#{title}#{link && '</a>'})
+  h1 id=@id class='sect0' =%(#{anchor}#{link}#{title}#{link && '</a>'})
   =content
 - else
   div class=["sect#{slevel}",(attr :role)]
-    *{:tag=>"h#{slevel + 1}", :id=>@id} =%(#{anchor}#{link}#{@numbered ? sectnum : nil}#{@caption}#{title}#{link && '</a>'})
+    *{:tag=>"h#{slevel + 1}", :id=>@id} =%(#{anchor}#{link}#{@numbered ? "#{sectnum} " : nil}#{@caption}#{title}#{link && '</a>'})
     - if slevel == 1
       .sectionbody=content
     - else

@@ -21,14 +21,13 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
     - case attr 'source-highlighter'
     - when 'coderay'
       - if (attr 'coderay-css', 'class') == 'class'
-        / hackish, find a way to locate this function in a more generic namespace
-        =Asciidoctor::HTML5::DocumentTemplate.default_coderay_stylesheet
+        =Asciidoctor::HTML5.default_coderay_stylesheet
     - when 'highlightjs'
       link rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css"
       script src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js"
       script hljs.initHighlightingOnLoad()
     =docinfo
-  body id=@id class=(attr :doctype) style=("max-width: #{attr 'max-width'};" if attr? 'max-width')
+  body id=@id class=[(attr :doctype),((attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto') ? (attr 'toc-class') : nil)] style=("max-width: #{attr 'max-width'};" if attr? 'max-width')
     - unless noheader
       / AsciiDoc leaves an empty header div even if there's no doctitle
       #header
@@ -36,11 +35,17 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
           - unless notitle
             h1=@header.title
           - if attr? :author
-            span#author=(attr :author)
+            span#author class='author' =(attr :author)
             br
-          - if attr? :email
-            span#email=sub_macros(attr :email)
-            br
+            - if attr? :email
+              span#email class='email' =sub_macros(attr :email)
+              br
+            - if (authorcount = (attr :authorcount).to_i) > 1
+              - (2..authorcount).each do |idx|
+                span id="author#{idx}" class='author' =(attr "author_#{idx}")
+                br
+                - if attr? "email_#{idx}"
+                  span id="email#{idx}" class='email' =sub_macros(attr "email_#{idx}")
           - if attr? :revnumber
             span#revnumber version #{attr :revnumber}#{',' if attr? :revdate}
             '
@@ -49,11 +54,10 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
           - if attr? :revremark
             br
             span#revremark=attr :revremark
-        - if attr? :toc
+        - if (attr? :toc) && (attr? 'toc-placement', 'auto')
           #toc class=(attr 'toc-class', 'toc')
             #toctitle=attr 'toc-title'
             / hackish, find a way to make the toc generator more generic
-            / also need a no-indent mode
             =Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i)
     #content=content
     - unless !footnotes? || attr?(:nofootnotes)

@@ -1,7 +1,13 @@
-example id=@id role=(attr :role) xreflabel=(attr :reftext)
-  - if title?
+- if title?
+  example id=@id role=(attr :role) xreflabel=(attr :reftext)
     title=title
-  - if blocks?
-    =content
-  - else
-    simpara=content
+    - if blocks?
+      =content
+    - else
+      simpara=content
+- else
+  informalexample id=@id role=(attr :role) xreflabel=(attr :reftext)
+    - if blocks?
+      =content
+    - else
+      simpara=content
