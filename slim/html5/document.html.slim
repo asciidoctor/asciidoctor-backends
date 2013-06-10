@@ -47,7 +47,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
                 - if attr? "email_#{idx}"
                   span id="email#{idx}" class='email' =sub_macros(attr "email_#{idx}")
           - if attr? :revnumber
-            span#revnumber version #{attr :revnumber}#{',' if attr? :revdate}
+            span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if attr? :revdate}
             '
           - if attr? :revdate
             span#revdate=attr :revdate
@@ -69,6 +69,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
     #footer
       #footer-text
         - if attr? :revnumber
-          | Version #{attr :revnumber}
+          | #{attr 'version-label'} #{attr :revnumber}
+        - if attr? 'last-update-label'
           br
-        | Last updated #{attr :docdatetime}
+          | #{attr 'last-update-label'} #{attr :docdatetime}
