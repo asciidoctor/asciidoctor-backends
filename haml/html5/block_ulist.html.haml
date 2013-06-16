@@ -1,9 +1,20 @@
-%div{:id=>@id, :class=>['ulist', (attr :style, nil, false), (attr :role)]}
+- if (checklist = (option? 'checklist') ? 'checklist' : nil)
+  -#could use &#9745 (checked ballot) and &#9744 (ballot) w/o font instead
+  - marker_checked = (attr? 'icons', 'font') ? '<i class="icon-check"></i>' : '<input type="checkbox" data-item-complete="1" checked disabled>'
+  - marker_unchecked = (attr? 'icons', 'font') ? '<i class="icon-check-empty"></i>' : '<input type="checkbox" data-item-complete="0" disabled>'
+%div{:id=>@id, :class=>['ulist', checklist, (attr :style, nil, false), (attr :role)]}
   - if title?
     .title=title
-  %ul
+  %ul{:class=>checklist}
     - content.each do |item|
       %li
-        %p=item.text
+        %p
+          - if checklist && (item.attr? 'checkbox')
+            - if item.attr? 'checked'
+              =%(#{marker_checked} #{item.text})
+            - else
+              =%(#{marker_unchecked} #{item.text})
+          - else
+            =item.text
         - if item.blocks?
           =item.content.chomp
