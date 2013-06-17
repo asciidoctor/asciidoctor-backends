@@ -12,12 +12,17 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
       - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
         link rel='stylesheet' href=normalize_web_path(Asciidoctor::DEFAULT_STYLESHEET_NAME, (attr :stylesdir, ''))
       - else
-        style=read_asset(Asciidoctor::DEFAULT_STYLESHEET_PATH)
+        style=Asciidoctor::HTML5.default_asciidoctor_stylesheet
     - elsif attr? :stylesheet
-      - if attr? :linkcss
+      - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
         link rel='stylesheet' href=normalize_web_path((attr :stylesheet), (attr :stylesdir, ''))
       - else
         style=read_asset(normalize_system_path((attr :stylesheet), (attr :stylesdir, '')), true)
+    - if attr? :icons, 'font'
+      - if !(attr 'iconfont-remote', '').nil?
+        link rel='stylesheet' href="#{attr 'iconfont-cdn', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css'}/#{attr 'iconfont-name', 'font-awesome'}.min.css"
+      - else
+        link rel='stylesheet' href=normalize_web_path("#{attr 'iconfont-name', 'font-awesome'}.css", (attr :stylesdir, ''))
     - case attr 'source-highlighter'
     - when 'coderay'
       - if (attr 'coderay-css', 'class') == 'class'
