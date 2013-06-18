@@ -6,6 +6,7 @@
       - language_classes = (language = (attr :language)) ? [language, "language-#{language}"] : []
       - pre_classes = ['highlight']
       - code_classes = language_classes
+      - nowrap = !(@document.attr? 'prewrap') || (option? 'nowrap')
       - case attr 'source-highlighter'
       - when 'coderay'
         - pre_classes = ['CodeRay']
@@ -14,7 +15,8 @@
         - pre_classes = ['prettyprint']
         - pre_classes << 'linenums' if attr? :linenums
         - code_classes = []
+      - pre_classes << 'nowrap' if !(@document.attr? 'prewrap') || (option? 'nowrap')
       pre class=pre_classes
         code class=code_classes =content
     - else
-      pre=content
+      pre class=(!(@document.attr? 'prewrap') || (option? 'nowrap') ? ['nowrap'] : []) =content

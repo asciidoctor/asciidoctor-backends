@@ -2,4 +2,4 @@
   - if title?
     .title=title
   .content.monospaced
-    %pre=content
+    %pre{:class=>(!(@document.attr? 'prewrap') || (option? 'nowrap') ? ['nowrap'] : [])}=content

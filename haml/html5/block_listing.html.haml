@@ -15,7 +15,8 @@
         - pre_classes = ['prettyprint']
         - pre_classes << 'linenums' if attr? :linenums
         - code_classes = []
+      - pre_classes << 'nowrap' if !(@document.attr? 'prewrap') || (option? 'nowrap')
       %pre{:class=>pre_classes}
         %code{:class=>code_classes}~content
     - else
-      %pre=content
+      %pre{:class=>(!(@document.attr? 'prewrap') || (option? 'nowrap') ? ['nowrap'] : [])}=content
