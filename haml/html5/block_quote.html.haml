@@ -1,4 +1,4 @@
-%div{:id=>@id, :class=>['quoteblock', (attr :role)]}
+%div{:id=>@id, :class=>['quoteblock', role]}
   - if title?
     .title=title
   %blockquote=content.chomp

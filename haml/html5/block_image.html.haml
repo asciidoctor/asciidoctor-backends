@@ -1,6 +1,6 @@
-%div{:id=>@id, :class=>['imageblock', (attr :style, nil, false), (attr :role)],
-    :style=>((style = [("text-align: #{attr :align}" if attr? :align),
-                       ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : style)}
+%div{:id=>@id, :class=>['imageblock', @style, role],
+    :style=>((css_style = [("text-align: #{attr :align}" if attr? :align),
+                       ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : css_style)}
   .content
     - if attr? :link
       %a.image{:href=>(attr :link)}

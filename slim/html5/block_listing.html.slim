@@ -1,8 +1,8 @@
-.listingblock id=@id class=(attr :role)
+.listingblock id=@id class=role
   - if title?
     .title #{@caption}#{title}
   .content.monospaced
-    - if attr? :style, 'source', false
+    - if @style
       - language_classes = (language = (attr :language)) ? [language, "language-#{language}"] : []
       - pre_classes = ['highlight']
       - code_classes = language_classes

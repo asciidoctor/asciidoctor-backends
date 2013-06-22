@@ -1,10 +1,10 @@
-table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :grid, 'all'}",(attr :role)]
-    style=[("width:#{attr :tablepcwidth}%" unless attr? 'autowidth-option'),("float: #{attr :float}" if attr? :float)].compact.join('; '))
+table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :grid, 'all'}",role]
+    style=[("width:#{attr :tablepcwidth}%" unless option? 'autowidth'),("float: #{attr :float}" if attr? :float)].compact.join('; '))
   - if title?
     caption.title #{@caption}#{title}
   - unless (attr :rowcount).zero?
     colgroup
-      - if attr? 'autowidth-option'
+      - if option? 'autowidth'
         - @columns.each do
           col
       - else
@@ -19,7 +19,7 @@ table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :gri
               - if tblsec == :head
                 - cell_content = cell.text
               - else
-                - case cell.attr :style, nil, false
+                - case cell.style
                 - when :verse, :literal
                   - cell_content = cell.text
                 - else
@@ -30,7 +30,7 @@ table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :gri
                 - if tblsec == :head
                   =cell_content
                 - else
-                  - case cell.attr :style, nil, false
+                  - case cell.style
                   - when :asciidoc
                     div=cell_content
                   - when :verse

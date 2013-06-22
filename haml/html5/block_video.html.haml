@@ -1,8 +1,8 @@
-%div{:id=>@id, :class=>['videoblock', (attr :style, nil, false), (attr :role)]}
+%div{:id=>@id, :class=>['videoblock', @style, role]}
   - if title?
     .title="#{@caption}#{title}"
   .content
     %video{:src=>media_uri(attr :target), :width=>(attr :width), :height=>(attr :height),
-        :poster=>((attr :poster) ? media_uri(attr :poster) : nil), :autoplay=>(attr? 'autoplay-option'),
-        :controls=>!(attr? 'nocontrols-option'), :loop=>(attr? 'loop-option')}
+        :poster=>((attr :poster) ? media_uri(attr :poster) : nil), :autoplay=>(option? 'autoplay'),
+        :controls=>!(option? 'nocontrols'), :loop=>(option? 'loop')}
       Your browser does not support the video tag.

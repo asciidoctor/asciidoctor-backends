@@ -1,4 +1,4 @@
-.literalblock id=@id class=(attr :role)
+.literalblock id=@id class=role
   - if title?
     .title=title
   .content.monospaced: pre class=(!(@document.attr? 'prewrap') || (option? 'nowrap') ? ['nowrap'] : []) =content
