@@ -2,7 +2,7 @@
 <div class="title">#{@caption}#{title}</div>) : nil %>
 <div class="content monospaced"><%
 if attr? 'style', 'source', false %>
-<pre class="highlight"><code class="<%= attr('language') %>"><%= content %></code></pre><%
+<pre class="highlight"><code class="<%= (attr 'language') %>"><%= content %></code></pre><%
 else %>
 <pre><%= content %></pre><%
 end %>
