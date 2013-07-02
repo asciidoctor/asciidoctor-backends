@@ -11,7 +11,7 @@
     - if attr? :revealjs_theme
       %link(rel='stylesheet' href='reveal.js/css/theme/#{attr :revealjs_theme}.css' id='theme')
     - else
-      %link(rel='stylesheet' href='css/theme/default.css' id='theme')
+      %link(rel='stylesheet' href='reveal.js/css/theme/default.css' id='theme')
     %link(rel='stylesheet' href='css/zenburn.css')
     - if attr? :description
       %meta(name='description'){:content=>(attr :description)}
