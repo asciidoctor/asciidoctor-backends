@@ -1,0 +1,53 @@
+<%#encoding:UTF-8%><%
+if attr? 'style', 'qanda', false %>
+<div<%= @id && %( id="#{@id}") %> class="qlist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
+<div class="title">#{title}</div>) : nil %>
+<ol><%
+content.each do |dt, dd| %>
+<li>
+<p><em><%= dt.text %></em></p><%
+unless dd.nil? %><%
+if dd.text? %>
+<p><%= dd.text %></p><%
+end %><%
+if dd.blocks? %>
+<%= dd.content.chomp %><%
+end %><%
+end %>
+</li><%
+end %>
+</ol>
+</div><%
+elsif attr? 'style', 'horizontal', false %>
+<div<%= @id && %( id="#{@id}") %> class="hdlist<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
+<div class="title">#{title}</div>) : nil %>
+<table>
+<colgroup>
+<col<% if attr? 'labelwidth' %> style="width:<%= attr 'labelwidth' %>%;"<% end %>>
+<col<% if attr? 'itemwidth' %> style="width:<%= attr 'itemwidth' %>%;"<% end %>>
+</colgroup><%
+content.each do |dt, dd| %>
+<tr>
+<td class="hdlist1<% if attr? 'strong-option' %> strong<% end %>">
+<%= dt.text %>
+<br>
+</td>
+<td class="hdlist2"><%
+unless dd.nil? %><%
+if dd.text? %>
+<p style="margin-top: 0;"><%= dd.text %></p><%
+end %><%
+if dd.blocks? %>
+<%= dd.content.chomp %><%
+end %><%
+end %>
+</td>
+</tr><%
+end %>
+</table>
+</div><%
+else %>
+<dl><% content.each do |dt, dd| %>
+<dt><% dt.text %></dt>
+<dd><p><%= dd.text %></p></dd><% end %>
+</dl><% end %>

@@ -1,0 +1,5 @@
+<%#encoding:UTF-8%><div class="<%= attr 'name' %><%= attr?('role') ? %( #{attr 'role'}) : nil %>">
+<%= title? ? %(<h1>#{title}</h1>) : nil %>
+<%= content.chomp %>
+
+</div>

@@ -1,0 +1,20 @@
+<%#encoding:UTF-8%><!DOCTYPE html>
+
+<html xmlns="<%= attr :xmlns, 'http://www.w3.org/1999/xhtml' %>">
+
+  <head>
+    <title><%= doctitle %></title>
+    <meta name="<%= doctitle %>" content="text/html; charset=utf-8"/>
+  </head>
+<body<%= @id && %( id="#{@id}") %> class="book">
+  <h1><%= @header.title %></h1>
+  <figure class="cover">
+    <img src="cover.png"/>
+  </figure>
+  <section class="titlepage">
+    <h1><%= @header.title %></h1>
+    <% if attr? :author %><h2 class="author"><%= attr :author %></h2><% end %>
+  </section>
+<%= content %>
+</body>
+</html>
