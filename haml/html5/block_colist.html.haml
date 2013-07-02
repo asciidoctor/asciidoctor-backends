@@ -1,12 +1,12 @@
 %div{:id=>@id, :class=>['colist', @style, role]}
   - if title?
     .title=title
-  - if attr? :icons
+  - if @document.attr? :icons
     %table
       - content.each_with_index do |item, i|
         %tr
           %td<
-            - if attr? :icons, 'font'
+            - if @document.attr? :icons, 'font'
               %i.conum=i + 1
             - else
               %img{:src=>icon_uri("callouts/#{i + 1}"), :alt=>(i + 1)}

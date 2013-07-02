@@ -2,9 +2,9 @@
   %table
     %tr
       %td.icon
-        - if attr? :icons, 'font'
+        - if @document.attr? :icons, 'font'
           %i{:class=>"icon-#{attr :name}", :title=>@caption}
-        - elsif attr? :icons
+        - elsif @document.attr? :icons
           %img{:src=>icon_uri(attr :name), :alt=>@caption}
         - else
           .title=@caption

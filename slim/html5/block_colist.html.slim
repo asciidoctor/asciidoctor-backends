@@ -1,13 +1,13 @@
 .colist id=@id class=[@style,role]
   - if title?
     .title=title
-  - if attr? :icons
+  - if @document.attr? :icons
     table
       - content.each_with_index do |item, i|
         - num = i + 1
         tr
           td
-            - if attr? :icons, 'font'
+            - if @document.attr? :icons, 'font'
               i.conum=num
             - else
               img src=icon_uri("callouts/#{num}") alt=num
