@@ -1,0 +1,12 @@
+<% content.each do |li| %>.sp
+.RS 4
+.ie n \{\
+\h'-04'\(bu\h'+03'\c
+.\}
+.el \{\
+.sp -1
+.IP \(bu 2.3
+.\}
+<%= manify li.text %><% if li.blocks? %><%= li.content %><% end %>
+.RE
+<% end %>

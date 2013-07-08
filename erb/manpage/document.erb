@@ -1,0 +1,21 @@
+'\" t
+.\"     Title: <%= doctitle.split('(').first.downcase %>
+.\"    Author: <%= (attr? 'author') ? (attr 'author') : '[see the "AUTHORS" section]' %>
+.\" Generator: Asciidoctor <%= attr 'asciidoctor-version' %>
+.\"      Date: <%= attr 'docdate' %>
+.\"    Manual: <%= (manual = (attr? 'manmanual') ? (attr 'manmanual') : '\ \&') %>
+.\"    Source: <%= (source = (attr? 'mansource') ? (attr 'mansource') : '\ \&') %>
+.\"  Language: English
+.\"
+.TH "<%= manify doctitle.split('(').first.upcase, false %>" "<%= doctitle.split('(').last.chop %>" "<%= attr 'docdate' %>" "<%= manify source, false %>" "<%= manify manual, false %>"
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
+.nh
+.ad l
+<%= content %><%
+if attr? 'author' %>.SH "AUTHOR"
+.PP
+\fB<%= attr 'author' %>\fR
+.RS 4
+Author.
+.RE<% end %>

@@ -1,0 +1,7 @@
+<% case @type
+when :link
+  if @target.start_with? 'mailto:' %><%= @target[7..-1] %><%
+  else %><%= @target %><%
+  end
+else %><%= @target %><%
+end %>

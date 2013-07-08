@@ -1,0 +1,12 @@
+<% content.each_with_index do |li, idx| %>.sp
+.RS 4
+.ie n \{\
+\h'-04' <%= idx + 1 %>.\h'+01'\c
+.\}
+.el \{\
+.sp -1
+.IP "  <%= idx + 1 %>." 4.2
+.\}
+<%= manify li.text %><% if li.blocks? %><%= li.content %><% end %>
+.RE
+<% end %>

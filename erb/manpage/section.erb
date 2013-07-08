@@ -1,0 +1,2 @@
+.S<%= @level > 1 ? 'S' : 'H' %> "<%= @level > 1 ? title : title.upcase %>"
+<%= title.upcase == "NAME" ? content.gsub(/\A\.sp\n/, '') : content %>

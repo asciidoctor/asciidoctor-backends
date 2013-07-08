@@ -1,0 +1,15 @@
+.if n \{\
+.sp
+.\}
+.RS 4
+.it 1 an-trap
+.nr an-no-space-flag 1
+.nr an-break-flag 1
+.br
+.ps +1
+\fB<%= @caption %>\fR
+.ps -1
+.br
+<%= manify content %>
+.sp .5v
+.RE
