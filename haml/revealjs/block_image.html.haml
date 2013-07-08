@@ -1,0 +1,11 @@
+%a{:id=>@id, :class=>['image', (attr :role)],
+    :style=>((style = [("text-align: #{attr :align}" if attr? :align),
+                       ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : style)}
+  - if attr? :link
+    %a.image{:href=>(attr :link), :target=>'_blank'}
+      %img{:src=>image_uri(attr :target), :alt=>(attr :alt), :width=>(attr :width), :height=>(attr :height)}
+  - else
+    %img{:src=>image_uri(attr :target), :alt=>(attr :alt), :width=>(attr :width), :height=>(attr :height)}
+  - if title?
+    .title="#{@caption}#{title}"
+
