@@ -2,6 +2,7 @@
   - if title?
     .title #{@caption}#{title}
   - if (attr? :style, 'source') && (attr? :language)
-    pre.highlight class=('CodeRay' if attr? 'source-highlighter', 'coderay') : code class=(attr :language) =content
+    pre.highlight class=[(attr? 'source-highlighter', 'coderay') ? 'CodeRay' : nil, (option? 'nowrap') ? 'nowrap' : nil]
+      code class=(attr :language) style=((attr? 'max-height') ? "max-height: #{attr 'max-height'}px" : nil) =content
   - else
-    pre=content
+    pre style=((attr? 'max-height') ? "max-height: #{attr 'max-height'}px" : nil) =content

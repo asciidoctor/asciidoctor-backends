@@ -9,7 +9,7 @@
       tr
         td.icon
           - if attr? :icons, 'font'
-            i class icon#{attr :name}
+            i class="icon-#{attr :name}"
           - elsif attr? :icons
             img src=icon_uri(attr :name) alt=@caption
           - else

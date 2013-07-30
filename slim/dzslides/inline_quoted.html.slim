@@ -1,21 +1,18 @@
-- if attr? :role
-  - text = %(<span class="#{attr :role}">#{@text}</span>)
-- else
-  - text = @text
 - case @type
 - when :emphasis
-  em=text
+  em class=role =@text
 - when :strong
-  strong=text
+  strong class=role =@text
 - when :monospaced
-  code=text
+  code class=role =@text
 - when :superscript
-  sup=text
+  sup class=role =@text
 - when :subscript
-  sub=text
+  sub class=role =@text
 - when :double
-  | &#8220;#{text}&#8221;
+  =role? ? %(<span class="#{role}">&#8220;#{@text}&#8221;</span>) : %(&#8220;#{@text}&#8221;)
 - when :single
-  | &#8216;#{text}&#8217;
+  =role? ? %(<span class="#{role}">&#8216;#{@text}&#8217;</span>) : %(&#8216;#{@text}&#8217;)
 - else
-  =text
+  =role? ? %(<span class="#{role}">#{@text}</span>) : @text
+
