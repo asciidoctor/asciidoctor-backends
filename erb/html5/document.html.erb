@@ -10,7 +10,7 @@ end
 if attr? :keywords %>
 <meta name="keywords" content="<%= attr :keywords %>"><%
 end %>
-<title><%= doctitle(:sanitize => true) || (attr 'untitled-label') %></title><%
+<title><%= doctitle %></title><%
 if ::Asciidoctor::DEFAULT_STYLESHEET_KEYS.include?(attr 'stylesheet') %><%
   if @safe >= ::Asciidoctor::SafeMode::SECURE || (attr? 'linkcss') %>
 <link rel="stylesheet" href="<%= normalize_web_path(::Asciidoctor::DEFAULT_STYLESHEET_NAME, (attr :stylesdir, '')) %>"><%
@@ -37,14 +37,10 @@ if attr? 'icons', 'font'
 end
 case attr 'source-highlighter'
 when 'coderay'
-  if (attr 'coderay-css', 'class') == 'class'
-    if @safe >= ::Asciidoctor::SafeMode::SECURE || (attr? 'linkcss') %>
-<link rel="stylesheet" href="<%= normalize_web_path('asciidoctor-coderay.css', (attr :stylesdir, '')) %>"><%
-    else %>
+  if (attr 'coderay-css', 'class') == 'class' %>
 <style>
 <%= ::Asciidoctor::HTML5.default_coderay_stylesheet %>
 </style><%
-    end
   end
 when 'highlightjs' %>
 <link rel="stylesheet" href="<%= (attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3') %>/styles/<%= (attr 'highlightjs-theme', 'default') %>.min.css">
@@ -57,56 +53,42 @@ when 'prettify' %>
 end %><%= (docinfo_content = docinfo).empty? ? nil : %(
 #{docinfo_content}) %>
 </head>
-<body<%= @id && %( id="#{@id}") %> class="<%= doctype %><%= (attr? 'toc-class') && (attr? 'toc') && (attr? 'toc-placement', 'auto') ? %( #{attr 'toc-class'} toc-#{attr 'toc-position'}) : nil %>"<%= (attr? 'max-width') ? %( style="max-width: #{attr 'max-width'};") : nil %>><%
+<body<%= @id && %( id="#{@id}") %> class="<%= doctype %><%= (attr? 'toc-class') && (attr? 'toc') && (attr? 'toc-placement', 'auto') ? %( #{attr 'toc-class'}) : nil %>"<%= (attr? 'max-width') ? %( style="max-width: #{attr 'max-width'};") : nil %>><%
 unless noheader %>
 <div id="header"><%
-  if doctype == 'manpage' %>
-<h1><%= doctitle %> Manual Page</h1><%
-    if (attr? :toc) && (attr? 'toc-placement', 'auto') %>
-<div id="toc" class="<%= attr 'toc-class', 'toc' %>">
-<div id="toctitle"><%= attr 'toc-title' %></div>
-<%= ::Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i) %>
-</div><%
-    end %>
-<h2><%= attr 'manname-title' %></h2>
-<div class="sectionbody">
-<p><%= %(#{attr 'manname'} - #{attr 'manpurpose'}) %></p>
-</div><%
-  else 
-    if has_header?
-      unless notitle %>
+  if has_header?
+    unless notitle %>
 <h1><%= @header.title %></h1><%
-      end
-      if attr? :author %>
+    end
+    if attr? :author %>
 <span id="author"><%= attr :author %></span><br><%
-        if attr? :email %>
+      if attr? :email %>
 <span id="email"><%= sub_macros(attr :email) %></span><br><%
-        end
-        if (authorcount = (attr :authorcount).to_i) > 1
-          (2..authorcount).each do |idx| %><span id="author<%= idx %>" class="author"><%= attr "author_#{idx}" %></span><br><%
-            if attr? "email_#{idx}" %>
+      end
+      if (authorcount = (attr :authorcount).to_i) > 1
+        (2..authorcount).each do |idx| %><span id="author<%= idx %>" class="author"><%= attr "author_#{idx}" %></span><br><%
+          if attr? "email_#{idx}" %>
 <span id="email<%= idx %>" class="email"><%= sub_macros(attr "email_#{idx}") %></span><br><%
-            end
           end
         end
       end
-      if attr? :revnumber %>
+    end
+    if attr? :revnumber %>
 <span id="revnumber"><%= ((attr 'version-label') || '').downcase %> <%= attr :revnumber %><%= attr?(:revdate) ? ',' : '' %></span><%
-      end
-      if attr? :revdate %>
+    end
+    if attr? :revdate %>
 <span id="revdate"><%= attr :revdate %></span><%
-      end
-      if attr? :revremark %>
+    end
+    if attr? :revremark %>
 <br>
 <span id="revremark"><%= attr :revremark %></span><%
-      end
     end
-    if (attr? :toc) && (attr? 'toc-placement', 'auto') %>
+  end
+  if (attr? :toc) && (attr? 'toc-placement', 'auto') %>
 <div id="toc" class="<%= attr 'toc-class', 'toc' %>">
 <div id="toctitle"><%= attr 'toc-title' %></div>
 <%= ::Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i) %>
 </div><%
-    end
   end %>
 </div><%
 end %>
