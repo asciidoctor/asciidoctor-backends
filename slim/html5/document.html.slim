@@ -20,7 +20,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
         style=read_asset(normalize_system_path((attr :stylesheet), (attr :stylesdir, '')), true)
     - if attr? :icons, 'font'
       - if !(attr 'iconfont-remote', '').nil?
-        link rel='stylesheet' href="#{attr 'iconfont-cdn', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.0/css'}/#{attr 'iconfont-name', 'font-awesome'}.min.css"
+        link rel='stylesheet' href="#{attr 'iconfont-cdn', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css'}/#{attr 'iconfont-name', 'font-awesome'}.min.css"
       - else
         link rel='stylesheet' href=normalize_web_path("#{attr 'iconfont-name', 'font-awesome'}.css", (attr :stylesdir, ''))
     - case attr 'source-highlighter'
@@ -40,17 +40,17 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
           - unless notitle
             h1=@header.title
           - if attr? :author
-            span#author class='author' =(attr :author)
+            span.author#author =(attr :author)
             br
             - if attr? :email
-              span#email class='email' =sub_macros(attr :email)
+              span.email#email =sub_macros(attr :email)
               br
             - if (authorcount = (attr :authorcount).to_i) > 1
               - (2..authorcount).each do |idx|
-                span id="author#{idx}" class='author' =(attr "author_#{idx}")
+                span.author id="author#{idx}" =(attr "author_#{idx}")
                 br
                 - if attr? "email_#{idx}"
-                  span id="email#{idx}" class='email' =sub_macros(attr "email_#{idx}")
+                  span.email id="email#{idx}" =sub_macros(attr "email_#{idx}")
           - if attr? :revnumber
             span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if attr? :revdate}
             '
