@@ -2,8 +2,11 @@
 <div class="title">#{title}</div>) : nil %>
 <ul><% content.each do |item| %>
 <li>
-<p><%= item.text %></p><% if item.blocks? %>
-<%= item.content %><% end %>
-</li><% end %>
+<p><%= item.text %></p><%
+  if item.blocks? %>
+<%= item.content %><%
+  end %>
+</li><%
+end %>
 </ul>
 </div>
