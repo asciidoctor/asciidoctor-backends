@@ -4,10 +4,11 @@
     - if title?
       .title=title
     %ol
-      - content.each do |q, a|
+      - items.each do |qs, a|
         %li
-          %p<
-            %em=q.text
+          - [*qs].each do |q|
+            %p<
+              %em=q.text
           - unless a.nil?
             - if a.text?
               %p<=a.text
@@ -22,11 +23,15 @@
         %colgroup
           %col{:style=>("width:#{attr :labelwidth}%;" if (attr? :labelwidth))}
           %col{:style=>("width:#{attr :itemwidth}%;" if (attr? :itemwidth))}
-      - content.each do |dt, dd|
+      - items.each do |terms, dd|
         %tr
           %td{:class=>['hdlist1', ('strong' if (option? 'strong'))]}
-            =dt.text
-            %br
+            - terms_arr = [*terms]
+            - last_term = terms_arr.last
+            - terms_arr.each do |dt|
+              =dt.text
+              - if dt != last_term
+                %br
           %td.hdlist2
             - unless dd.nil?
               - if dd.text?
@@ -38,9 +43,9 @@
     - if title?
       .title=title
     %dl
-      - content.each do |dt, dd|
-        %dt{:class=>('hdlist1' unless @style)}<
-          =dt.text
+      - items.each do |terms, dd|
+        - [*terms].each do |dt|
+          %dt{:class=>('hdlist1' unless @style)}=dt.text
         - unless dd.nil?
           %dd
             - if dd.text?
