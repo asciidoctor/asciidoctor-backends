@@ -1,5 +1,5 @@
 ul class=(attr :role)
-  - content.each do |item|
+  - items.each do |item|
     li
       =item.text
       - if item.blocks?

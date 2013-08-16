@@ -1,6 +1,7 @@
 dl class=[(attr :style),(attr :role)]
-  - content.each do |dt, dd|
-    dt=dt.text
+  - items.each do |terms, dd|
+    - [*terms].each do |dt|
+      dt=dt.text
     - unless dd.nil?
       dd
         - if dd.text?

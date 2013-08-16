@@ -1,5 +1,5 @@
 ol class=(attr :style) start=(attr :start)
-  - content.each do |item|
+  - items.each do |item|
     li
       =item.text
       - if item.blocks?
