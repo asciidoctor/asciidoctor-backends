@@ -3,9 +3,11 @@
   qandaset id=@id role=(attr :role) xreflabel=(attr :reftext)
     - if title?
       title=title
-    - content.each do |dt, dd|
+    - items.each do |terms, dd|
       qandaentry
-        question: simpara=dt.text
+        question
+          - [*terms].each do |dt|
+            simpara=dt.text
         - unless dd.nil?
           answer
             - if dd.text?
@@ -13,9 +15,10 @@
             - if dd.blocks?
               =dd.content
 - when 'glossary'
-  - content.each do |dt, dd|
+  - items.each do |terms, dd|
     glossentry
-      glossterm=dt.text
+      - [*terms].each do |dt|
+        glossterm=dt.text
       - unless dd.nil?
         glossdef
           - if dd.text?
@@ -31,9 +34,11 @@
       colspec colwidth="#{attr :labelwidth, 15}*" /
       colspec colwidth="#{attr :labelwidth, 85}*" /
       tbody valign='top'
-        - content.each do |dt, dd|
+        - items.each do |terms, dd|
           row
-            entry: simpara=dt.text
+            entry
+              - [*terms].each do |dt|
+                simpara=dt.text
             - unless dd.nil?
               entry
                 - if dd.text?
@@ -44,9 +49,10 @@
   variablelist id=@id role=(attr :role) xreflabel=(attr :reftext)
     - if title?
       title=title
-    - content.each do |dt, dd|
+    - items.each do |terms, dd|
       varlistentry
-        term=dt.text
+        - [*terms].each do |dt|
+          term=dt.text
         - unless dd.nil?
           listitem
             - if dd.text?

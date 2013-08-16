@@ -2,7 +2,7 @@
   %bibliodiv{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
     - if title?
       %title=title
-    - content.each do |item|
+    - items.each do |item|
       %bibliomixed
         %bibliomisc=item.text
         - if item.blocks?
@@ -11,7 +11,7 @@
   %itemizedlist{:id=>@id, :role=>(attr :role), :xreflabel=>(attr :reftext)}
     - if title?
       %title=title
-    - content.each do |item|
+    - items.each do |item|
       %listitem
         %simpara=item.text
         - if item.blocks?

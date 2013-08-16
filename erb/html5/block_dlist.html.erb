@@ -3,9 +3,11 @@ if attr? 'style', 'qanda', false %>
 <div<%= @id && %( id="#{@id}") %> class="qlist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
 <div class="title">#{title}</div>) : nil %>
 <ol><%
-content.each do |dt, dd| %>
-<li>
+items.each do |terms, dd| %>
+<li><%
+[*terms].each do |dt| %>
 <p><em><%= dt.text %></em></p><%
+end
 unless dd.nil? %><%
 if dd.text? %>
 <p><%= dd.text %></p><%
@@ -26,11 +28,13 @@ elsif attr? 'style', 'horizontal', false %>
 <col<% if attr? 'labelwidth' %> style="width:<%= attr 'labelwidth' %>%;"<% end %>>
 <col<% if attr? 'itemwidth' %> style="width:<%= attr 'itemwidth' %>%;"<% end %>>
 </colgroup><%
-content.each do |dt, dd| %>
+items.each do |terms, dd| %>
 <tr>
-<td class="hdlist1<% if attr? 'strong-option' %> strong<% end %>">
+<td class="hdlist1<% if attr? 'strong-option' %> strong<% end %>"><%
+[*terms].each do |dt| %>
 <%= dt.text %>
-<br>
+<br><%
+end %>
 </td>
 <td class="hdlist2"><%
 unless dd.nil? %><%
@@ -50,10 +54,12 @@ else %>
 <div<%= @id && %( id="#{@id}") %> class="dlist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
 <div class="title">#{title}</div>) : nil %>
 <dl><%
-content.each do |dt, dd| %>
+items.each do |terms, dd|
+[*terms].each do |dt| %>
 <dt<%= !(attr? 'style', nil, false) ? ' class="hdlist"' : nil %>>
 <%= dt.text %>
 </dt><%
+end
 unless dd.nil? %>
 <dd><%
 if dd.text? %>

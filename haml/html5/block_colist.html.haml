@@ -3,7 +3,7 @@
     .title=title
   - if @document.attr? :icons
     %table
-      - content.each_with_index do |item, i|
+      - items.each_with_index do |item, i|
         %tr
           %td<
             - if @document.attr? :icons, 'font'
@@ -13,6 +13,6 @@
           %td=item.text
   - else
     %ol
-      - content.each do |item|
+      - items.each do |item|
         %li
           %p=item.text

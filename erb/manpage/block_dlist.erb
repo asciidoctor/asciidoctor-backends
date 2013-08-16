@@ -1,9 +1,10 @@
-<% previous_has_content = true %><% content.each do |dt, dd| %><%
+<% previous_has_content = true %><% items.each do |terms, dd| %><%
   if previous_has_content %>.PP
 <%
   end
   if !previous_has_content %>, <% end
-%><%= manify dt.text, !dd.nil? %><%
+# FIXME support multiple terms per item
+%><%= manify [*terms].first.text, !dd.nil? %><%
   if !dd.nil?
     previous_has_content = true %>.RS 4
 <%= manify dd.text, false %><%

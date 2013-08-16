@@ -6,7 +6,7 @@
   - if title?
     .title=title
   %ul{:class=>checklist}
-    - content.each do |item|
+    - items.each do |item|
       %li
         %p
           - if checklist && (item.attr? 'checkbox')

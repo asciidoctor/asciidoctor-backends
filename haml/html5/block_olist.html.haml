@@ -2,7 +2,7 @@
   - if title?
     .title=title
   %ol{:class=>@style, :start=>(attr :start), :type=>(Asciidoctor::ORDERED_LIST_KEYWORDS[@style])}
-    - content.each do |item|
+    - items.each do |item|
       %li
         %p=item.text
         - if item.blocks?
