@@ -13,7 +13,7 @@
   =content
 - else
   div class=["sect#{slevel}",role]
-    *{:tag=>"h#{slevel + 1}", :id=>@id} =%(#{anchor}#{link}#{@numbered ? "#{sectnum} " : nil}#{@caption}#{title}#{link && '</a>'})
+    *{:tag=>"h#{slevel + 1}", :id=>@id} =%(#{anchor}#{link}#{@numbered ? "#{sectnum} " : nil}#{captioned_title}#{link && '</a>'})
     - if slevel == 1
       .sectionbody=content
     - else

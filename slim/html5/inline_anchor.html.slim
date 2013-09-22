@@ -1,6 +1,7 @@
 - case @type
 - when :xref
-  a href="##{@target}" =(@text || @document.references[:ids].fetch(@target, "[#{@target}]")).tr_s("\n", ' ')
+  - refid = (attr :refid) || @target
+  a href=@target =(@text || @document.references[:ids].fetch(refid, "[#{refid}]")).tr_s("\n", ' ')
 - when :ref
   a id=@target
 - when :bibref

@@ -1,7 +1,7 @@
 .olist id=@id class=[@style,role]
   - if title?
     .title=title
-  ol class=@style start=(attr :start) type=(Asciidoctor::ORDERED_LIST_KEYWORDS[@style])
+  ol class=@style start=(attr :start) type=list_marker_keyword
     - items.each do |item|
       li
         p=item.text

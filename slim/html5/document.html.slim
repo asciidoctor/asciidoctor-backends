@@ -2,12 +2,12 @@ doctype 5
 html lang=(attr :lang, 'en' unless attr? :nolang)
   head
     meta http-equiv='Content-Type' content='text/html; charset=#{attr :encoding}'
-    meta name='viewport' content='width=device-width, initial-scale=1.0'
     meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}"
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
     - [:description, :author, :copyright].each do |key|
       - if attr? key
         meta name=key content=(attr key)
-    title=doctitle
+    title=((doctitle :sanitize => true) || (attr 'untitled-label'))
     - if Asciidoctor::DEFAULT_STYLESHEET_KEYS.include?(attr :stylesheet)
       - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
         link rel='stylesheet' href=normalize_web_path(Asciidoctor::DEFAULT_STYLESHEET_NAME, (attr :stylesdir, ''))
@@ -20,19 +20,32 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
         style=read_asset(normalize_system_path((attr :stylesheet), (attr :stylesdir, '')), true)
     - if attr? :icons, 'font'
       - if !(attr 'iconfont-remote', '').nil?
-        link rel='stylesheet' href="#{attr 'iconfont-cdn', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css'}/#{attr 'iconfont-name', 'font-awesome'}.min.css"
+        link rel='stylesheet' href=(attr 'iconfont-cdn', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css')
       - else
         link rel='stylesheet' href=normalize_web_path("#{attr 'iconfont-name', 'font-awesome'}.css", (attr :stylesdir, ''))
     - case attr 'source-highlighter'
     - when 'coderay'
       - if (attr 'coderay-css', 'class') == 'class'
-        =Asciidoctor::HTML5.default_coderay_stylesheet
+        - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
+          link rel='stylesheet' href=normalize_web_path('asciidoctor-coderay.css', (attr :stylesdir, ''))
+        - else
+          style=Asciidoctor::HTML5.default_coderay_stylesheet
+    - when 'pygments'
+      - if (attr 'pygments-css', 'class') == 'class'
+        - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
+          link rel='stylesheet' href=normalize_web_path('asciidoctor-pygments.css', (attr :stylesdir, ''))
+        - else
+          style=Asciidoctor::HTML5.pygments_stylesheet(attr 'pygments-style')
     - when 'highlightjs'
       link rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css"
       script src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js"
       script hljs.initHighlightingOnLoad()
+    - when 'prettify'
+      link rel='stylesheet' href="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/#{attr 'prettify-theme', 'prettify'}.min.css"
+      script src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js"
+      script document.addEventListener('DOMContentLoaded', prettyPrint)
     =docinfo
-  body id=@id class=[(attr :doctype),((attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto') ? (attr 'toc-class') : nil)] style=("max-width: #{attr 'max-width'};" if attr? 'max-width')
+  body id=@id class=[(attr :doctype),((attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto') ? "#{attr 'toc-class'} toc-#{attr 'toc-position', 'left'}" : nil)] style=("max-width: #{attr 'max-width'};" if attr? 'max-width')
     - unless noheader
       / AsciiDoc leaves an empty header div even if there's no doctitle
       #header
@@ -78,3 +91,4 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
         - if attr? 'last-update-label'
           br
           | #{attr 'last-update-label'} #{attr :docdatetime}
+      =(docinfo :footer)
