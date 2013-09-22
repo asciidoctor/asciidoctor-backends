@@ -20,14 +20,14 @@
     table
       - if (attr? :labelwidth) || (attr? :itemwidth)
         colgroup
-          col style=((attr? :labelwidth) ? %(width:#{(attr 'labelwidth').chomp '%'}%;) : nil)
-          col style=((attr? :itemwidth) ? %(width:#{(attr 'itemwidth').chomp '%'}%;) : nil)
+          col style=((attr? :labelwidth) ? %(width:#{(attr :labelwidth).chomp '%'}%;) : nil)
+          col style=((attr? :itemwidth) ? %(width:#{(attr :itemwidth).chomp '%'}%;) : nil)
       - items.each do |terms, dd|
         tr
           td class=['hdlist1',('strong' if option? 'strong')]
-            - terms_array = [*terms]
-            - last_term = terms_array.last
-            - terms_array.each do |dt|
+            - terms = [*terms]
+            - last_term = terms.last
+            - terms.each do |dt|
               =dt.text
               - if dt != last_term
                 br

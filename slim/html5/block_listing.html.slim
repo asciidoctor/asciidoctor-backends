@@ -2,19 +2,15 @@
   - if title?
     .title=captioned_title
   .content
+    - nowrap = !(@document.attr? 'prewrap') || (option? 'nowrap')
     - if @style == 'source'
       - language = attr :language
-      - language_classes = language ? [language, "language-#{language}"] : []
-      - code_class = language_classes
+      - code_class = language ? [language, "language-#{language}"] : nil
       - pre_class = ['highlight']
       - pre_lang = nil
-      - nowrap = (!(@document.attr? 'prewrap') || (option? 'nowrap'))
       - case attr 'source-highlighter'
-      - when 'highlightjs', 'highlight.js'
       - when 'coderay'
         - pre_class = ['CodeRay']
-      - when 'pygments'
-        - pre_class = ['pygments','highlight']
       - when 'prettify'
         - pre_class = ['prettyprint']
         - pre_class << 'linenums' if attr? :linenums
@@ -25,6 +21,7 @@
         - pre_lang = language
         - pre_class = code_class = nil
         - nowrap = nil
+      /- when 'highlightjs', 'highlight.js'
       - pre_class << 'nowrap' if nowrap
       pre class=pre_class lang=pre_lang
         code class=code_class =content
