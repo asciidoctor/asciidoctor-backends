@@ -1,8 +1,8 @@
 -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag
 %div{:id=>@id, :class=>['listingblock', role]}
   - if title?
-    .title="#{@caption}#{title}"
-  .content.monospaced
+    .title=captioned_title
+  .content
     - if @style == 'source'
       - language = attr :language
       - language_classes = language ? [language, "language-#{language}"] : []

@@ -2,7 +2,7 @@
     :style=>((css_style = [("width:#{attr :tablepcwidth}%" unless option? 'autowidth'),
                        ("float: #{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : css_style)}
   - if title?
-    %caption.title="#{@caption}#{title}"
+    %caption.title=captioned_title
   - unless (attr :rowcount).zero?
     %colgroup
       - if option? 'autowidth'
@@ -37,7 +37,7 @@
                   - when :verse
                     .verse~cell_content
                   - when :literal
-                    .literal.monospaced
+                    .literal
                       %pre=cell_content
                   - when :header
                     - cell_content.each do |text|

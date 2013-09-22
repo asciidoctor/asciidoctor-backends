@@ -1,6 +1,6 @@
 %div{:id=>@id, :class=>['audioblock', @style, role]}
   - if title?
-    .title="#{@caption}#{title}"
+    .title=captioned_title
   .content
     %audio{:src=>media_uri(attr :target), :autoplay=>(option? 'autoplay'),
         :controls=>!(option? 'nocontrols'), :loop=>(option? 'loop')}
