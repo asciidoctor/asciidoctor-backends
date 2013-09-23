@@ -17,8 +17,8 @@
     - items.each do |item|
       %li
         %p
-          - if checklist && (item.attr? 'checkbox')
-            =%(#{(item.attr? 'checked') ? marker_checked : marker_unchecked} #{item.text})
+          - if checklist && (item.attr? :checkbox)
+            =%(#{(item.attr? :checked) ? marker_checked : marker_unchecked} #{item.text})
           - else
             =item.text
         - if item.blocks?
