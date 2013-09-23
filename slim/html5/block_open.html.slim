@@ -2,7 +2,7 @@
   - if @parent == @document && @document.doctype == 'book'
     - puts 'asciidoctor: WARNING: abstract block cannot be used in a document without a title when doctype is book. Excluding block content.'
   - else
-    .quoteblock.abstract id=@id class=(attr :role)
+    .quoteblock.abstract id=@id class=role
       - if title?
         .title=title
       blockquote=content
