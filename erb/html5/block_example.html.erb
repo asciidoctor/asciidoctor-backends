@@ -1,6 +1,8 @@
-<%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="exampleblock<%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{@caption}#{title}</div>) : nil %>
+<%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="<%= ['exampleblock',role].compact * ' ' %>"><%
+if title? %>
+<div class="title"><%= captioned_title %></div><%
+end %>
 <div class="content">
-<%= content.chomp %>
+<%= content %>
 </div>
 </div>

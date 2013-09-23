@@ -1,7 +1,9 @@
 <%#encoding:UTF-8%><%
 case @type
-when :xref %><%= %|<a href="##@target">#{@text || @document.references[:ids].fetch(@target, "[#{@target}]").tr_s("\n", ' ')}</a>| %><%
-when :ref %><%= %|<a id="#@target"></a>| %><%
-when :bibref %><%= %|<a id="#@target">[#@target]</a>| %><%
-else %><%= %|<a href="#@target"#{attr?('role') ? %( class="#{attr 'role'}") : nil}#{attr?('window') ? %( target="#{attr 'window'}") : nil}>#@text</a>| %><%
+when :xref
+  refid = (attr :refid) || @target
+  %><%= %(<a href="#{@target}">#{@text || @document.references[:ids].fetch(refid, "[#{refid}]").tr_s("\n", ' ')}</a>) %><%
+when :ref %><%= %(<a id="#{@target}"></a>) %><%
+when :bibref %><%= %(<a id="#{@target}">[#{@target}]</a>) %><%
+else %><%= %(<a href="#{@target}"#{role? ? %[ class="#{role}"] : nil}#{(attr? :window) ? %[ target="#{attr :window}"] : nil}>#{@text}</a>) %><%
 end %>

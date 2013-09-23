@@ -1,11 +1,12 @@
-<%#encoding:UTF-8%><% text_span = attr?('role') ? %|<span class="#{attr 'role'}">#@text</span>| : @text %><%
+<%#encoding:UTF-8%><%= @id && %(<a id="#{@id}"></a>) %><%
+style_class = role? ? %( class="#{role}") : nil
 case @type
-when :emphasis %><%= %|<em>#{text_span}</em>| %><%
-when :strong %><%= %|<strong>#{text_span}</strong>| %><%
-when :monospaced %><%= %|<code>#{text_span}</code>| %><%
-when :superscript %><%= %|<sup>#{text_span}</sup>| %><%
-when :subscript %><%= %|<sub>#{text_span}</sub>| %><%
-when :double %><%= %|&#8220;#{text_span}&#8221;| %><%
-when :single %><%= %|&#8216;#{text_span}&#8217;| %><%
-else %><%= text_span %><%
+when :emphasis %><%= %(<em#{style_class}>#{@text}</em>) %><%
+when :strong %><%= %(<strong#{style_class}>#{@text}</strong>) %><%
+when :monospaced %><%= %(<code#{style_class}>#{@text}</code>) %><%
+when :superscript %><%= %(<sup#{style_class}>#{@text}</sup>) %><%
+when :subscript %><%= %(<sub#{style_class}>#{@text}</sub>) %><%
+when :double %><%= style_class ? %(<span#{style_class}>&#8220;#{@text}&#8221;</span>) : %(&#8220;#{@text}&#8221;) %><%
+when :single %><%= style_class ? %(<span#{style_class}>&#8216;#{@text}&#8217;</span>) : %(&#8216;#{@text}&#8217;) %><%
+else %><%= style_class ? %(<span#{style_class}>#{@text}</span>) : @text %><%
 end %>

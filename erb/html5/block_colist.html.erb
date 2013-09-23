@@ -1,17 +1,28 @@
-<%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="colist<%= attr?('style') ? %( #{attr 'style'}) : nil %><%= attr?('role') ? %( #{attr 'role'}) : nil %>"><%= title? ? %(
-<div class="title">#{title}</div>) : nil %><%
-if attr? 'icons' %>
-<table><% items.each_with_index do |item, i| %>
+<%#encoding:UTF-8%><div<%= @id && %( id="#{@id}") %> class="<%= ['colist',@style,role].compact * ' ' %>"><%
+if title? %>
+<div class="title"><%= title %></div><%
+end
+if @document.attr? :icons
+  font_icons = @document.attr? :icons, 'font' %>
+<table><%
+  items.each_with_index do |item, i|
+    num = i + 1 %>
 <tr>
-<td><img src="<%= icon_uri("callouts/#{i + 1}") %>" alt="<%= i + 1 %>"></td>
+<td><%
+    if font_icons %><i class="conum" data-value="<%= num %>"></i><b><%= num %></b><%
+    else %><img src="<%= icon_uri("callouts/#{num}") %>" alt="<%= num %>"><%
+    end %></td>
 <td><%= item.text %></td>
-</tr><% end %>
+</tr><%
+  end %>
 </table><%
 else %>
-<ol><% items.each do |item| %>
+<ol><%
+  items.each do |item| %>
 <li>
-<p><%= item.text %></p><% if item.blocks? %>
-<%= item.content %><% end %>
-</li><% end %>
-</ol><% end %>
+<p><%= item.text %></p>
+</li><%
+  end %>
+</ol><%
+end %>
 </div>
