@@ -4,6 +4,6 @@ when :xref
   refid = (attr :refid) || @target
   %><%= %(<a href="#{@target}">#{@text || @document.references[:ids].fetch(refid, "[#{refid}]").tr_s("\n", ' ')}</a>) %><%
 when :ref %><%= %(<a id="#{@target}"></a>) %><%
-when :bibref %><%= %(<a id="#{@target}">[#{@target}]</a>) %><%
+when :bibref %><%= %(<a id="#{@target}"></a>[#{@target}]) %><%
 else %><%= %(<a href="#{@target}"#{role? ? %[ class="#{role}"] : nil}#{(attr? :window) ? %[ target="#{attr :window}"] : nil}>#{@text}</a>) %><%
 end %>

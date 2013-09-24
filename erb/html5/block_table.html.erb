@@ -31,20 +31,19 @@ unless (attr :rowcount).zero? %>
           else
             cell_content = cell.content
           end
-          cell_css_style = (@document.attr? :cellbgcolor) ? %(background-color:#{@document.attr :cellbgcolor};) : nil %>
+        end
+        cell_css_style = (@document.attr? :cellbgcolor) ? %(background-color:#{@document.attr :cellbgcolor};) : nil %>
 <<%= tsec == :head ? 'th' : 'td' %> class="<%= ['tableblock',"halign-#{cell.attr :halign}","valign-#{cell.attr :valign}"] * ' ' %>"<%= cell.colspan ? %( colspan="#{cell.colspan}") : nil %><%= cell.rowspan ? %( rowspan="#{cell.rowspan}") : nil %><%= cell_css_style ? %( style="#{cell_css_style}") : nil %>><%
-          if tsec == :head %>
-<%= cell_content %><%
+        if tsec == :head %><%= cell_content %><%
+        else
+          case cell.style
+          when :asciidoc %><div><%= cell_content %></div><%
+          when :verse %><div class="verse"><%= cell_content %></div><%
+          when :literal %><div class="literal"><pre><%= cell_content %></pre></div><%
+          when :header
+            cell_content.each do |text| %><p class="tableblock header"><%= text %></p><% end
           else
-            case cell.style
-            when :asciidoc %><div><%= cell_content %></div><%
-            when :verse %><div class="verse"><%= cell_content %></div><%
-            when :literal %><div class="literal"><pre><%= cell_content %></pre></div><%
-            when :header
-              cell_content.each do |text| %><p class="tableblock header"><%= text %></p><% end
-            else
-              cell_content.each do |text| %><p class="tableblock"><%= text %></p><% end
-            end
+            cell_content.each do |text| %><p class="tableblock"><%= text %></p><% end
           end
         end %></<%= tsec == :head ? 'th' : 'td' %>><%
       end %>

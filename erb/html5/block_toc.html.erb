@@ -9,7 +9,7 @@ if @document.attr? :toc
     toc_id = 'toc'
     toc_title_id = 'toctitle'
   end
-%><div id="<%= toc_id %>" class="<%= toc_role %>"><%
+%><div<%= toc_id && %( id="#{toc_id}") %> class="<%= toc_role %>"><%
   if toc_title %>
 <div class="title"<%= toc_title_id && %( id="#{toc_title_id}") %>><%= toc_title %></div><%
   end %>
