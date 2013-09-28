@@ -1,4 +1,4 @@
-%div{:id=>@id, :class=>['paragraph', (attr :role), ('slide' if attr? 'step-option')]}
+%div{:id=>@id, :class=>['paragraph', role, ('slide' if option? :step)]}
   - if title?
     .title=title
-  %p{:class=>(attr :position)}=content
+  %p{:class=>(attr :position)}><=content

@@ -1,1 +1,1 @@
-- haml_tag "h#{@level + 1}##{@id}", title, :class=>[(attr :style), (attr :role), ('slide' if attr? 'step-option')]
+- haml_tag "h#{@level + 1}##{@id}", title, :class => [@style, role, ('slide' if option? :step)]

@@ -3,80 +3,93 @@
   %head
     %meta(http-equiv='Content-Type' content="text/html; charset=#{attr :encoding}")
     %meta(name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}")
-    - if attr? :description
-      %meta(name='description'){:content=>(attr :description)}
-    - if attr? :keywords 
-      %meta(name='keywords'){:content=>(attr :keywords)}
-    %title=doctitle
+    - [:description, :keywords, :author, :copyright].each do |key|
+      - if attr? key
+        %meta{:name=>key, :content=>(attr key)}
+    %title=((doctitle :sanitize => true) || (attr 'untitled-label'))
     - unless (attr :stylesheet, '').empty?
-      %link(rel="stylesheet"){:href=>(attr? :stylesdir) ? File.join((attr :stylesdir), (attr :stylesheet)) : (attr :stylesheet)}
+      %link(rel='stylesheet'){:href=>normalize_web_path((attr :stylesheet), (attr :stylesdir, ''))}
+    - if attr? :icons, 'font'
+      %link(rel='stylesheet'){:href=>(attr 'iconfont-cdn', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css')}
     - case attr 'source-highlighter'
     - when 'coderay'
       - if (attr 'coderay-css', 'class') == 'class'
-        -# hackish, find a way to locate this function in a more generic namespace
-        =Asciidoctor::HTML5::DocumentTemplate.default_coderay_stylesheet
+        - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
+          %link(rel='stylesheet'){:href=>normalize_web_path('asciidoctor-coderay.css', (attr :stylesdir, ''))}
+        - else
+          %style=Asciidoctor::HTML5.default_coderay_stylesheet
+    - when 'pygments'
+      - if (attr 'pygments-css', 'class') == 'class'
+        - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
+          %link(rel='stylesheet'){:href=>normalize_web_path('asciidoctor-pygments.css', (attr :stylesdir, ''))}
+        - else
+          %style=Asciidoctor::HTML5.pygments_stylesheet(attr 'pygments-style')
     - when 'highlightjs'
       %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css")
       %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js")
       %script hljs.initHighlightingOnLoad()
-    %link(rel="stylesheet" href="deck.js/core/deck.core.css")
-    %link(rel="stylesheet" href="deck.js/extensions/goto/deck.goto.css")
-    %link(rel="stylesheet" href="deck.js/extensions/menu/deck.menu.css")
-    %link(rel="stylesheet" href="deck.js/extensions/navigation/deck.navigation.css")
-    %link(rel="stylesheet" href="deck.js/extensions/status/deck.status.css")
-    %link(rel="stylesheet" href="deck.js/extensions/hash/deck.hash.css")
-
+    - when 'prettify'
+      %link(rel='stylesheet' href="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/#{attr 'prettify-theme', 'prettify'}.min.css")
+      %script(src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js")
+      %script document.addEventListener('DOMContentLoaded', prettyPrint)
+    %link(rel='stylesheet' href='deck.js/core/deck.core.css')
+    %link(rel='stylesheet' href='deck.js/extensions/goto/deck.goto.css')
+    %link(rel='stylesheet' href='deck.js/extensions/menu/deck.menu.css')
+    %link(rel='stylesheet' href='deck.js/extensions/navigation/deck.navigation.css')
+    %link(rel='stylesheet' href='deck.js/extensions/status/deck.status.css')
+    %link(rel='stylesheet' href='deck.js/extensions/hash/deck.hash.css')
     %link(rel="stylesheet" href="deck.js/themes/style/#{attr :deckjs_theme}.css")
-    %link(rel="stylesheet" id="transition-theme-link" href="deck.js/themes/transition/#{attr :deckjs_transition}.css")
-
+    %link(rel='stylesheet' id='transition-theme-link' href="deck.js/themes/transition/#{attr :deckjs_transition}.css")
     - if attr? :customjs
       %script(src="#{:customjs}.js")
     - if attr? :customcss
-      %link(rel="stylesheet" href="#{:customcss}.css")
-    %script(src="deck.js/modernizr.custom.js")
-  %body{:id=>@id, :class=>['deck-container',(attr :doctype)], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
-    -# Asciidoctor-specific feature to disable header entirely
+      %link(rel='stylesheet' href="#{:customcss}.css")
+    %script(src='deck.js/modernizr.custom.js')
+  %body{:id=>@id, :class=>['deck-container', doctype], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     - unless noheader
-      -# AsciiDoc leaves an empty header div even if there's no doctitle
-      %section(class="slide" id="title-slide")
+      %section(class='slide' id='title-slide')
         - unless notitle
-          %h1=header.title
+          %h1=@header.title
         - if attr? :author
-          %span#author=(attr :author)
+          %span#author=attr :author
           %br
-        - if attr? :email
-          %span#email.monospaced &lt;#{attr :email}&gt;
-          %br
+          - if attr? :email
+            %span#email=sub_macros(attr :email)
+            %br
+          - if (authorcount = (attr :authorcount).to_i) > 1
+            - (2..authorcount).each do |idx|
+              %span{:id=>"author#{idx}", :class=>"author"}=(attr "author_#{idx}")
+              %br
+              - if attr? "email_#{idx}"
+                %span{:id=>"email#{idx}", :class=>"email"}=sub_macros(attr "email_#{idx}")
         - if attr? :revnumber
-          %span#revnumber version #{attr :revnumber}#{(attr? :revdate) ? ',' : ''}
+          %span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if (attr? :revdate)}
         - if attr? :revdate
-          %span#revdate=(attr :revdate)
+          %span#revdate=attr :revdate
         - if attr? :revremark
           %br
-          %span#revremark=(attr :revremark)
+          %span#revremark=attr :revremark
       =content
     - if attr? :navigation
-      %a(href="#" class="deck-prev-link" title="Previous") &#8592;
-      %a(href="#" class="deck-next-link" title="Next") &#8594;
+      %a(href='#' class='deck-prev-link' title='Previous') &#8592;
+      %a(href='#' class='deck-next-link' title='Next') &#8594;
     - if attr? :status
       %p.deck-status
         %span.deck-status-current
         \/
         %span.deck-status-total
-
-    %a(href="." title="Permalink to this slide" class="deck-permalink") #
-    
-    %script(src="deck.js/jquery-1.7.2.min.js")
-    %script(src="deck.js/core/deck.core.js")
-    %script(src="deck.js/core/deck.core.js")
-    %script(src="deck.js/extensions/hash/deck.hash.js")
-    %script(src="deck.js/extensions/menu/deck.menu.js")
-    %script(src="deck.js/extensions/goto/deck.goto.js")
-    %script(src="deck.js/extensions/status/deck.status.js")
-    %script(src="deck.js/extensions/navigation/deck.navigation.js")
-    %script(src="deck.js/extensions/scale/deck.scale.js")
+    %a(href='.' title='Permalink to this slide' class='deck-permalink') #
+    %script(src='deck.js/jquery-1.7.2.min.js')
+    %script(src='deck.js/core/deck.core.js')
+    %script(src='deck.js/core/deck.core.js')
+    %script(src='deck.js/extensions/hash/deck.hash.js')
+    %script(src='deck.js/extensions/menu/deck.menu.js')
+    %script(src='deck.js/extensions/goto/deck.goto.js')
+    %script(src='deck.js/extensions/status/deck.status.js')
+    %script(src='deck.js/extensions/navigation/deck.navigation.js')
+    %script(src='deck.js/extensions/scale/deck.scale.js')
     - if attr? :split
-      %script(src="deck.js/extensions/deck.split.js")
+      %script(src='deck.js/extensions/deck.split.js')
     :javascript
       $(function() {
         $.deck('.slide');
