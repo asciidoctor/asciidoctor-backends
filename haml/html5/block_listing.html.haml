@@ -2,7 +2,7 @@
   - if title?
     .title=captioned_title
   .content
-    - nowrap = !(@document.attr? :prewrap) || (option? 'nowrap')
+    - nowrap = !(@document.attr? :prewrap) || (option? :nowrap)
     - if @style == 'source'
       - language = attr :language
       - code_class = language ? [language, "language-#{language}"] : nil
@@ -23,7 +23,6 @@
         - pre_lang = language
         - pre_class = code_class = nil
         - nowrap = false
-      -#- when 'highlightjs', 'highlight.js'
       - pre_class << 'nowrap' if nowrap
       %pre{:class=>pre_class, :lang=>pre_lang}
         -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag

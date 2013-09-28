@@ -1,4 +1,4 @@
-%span{:class=>[@type,role], :style=>((attr? :float) ? "float: #{attr :float}" : nil)}<
+%span{:class=>[@type, role], :style=>((attr? :float) ? "float: #{attr :float}" : nil)}<
   - if @type == 'icon' && (@document.attr? :icons, 'font')
     - style_class = ["icon-#{@target}"]
     - style_class << "icon-#{attr :size}" if attr? :size

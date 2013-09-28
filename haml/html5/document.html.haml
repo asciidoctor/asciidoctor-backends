@@ -46,7 +46,7 @@
       %script document.addEventListener('DOMContentLoaded', prettyPrint)
     - unless (docinfo_content = docinfo).empty?
       =docinfo_content
-  %body{:id => @id, :class=>[(attr :doctype), ((attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto') ? "#{attr 'toc-class'} toc-#{attr 'toc-position', 'left'}" : nil)], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
+  %body{:id => @id, :class=>[doctype, ((attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto') ? "#{attr 'toc-class'} toc-#{attr 'toc-position', 'left'}" : nil)], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     - unless noheader
       -# AsciiDoc leaves an empty header div even if there's no doctitle
       #header

@@ -1,11 +1,11 @@
 %table{:id=>@id, :class=>['tableblock', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", role],
-    :style=>((css_style = [("width:#{attr :tablepcwidth}%" unless option? 'autowidth'),
+    :style=>((css_style = [("width:#{attr :tablepcwidth}%" unless option? :autowidth),
                        ("float:#{attr :float}" if attr? :float)].compact * '; ').empty? ? nil : css_style)}
   - if title?
     %caption.title=captioned_title
   - unless (attr :rowcount).zero?
     %colgroup
-      - if option? 'autowidth'
+      - if option? :autowidth
         - @columns.each do
           %col
       - else

@@ -2,4 +2,4 @@
   - if title?
     .title=title
   .content
-    %pre{:class=>(!(@document.attr? 'prewrap') || (option? 'nowrap') ? ['nowrap'] : [])}=content
+    %pre{:class=>(!(@document.attr? :prewrap) || (option? :nowrap) ? 'nowrap' : nil)}=content

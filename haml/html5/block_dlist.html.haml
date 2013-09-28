@@ -25,7 +25,7 @@
           %col{:style=>((attr? :itemwidth) ? %(width:#{(attr :itemwidth).chomp '%'}%;) : nil)}
       - items.each do |terms, dd|
         %tr
-          %td{:class=>['hdlist1', ('strong' if (option? 'strong'))]}
+          %td{:class=>['hdlist1', ('strong' if (option? :strong))]}
             - terms = [*terms]
             - last_term = terms.last
             - terms.each do |dt|
@@ -39,7 +39,7 @@
               - if dd.blocks?
                 =dd.content.chomp
 - else
-  %div{:id=>@id, :class=>['dlist',@style,role]}
+  %div{:id=>@id, :class=>['dlist', @style, role]}
     - if title?
       .title=title
     %dl
