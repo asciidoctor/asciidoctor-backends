@@ -5,20 +5,20 @@ end %>
 <div class="content"><%
 case attr :poster
 when 'vimeo'
-  start_anchor = (attr? :start) ? "#at=#{attr :start}" : nil
+  start_anchor = (attr? :start) ? %(#at=#{attr :start}) : nil
   delimiter = '?'
-  autoplay_param = (option? 'autoplay') ? "#{delimiter}autoplay=1" : nil
+  autoplay_param = (option? :autoplay) ? %(#{delimiter}autoplay=1) : nil
   delimiter = '&amp;' if autoplay_param
-  loop_param = (option? 'loop') ? "#{delimiter}loop=1" : nil
+  loop_param = (option? :loop) ? %(#{delimiter}loop=1) : nil
   src = %(//player.vimeo.com/video/#{attr :target}#{start_anchor}#{autoplay_param}#{loop_param}) %>
 <iframe<%= (attr? :width) ? %( width="#{attr :width}") : nil %><%= (attr? :height) ? %( height="#{attr :height}") : nil %> src="<%= src %>" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><%
 when 'youtube'
   params = ['rel=0']
-  params << "start=#{attr :start}" if attr? :start
-  params << "end=#{attr :end}" if attr? :end
-  params << "autoplay=1" if option? 'autoplay'
-  params << "loop=1" if option? 'loop'
-  params << "controls=0" if option? 'nocontrols'
+  params << %(start=#{attr :start}) if attr? :start
+  params << %(end=#{attr :end}) if attr? :end
+  params << 'autoplay=1' if option? :autoplay
+  params << 'loop=1' if option? :loop
+  params << 'controls=0' if option? :nocontrols
   src = %(//www.youtube.com/embed/#{attr :target}?#{params * '&amp;'}) %>
 <iframe<%= (attr? :width) ? %( width="#{attr :width}") : nil %><%= (attr? :height) ? %( height="#{attr :height}") : nil %> src="<%= src %>" frameborder="0"<%= (option? :nofullscreen) ? nil : ' allowfullscreen' %>></iframe><%
 else %>

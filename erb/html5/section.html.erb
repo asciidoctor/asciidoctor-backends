@@ -13,9 +13,9 @@ if slevel.zero?
   %><h1<%= @id && %( id="#{@id}") %> class="sect0"><%= %(#{anchor}#{link_start}#{title}#{link_end}) %></h1>
 <%= content %><%
 else
-  snum = @numbered ? "#{sectnum} " : nil
+  snum = @numbered ? %(#{sectnum} ) : nil
   hlevel = slevel + 1
-  %><div class="<%= ["sect#{slevel}",role].compact * ' ' %>">
+  %><div class="<%= [%(sect#{slevel}),role].compact * ' ' %>">
 <h<%= hlevel %><%= @id && %( id="#{@id}") %>><%= %(#{anchor}#{link_start}#{snum}#{captioned_title}#{link_end}) %></h<%= hlevel %>><%
   if slevel == 1 %>
 <div class="sectionbody">

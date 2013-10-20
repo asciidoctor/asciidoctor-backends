@@ -10,7 +10,7 @@ if @document.attr? :icons
 <tr>
 <td><%
     if font_icons %><i class="conum" data-value="<%= num %>"></i><b><%= num %></b><%
-    else %><img src="<%= icon_uri("callouts/#{num}") %>" alt="<%= num %>"><%
+    else %><img src="<%= icon_uri %(callouts/#{num}) %>" alt="<%= num %>"><%
     end %></td>
 <td><%= item.text %></td>
 </tr><%

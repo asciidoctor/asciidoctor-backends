@@ -6,7 +6,7 @@ end %>
 nowrap = !(@document.attr? :prewrap) || (option? :nowrap)
 if @style == 'source'
   language = attr :language
-  code_class = language ? [language, "language-#{language}"] : []
+  code_class = language ? [language, %(language-#{language})] : []
   pre_class = ['highlight']
   pre_lang = nil
   case attr 'source-highlighter'
@@ -18,7 +18,7 @@ if @style == 'source'
     pre_class = ['prettyprint']
     pre_class << 'linenums' if attr? :linenums
     pre_class << language if language
-    pre_class << "language-#{language}" if language
+    pre_class << %(language-#{language}) if language
     code_class = []
   when 'html-pipeline'
     pre_lang = language
