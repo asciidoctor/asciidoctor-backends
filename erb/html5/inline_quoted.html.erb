@@ -8,5 +8,7 @@ when :superscript %><%= %(<sup#{class_attr}>#{@text}</sup>) %><%
 when :subscript %><%= %(<sub#{class_attr}>#{@text}</sub>) %><%
 when :double %><%= class_attr ? %(<span#{class_attr}>&#8220;#{@text}&#8221;</span>) : %(&#8220;#{@text}&#8221;) %><%
 when :single %><%= class_attr ? %(<span#{class_attr}>&#8216;#{@text}&#8217;</span>) : %(&#8216;#{@text}&#8217;) %><%
+when :asciimath %><%= %(`#{@text}`) %><%
+when :latexmath %><%= %[\\(#{@text}\\)] %><%
 else %><%= class_attr ? %(<span#{class_attr}>#{@text}</span>) : @text %><%
 end %>
