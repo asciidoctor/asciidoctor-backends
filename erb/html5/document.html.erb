@@ -64,29 +64,22 @@ when 'prettify' %>
 <script src="<%= attr 'prettifydir', 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298' %>/prettify.min.js"></script>
 <script>document.addEventListener('DOMContentLoaded', prettyPrint)</script><%
 end
-if attr? 'mathjax' %>
+if attr? 'math' %>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: [['\\(','\\)']],
-    displayMath: [['\\[','\\]']],
+    inlineMath: [<%= ::Asciidoctor::INLINE_MATH_DELIMITERS[:latexmath] %>],
+    displayMath: [<%= ::Asciidoctor::BLOCK_MATH_DELIMITERS[:latexmath] %>],
     ignoreClass: 'nomath|nolatexmath'
   },
   asciimath2jax: {
-    delimiters: [['`','`']],
+    delimiters: [<%= ::Asciidoctor::BLOCK_MATH_DELIMITERS[:asciimath] %>],
     ignoreClass: 'nomath|noasciimath'
   }
 });
 </script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
-<script type="text/javascript">
-function execute_on_dom_ready(fn) {
-  /in/.test(document.readyState) ? setTimeout('execute_on_dom_ready(' + fn + ')', 10) : fn();
-}
-execute_on_dom_ready(function() {
-  MathJax.Hub.Typeset();
-});
-</script><%
+<script>document.addEventListener('DOMContentLoaded', MathJax.Hub.TypeSet)</script><%
 end
 %><%= (docinfo_content = docinfo).empty? ? nil : %(
 #{docinfo_content}) %>
