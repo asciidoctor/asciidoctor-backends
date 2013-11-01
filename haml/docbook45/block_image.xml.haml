@@ -3,6 +3,6 @@
     %title=title
   %mediaobject
     %imageobject
-      %imagedata{:fileref=>image_uri(attr :target), :contentwidth=>(attr :width), :contentdepth=>(attr :height)}
+      %imagedata{:fileref=>image_uri(attr :target), :contentwidth=>(attr :width), :contentdepth=>(attr :height), :scale=>(attr :scale), :width=>(attr :scaledwidth), :scalefit=>((attr? :scaledwidth) ? 1 : nil), :align=>(attr :align)}
     %textobject
       %phrase=attr :alt
