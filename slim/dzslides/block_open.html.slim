@@ -1,4 +1,4 @@
-.openblock id=@id class=(attr :role)
+.openblock id=@id class=[(@style != 'open' ? @style : nil),role]
   - if title?
     .title=title
   =content

@@ -1,20 +1,19 @@
-- if (attr? :role, 'details') or (attr? :role, 'speaker')
+- if (has_role? 'details') or (has_role? 'speaker')
   details
     details open=true
       summary Notes
       =content
 - else
-  .admonitionblock id=@id class=[(attr :name),(attr :role)]
-    table
-      tr
-        td.icon
-          - if attr? :icons, 'font'
-            i class="icon-#{attr :name}"
-          - elsif attr? :icons
-            img src=icon_uri(attr :name) alt=@caption
-          - else
-            .title=@caption
-        td.content
-          - if title?
-            .title=title
-          =content
+  .admonitionblock id=@id class=[(attr :name),role]
+    table: tr
+      td.icon
+        - if @document.attr? :icons, 'font'
+          i class=%(icon-#{attr :name}) title=@caption
+        - elsif @document.attr? :icons
+          img src=icon_uri(attr :name) alt=@caption
+        - else
+          .title=@caption
+      td.content
+        - if title?
+          .title=title
+        =content

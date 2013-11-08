@@ -2,10 +2,10 @@
 - if cached_content.start_with? '$ '
   .listingblock id=@id class=(attr :role)
     - if title?
-      .title #{@caption}#{title}
+      .title=captioned_title
     pre.highlight : code class='bash' =cached_content
 - else
-  .literalblock id=@id class=(attr :role)
+  .literalblock id=@id class=role
     - if title?
       .title=title
     pre.literal style=((attr? 'max-height') ? "max-height: #{attr 'max-height'}px" : nil) =content

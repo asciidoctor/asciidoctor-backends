@@ -1,6 +1,7 @@
-- if attr? :icons, 'font'
-  i.conum=@text
-- elsif attr? :icons
+- if @document.attr? :icons, 'font'
+  i.conum data-value=@text
+  b="(#{@text})"
+- elsif @document.attr? :icons
   img.conum src=icon_uri("callouts/#{@text}") alt=@text
 - else
-  b.conum &lt;#{@text}&gt;
+  b="(#{@text})"

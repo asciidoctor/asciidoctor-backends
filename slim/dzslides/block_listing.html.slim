@@ -1,7 +1,7 @@
-.listingblock id=@id class=(attr :role)
+.listingblock id=@id class=role
   - if title?
-    .title #{@caption}#{title}
-  - if (attr? :style, 'source') && (attr? :language)
+    .title=captioned_title
+  - if @style == 'source' && (attr? :language)
     pre.highlight class=[(attr? 'source-highlighter', 'coderay') ? 'CodeRay' : nil, (option? 'nowrap') ? 'nowrap' : nil]
       code class=(attr :language) style=((attr? 'max-height') ? "max-height: #{attr 'max-height'}px" : nil) =content
   - else

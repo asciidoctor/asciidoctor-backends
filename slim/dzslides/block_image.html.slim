@@ -1,6 +1,6 @@
 /begin captures
 - image_tmpl = Helpers.capture_output do
-  img class=(attr :role) src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
+  img class=role src=image_uri(attr :target) alt=(attr :alt) width=(attr :width) height=(attr :height)
 - linked_image_tmpl = Helpers.capture_output do
   a.image href=(attr :link)
     - image_tmpl.yield
@@ -9,6 +9,6 @@
   /perhaps the role should go on the figure
   figure
     - (attr? :link) ? linked_image_tmpl.yield : image_tmpl.yield
-    figcaption class=(attr :crole) #{@caption}#{title}
+    figcaption class=(attr :crole) =captioned_title
 - else
   - (attr? :link) ? linked_image_tmpl.yield : image_tmpl.yield
