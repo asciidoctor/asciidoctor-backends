@@ -2,8 +2,7 @@
   %kbd=keys.first
 - else
   %kbd.keyseq
-    - idx = 0
-    - keys.map do |key|
-      - if (idx += 1) != 1
+    - keys.each_with_index do |key, idx|
+      - unless idx.zero?
         ='+'
       %kbd>=key
