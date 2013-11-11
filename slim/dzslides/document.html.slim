@@ -58,6 +58,8 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
             - if attr? "email_#{idx}"
               '
               span.email =sub_macros(attr "email_#{idx}")
+        - if attr? :hashtag 
+          span.hashtag=(attr :hashtag)
     =content
     script src='./dzslides/core/dzslides.js' 
     - if attr? 'dzslides-highlight'
