@@ -88,6 +88,13 @@
     %script(src='deck.js/extensions/status/deck.status.js')
     %script(src='deck.js/extensions/navigation/deck.navigation.js')
     %script(src='deck.js/extensions/scale/deck.scale.js')
+    - if attr? :menu
+      %div{:class=>['deck-toc']}
+      %form{:action => ".", :method => "get", :class => "goto-form"}
+        %label{:for => "goto-slide"} Go to Slide:
+        %input{:type => "text", :name => "slidenum", :id => "goto-slide", list => "goto-datalist"}
+        %datalist{:id => "goto-data-list"}
+        %input{:type => "submit", :value => "Go"}
     - if attr? :split
       %script(src='deck.js/extensions/deck.split.js')
     :javascript
