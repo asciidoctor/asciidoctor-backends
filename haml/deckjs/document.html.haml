@@ -92,15 +92,24 @@
       %div{:class=>['deck-toc']}
       %form{:action => ".", :method => "get", :class => "goto-form"}
         %label{:for => "goto-slide"} Go to Slide:
-        %input{:type => "text", :name => "slidenum", :id => "goto-slide", list => "goto-datalist"}
+        %input{:type => "text", :name => "slidenum", :id => "goto-slide", :list => "goto-datalist"}
         %datalist{:id => "goto-data-list"}
         %input{:type => "submit", :value => "Go"}
     - if attr? :split
       %script(src='deck.js/extensions/deck.split.js')
     :javascript
-      $(function() {
+      (function($, deck, undefined) {
+
+        $.deck.defaults.keys["previous"] = [8, 33, 37, 39];
+        $.deck.defaults.keys["next"] = [13, 32, 34, 39];
+
+        $.extend(true, $[deck].defaults, {
+                countNested: false
+        });
+
         $.deck('.slide');
-      });
+
+      })(jQuery, 'deck');
     :css
       .slide.canvas-image {
       -moz-background-size: cover;
