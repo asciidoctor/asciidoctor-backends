@@ -33,12 +33,11 @@
               - if attr? "email_#{idx}"
                 email=attr "email_#{idx}"
     / this check seems weak
-    - if (attr? :revnumber) || (attr? :revremark)
+    - if (attr? :revdate) && ((attr? :revnumber) || (attr? :revremark))
       revhistory
-        - if attr? :revnumber
           revision
-            revnumber=attr :revnumber
-            - if attr? :revdate
+            - if attr? :revnumber
+              revnumber=attr :revnumber
               date=attr :revdate
             - if attr? :authorinitials
               authorinitials=attr :authorinitials
