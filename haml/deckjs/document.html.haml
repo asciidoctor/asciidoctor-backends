@@ -33,9 +33,10 @@
       %script(src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js")
       %script document.addEventListener('DOMContentLoaded', prettyPrint)
     %link(rel='stylesheet' href='deck.js/core/deck.core.css')
-    %link(rel='stylesheet' href='deck.js/extensions/goto/deck.goto.css')
     %link(rel='stylesheet' href='deck.js/extensions/hash/deck.hash.css')
     %link(rel='stylesheet' href='deck.js/extensions/scale/deck.scale.css')
+    - if attr? :goto
+      %link(rel='stylesheet' href='deck.js/extensions/goto/deck.goto.css')
     - if attr? :menu
       %link(rel='stylesheet' href='deck.js/extensions/menu/deck.menu.css')
     - if attr? :navigation
@@ -89,18 +90,19 @@
     %a(href='.' title='Permalink to this slide' class='deck-permalink') #
     %script(src='deck.js/jquery.min.js')
     %script(src='deck.js/core/deck.core.js')
-    %script(src='deck.js/extensions/goto/deck.goto.js')
     %script(src='deck.js/extensions/hash/deck.hash.js')
     %script(src='deck.js/extensions/scale/deck.scale.js')
     - if attr? :blank
       %script(src='deck.js/extensions/blank/deck.blank.js')
-    - if attr? :menu
-      %script(src='deck.js/extensions/menu/deck.menu.js')
+    - if attr? :goto
+      %script(src='deck.js/extensions/goto/deck.goto.js')
       %form(action='.' method='get' class='goto-form')
         %label(for='goto-slide') Go to Slide:
         %input(type='text' name='slidenum' id='goto-slide' list='goto-datalist')
         %datalist(id='goto-data-list')
         %input(type='submit' value='Go')
+    - if attr? :menu
+      %script(src='deck.js/extensions/menu/deck.menu.js')
     - if attr? :navigation
       %script(src='deck.js/extensions/navigation/deck.navigation.js')
     - if attr? :split
