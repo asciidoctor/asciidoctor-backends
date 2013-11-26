@@ -2,8 +2,9 @@
 %html{:lang=>(attr :lang, 'en')}
   %head
     %meta(http-equiv='Content-Type' content="text/html; charset=#{attr :encoding}")
+    %meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
     %meta(name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}")
-    - [:description, :keywords, :author, :copyright].each do |key|
+    - [:description, :author, :viewport, :keywords, :copyright].each do |key|
       - if attr? key
         %meta{:name=>key, :content=>(attr key)}
     %title=((doctitle :sanitize => true) || (attr 'untitled-label'))
@@ -33,26 +34,25 @@
       %script(src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js")
       %script document.addEventListener('DOMContentLoaded', prettyPrint)
     %link(rel='stylesheet' href='deck.js/core/deck.core.css')
-    %link(rel='stylesheet' href='deck.js/extensions/hash/deck.hash.css')
-    %link(rel='stylesheet' href='deck.js/extensions/scale/deck.scale.css')
+    %link(rel='stylesheet' media='screen' href='deck.js/extensions/hash/deck.hash.css')
+    %link(rel='stylesheet' media='screen' href='deck.js/extensions/scale/deck.scale.css')
     - if attr? :goto
-      %link(rel='stylesheet' href='deck.js/extensions/goto/deck.goto.css')
+      %link(rel='stylesheet' media='screen' href='deck.js/extensions/goto/deck.goto.css')
     - if attr? :menu
-      %link(rel='stylesheet' href='deck.js/extensions/menu/deck.menu.css')
+      %link(rel='stylesheet' media='screen' href='deck.js/extensions/menu/deck.menu.css')
     - if attr? :navigation
-      %link(rel='stylesheet' href='deck.js/extensions/navigation/deck.navigation.css')
+      %link(rel='stylesheet' media='screen' href='deck.js/extensions/navigation/deck.navigation.css')
     - if attr? :status
-      %link(rel='stylesheet' href='deck.js/extensions/status/deck.status.css')
+      %link(rel='stylesheet' media='screen' href='deck.js/extensions/status/deck.status.css')
     - if attr? :toc
-      %link(rel='stylesheet' href='deck.js/extensions/toc/deck.toc.css')
+      %link(rel='stylesheet' media='screen' href='deck.js/extensions/toc/deck.toc.css')
     - unless attr :deckjs_theme == 'none'
-      %link(rel='stylesheet' href="deck.js/themes/style/#{attr :deckjs_theme, 'web-2.0'}.css")
+      %link(rel='stylesheet' media='screen' href="deck.js/themes/style/#{attr :deckjs_theme, 'web-2.0'}.css")
     - unless attr :deckjs_transition == 'none'
-      %link(rel='stylesheet' id='transition-theme-link' href="deck.js/themes/transition/#{attr :deckjs_transition, 'fade'}.css")
-    - if attr? :customjs
-      %script(src="#{:customjs}.js")
+      %link(rel='stylesheet' media='screen' href="deck.js/themes/transition/#{attr :deckjs_transition, 'fade'}.css")
     - if attr? :customcss
       %link(rel='stylesheet' href="#{:customcss}.css")
+    %link(rel='stylesheet' media='print' href='deck.js/core/print.css')
     %script(src='deck.js/modernizr.custom.js')
   %body{:id=>@id, :class=>['deck-container', doctype], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     - unless noheader
@@ -87,6 +87,12 @@
         %span.deck-status-current
         \/
         %span.deck-status-total
+    - if attr? :goto
+      %form(action='.' method='get' class='goto-form')
+        %label(for='goto-slide') Go to Slide:
+        %input(type='text' name='slidenum' id='goto-slide' list='goto-datalist')
+        %datalist(id='goto-data-list')
+        %input(type='submit' value='Go')
     %a(href='.' title='Permalink to this slide' class='deck-permalink') #
     %script(src='deck.js/jquery.min.js')
     %script(src='deck.js/core/deck.core.js')
@@ -96,11 +102,6 @@
       %script(src='deck.js/extensions/blank/deck.blank.js')
     - if attr? :goto
       %script(src='deck.js/extensions/goto/deck.goto.js')
-      %form(action='.' method='get' class='goto-form')
-        %label(for='goto-slide') Go to Slide:
-        %input(type='text' name='slidenum' id='goto-slide' list='goto-datalist')
-        %datalist(id='goto-data-list')
-        %input(type='submit' value='Go')
     - if attr? :menu
       %script(src='deck.js/extensions/menu/deck.menu.js')
     - if attr? :navigation
@@ -112,18 +113,18 @@
     - if attr? :toc
       %script(src='deck.js/extensions/toc/deck.toc.js')
       %div(class='deck-toc')
+    - if attr? :customjs
+      %script(src="#{:customjs}.js")
     :javascript
       (function($, deck, undefined) {
-
-        $.deck.defaults.keys["previous"] = [8, 33, 37, 39];
-        $.deck.defaults.keys["next"] = [13, 32, 34, 39];
+        $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
+        $.deck.defaults.keys['next'] = [13, 32, 34, 39];
 
         $.extend(true, $[deck].defaults, {
-                countNested: false
+            countNested: false
         });
 
         $.deck('.slide');
-
       })(jQuery, 'deck');
     :css
       .slide.canvas-image {
