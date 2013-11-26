@@ -29,4 +29,6 @@
         -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag
         %code{:class=>code_class}~content
     - else
-      %pre{:class=>(nowrap ? 'nowrap' : nil)}=content
+      %pre{:class=>(nowrap ? 'nowrap' : nil)}
+        -# Haml automatically preserves whitespace in <pre> tags by replacing newlines with &#x000A;, but I'm not sure about the <code> tag
+        %code~content
