@@ -3,5 +3,8 @@
     =content.chomp
 - else
   %section.slide{:id=>@id, :class=>role}
-    %h2=title
+    - if has_role? 'title'
+      %h1=title
+    - else
+      %h2=title
     =content.chomp
