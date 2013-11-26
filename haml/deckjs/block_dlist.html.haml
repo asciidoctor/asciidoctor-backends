@@ -1,4 +1,22 @@
 - case @style
+- when 'steps'
+  %div{:id=>@id, :class=>['slist', 'steps', role]}
+    - if title?
+      .title=title
+    %ol
+      - items.each do |headings, contents|
+        %li
+          - if has_role? 'headings'
+            %h3=[*headings].first.text
+          - else
+            - [*headings].each do |heading|
+              %p<
+                %strong=heading.text
+          - unless contents.nil?
+            - if contents.text?
+              %p<=contents.text
+            - if contents.blocks?
+              =contents.content.chomp
 - when 'qanda'
   %div{:id=>@id, :class=>['qlist', 'qanda', role]}
     - if title?
