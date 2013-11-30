@@ -104,12 +104,13 @@
           .footnote{:id=>['_footnote', fn.index]}
             = succeed ". #{fn.text}" do
               %a(href="#_footnoteref_#{fn.index}")=fn.index
-    #footer
-      #footer-text
-        - if attr? :revnumber
-          #{attr 'version-label'} #{attr :revnumber}
-        - if attr? 'last-update-label'
-          %br
-          #{attr 'last-update-label'} #{attr :localdatetime}
-      - unless (docinfo_content = (docinfo :footer)).empty?
-        =docinfo_content
+    - unless nofooter
+      #footer
+        #footer-text
+          - if attr? :revnumber
+            #{attr 'version-label'} #{attr :revnumber}
+          - if attr? 'last-update-label'
+            %br
+            #{attr 'last-update-label'} #{attr :localdatetime}
+        - unless (docinfo_content = (docinfo :footer)).empty?
+          =docinfo_content
