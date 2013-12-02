@@ -69,9 +69,7 @@ else
 <dl><%
   items.each do |terms, dd|
     [*terms].each do |dt| %>
-<dt<%= !@style ? ' class="hdlist1"' : nil %>>
-<%= dt.text %>
-</dt><%
+<dt<%= !@style ? ' class="hdlist1"' : nil %>><%= dt.text %></dt><%
     end
     unless dd.nil? %>
 <dd><%
