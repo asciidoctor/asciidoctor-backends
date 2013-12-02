@@ -1,79 +1,106 @@
-= Dzslides backend
+= DZSlides backend for Asciidoctor
+Dan Allen; Cédric Exbrayat
 
-=== Installation
+This backend is used to convert an AsciiDoc document to a HTML5 slide presentation driven by a DZSlides fork.
 
-First, you should download (or git clone) the https://github.com/asciidoctor/asciidoctor-backends[asciidoctor-backends] repository to a convenient location.
+== Initial Setup
 
- git clone git://github.com/asciidoctor/asciidoctor-backends.git
+First, download (or git clone) the https://github.com/asciidoctor/asciidoctor-backends[asciidoctor-backends] repository to a convenient location.
 
-Then from your working directory (that is where your AsciiDoc document resides) you must clone the https://github.com/mojavelinux/asciidoc-dzslides-backend.git[dzslides] repository into a +dzslides+ directory.
+ $ git clone https://github.com/asciidoctor/asciidoctor-backends.git
 
- git clone https://github.com/mojavelinux/asciidoc-dzslides-backend.git dzslides
+Next, clone the https://github.com/mojavelinux/dzslides[dzslides] repository into your working directory (where your AsciiDoc document resides).
 
-=== Settings
+ $ git clone https://github.com/mojavelinux/dzslides.git
+
+If you list the files in your working directory, you should see:
+
+....
+slides.adoc
+dzslides/
+....
+
+== Settings
 
 There are some attributes that can be set at the top of the document which they are specific of +dzslides+ backend.
 
-[options="header",cols="1m,1"]
+[cols="1m,1,1m"]
 |===
-|Attribute                          |Description
-|:dzslides-style: <style>           |where you set the dzslides style. For example : watermelon
-|:dzslides-transition: <transition> |where you set the kind of transition. For example : fade
-|:dzslides-fonts: <font>            |where you set the fonts. For example: family=Cedarville+Cursive
-|:dzslides-highlight: <highlight>   |where you set the highlight. For example: monokai
+|Attribute |Description |Example
+
+|:dzslides-style: <style>
+|sets the CSS theme
+|watermelon
+
+|:dzslides-transition: <transition>
+|sets the type of slide transition
+|fade
+
+|:dzslides-fonts: <font>
+|sets the fonts to import
+|family=Cedarville+Cursive
+
+|:dzslides-highlight: <highlight>
+|sets the highlight.js theme
+|monokai
 |===
 
 NOTE: You can also specify a custom stylesheet using the +stylesheet+ attribute, which can be used to customize AsciiDoc elements like section, paragraph, images, etc...
 
-=== Examples
+== Example
 
+[source,asciidoc]
 ----
-Dzslides
-========
+= DZSlides Demo
+Your Name
 :backend: dzslides
-:dzslides-style: watermelon
+:dzslides-style: stormy
 :dzslides-transition: fade
 :dzslides-fonts: family=Yanone+Kaffeesatz:400,700,200,300&family=Cedarville+Cursive
 :dzslides-highlight: monokai
-:stepwise: role="incremental"
+:source-highlighter: highlightjs
 
-[{intro}]
+[.topic.intro]
 == Intro
 
-== \\
+== !
 
 *Title*
 
-== \\
+== !
 
-[{stepwise}]
+[.incremental]
 * dzslides
 * deckjs
+
+[.topic.source]
+== Source
+
+[source,ruby]
+--
+puts 'Hello, World!'
+--
+
+[.topic.ending]
+== Fin!
 ----
 
 You can see some more complete examples https://github.com/mojavelinux/dzslides[here].
 
+== Rendering
 
-=== Rendering
+First, make sure Asciidoctor, Tilt and Slim are installed:
 
-First, make sure Asciidoctor is installed:
-
- gem install asciidoctor
-
-You might also need tilt and slim:
-
- gem install tilt
- gem install slim
+ $ gem install asciidoctor tilt slim
 
 Then, to render your presentation as HTML5, simply execute the command:
 
- asciidoctor -T <backend directory> <asciidoc file>
+ $ asciidoctor -T <backend directory> -E slim <asciidoc file>
  
-So for the above dzslides backend you'd use
+So for the above dzslides backend you'd use:
  
- asciidoctor -T <base>/asciidoctor-backends/slim/dzslides <asciidoc file> 
+ $ asciidoctor -T /path/to/asciidoctor-backends -E slim <asciidoc file>
 
-=== Stay Connected
+== Stay Connected
 
 If you need any other feature supported by +dzslides+ to be ported to this backend, any way to make it better or you find any bug do not hesitate to open an issue. 
-
