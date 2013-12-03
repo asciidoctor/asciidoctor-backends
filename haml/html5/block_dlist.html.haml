@@ -13,7 +13,7 @@
             - if answer.text?
               %p<=answer.text
             - if answer.blocks?
-              =answer.content.chomp
+              =answer.content
 - when 'horizontal'
   %div{:id=>@id, :class=>['hdlist', role]}
     - if title?
@@ -37,7 +37,7 @@
               - if dd.text?
                 %p<=dd.text
               - if dd.blocks?
-                =dd.content.chomp
+                =dd.content
 - else
   %div{:id=>@id, :class=>['dlist', @style, role]}
     - if title?
@@ -51,4 +51,4 @@
             - if dd.text?
               %p<=dd.text
             - if dd.blocks?
-              =dd.content.chomp
+              =dd.content

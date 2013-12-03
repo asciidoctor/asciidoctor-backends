@@ -1,6 +1,6 @@
 - unless notitle || !has_header?
   %h1{:id=>@id}=@header.title
-=content.chomp
+=content
 - unless !footnotes? || attr?(:nofootnotes)
   #footnotes
     %hr

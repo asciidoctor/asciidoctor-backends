@@ -9,7 +9,7 @@
         %tr
           %td<
             - if font_icons
-              %i.conum{:data=>{:value=>num}}
+              %i.conum{:data=>{:value=>num}}>
               %b=num
             - else
               %img{:src=>icon_uri("callouts/#{num}"), :alt=>num}

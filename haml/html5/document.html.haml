@@ -73,10 +73,10 @@
           - unless notitle
             %h1=@header.title
           - if attr? :author
-            %span#author=attr :author
+            %span#author.author=attr :author
             %br
             - if attr? :email
-              %span#email=sub_macros(attr :email)
+              %span#email.email=sub_macros(attr :email)
               %br
             - if (authorcount = (attr :authorcount).to_i) > 1
               - (2..authorcount).each do |idx|
@@ -96,7 +96,8 @@
             #toctitle=attr 'toc-title'
             -# hackish, find a way to make the toc generator more generic
             =Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i)
-    #content=content.chomp
+    #content
+      =content
     - unless !footnotes? || attr?(:nofootnotes)
       #footnotes
         %hr
@@ -108,9 +109,10 @@
       #footer
         #footer-text
           - if attr? :revnumber
-            #{attr 'version-label'} #{attr :revnumber}
+            = precede %(#{attr 'version-label'} #{attr :revnumber}) do
+              - if attr? 'last-update-label'
+                %br
           - if attr? 'last-update-label'
-            %br
             #{attr 'last-update-label'} #{attr :localdatetime}
         - unless (docinfo_content = (docinfo :footer)).empty?
           =docinfo_content

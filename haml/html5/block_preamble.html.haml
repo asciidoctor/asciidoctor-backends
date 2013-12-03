@@ -1,5 +1,6 @@
 #preamble
-  .sectionbody=content.chomp
+  .sectionbody
+    =content
   - if (attr? :toc) && (attr? 'toc-placement', 'preamble')
     #toc{:class=>(attr 'toc-class', 'toc')}
       #toctitle=(attr 'toc-title')

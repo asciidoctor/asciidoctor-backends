@@ -1,7 +1,7 @@
 %div{:id=>@id, :class=>['quoteblock', role]}
   - if title?
     .title=title
-  %blockquote=content.chomp
+  %blockquote=content
   - if (attr? :attribution) or (attr? :citetitle)
     .attribution
       - if attr? :citetitle
