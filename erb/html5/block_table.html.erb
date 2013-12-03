@@ -1,6 +1,8 @@
 <%#encoding:UTF-8%><table<%= @id && %( id="#{@id}") %> class="<%=
-['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :grid, 'all'}",role].compact * ' ' %>" style="<%=
-[("width: #{attr :tablepcwidth}%;" unless option? :autowidth),("float: #{attr :float};" if attr? :float)].compact * ' ' %>"><%
+['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :grid, 'all'}",role].compact * ' ' %>"<%
+if (attr? :float) || !(option? :autowidth) %> style="<%=
+[("width: #{attr :tablepcwidth}%;" unless option? :autowidth),("float: #{attr :float};" if attr? :float)].compact * ' ' %>"<%
+end %>><%
 if title? %>
 <caption class="title"><%= captioned_title %></caption><%
 end
@@ -32,7 +34,7 @@ unless (attr :rowcount).zero? %>
             cell_content = cell.content
           end
         end
-        cell_css_style = (@document.attr? :cellbgcolor) ? %(background-color:#{@document.attr :cellbgcolor};) : nil %>
+        cell_css_style = (@document.attr? :cellbgcolor) ? %(background-color: #{@document.attr :cellbgcolor};) : nil %>
 <<%= tsec == :head ? 'th' : 'td' %> class="<%= ['tableblock',"halign-#{cell.attr :halign}","valign-#{cell.attr :valign}"] * ' ' %>"<%= cell.colspan ? %( colspan="#{cell.colspan}") : nil %><%= cell.rowspan ? %( rowspan="#{cell.rowspan}") : nil %><%= cell_css_style ? %( style="#{cell_css_style}") : nil %>><%
         if tsec == :head %><%= cell_content %><%
         else

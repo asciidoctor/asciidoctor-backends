@@ -1,4 +1,4 @@
-<%#encoding:UTF-8%><span class="<%= [@type,role].compact * ' ' %>"<%= (attr? :float) ? %( style="float: #{attr :float}") : nil %>><%
+<%#encoding:UTF-8%><span class="<%= [@type,role].compact * ' ' %>"<%= (attr? :float) ? %( style="float: #{attr :float};") : nil %>><%
 if @type == 'icon' && (@document.attr? :icons, 'font')
   style_class = [%(icon-#{@target})]
   style_class << %(icon-#{attr :size}) if attr? :size

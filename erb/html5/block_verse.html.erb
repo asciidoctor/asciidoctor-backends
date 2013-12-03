@@ -9,8 +9,7 @@ if (attr? :attribution) or (attr? :citetitle) %>
 <cite><%= attr :citetitle %></cite><%
   end
   if attr? :attribution
-    if attr? :citetitle %>
-<br><%
+    if attr? :citetitle %><br><%
     end %>
 <%= "&#8212; #{attr :attribution}" %><%
   end %>

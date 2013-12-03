@@ -31,8 +31,8 @@ when 'horizontal'
 <table><%
   if (attr? :labelwidth) || (attr? :itemwidth) %>
 <colgroup>
-<col<%= (attr? :labelwidth) ? %( style="width:#{(attr :labelwidth).chomp '%'}%") : nil %>>
-<col<%= (attr? :itemwidth) ? %( style="width:#{(attr :itemwidth).chomp '%'}%") : nil %>>
+<col<%= (attr? :labelwidth) ? %( style="width: #{(attr :labelwidth).chomp '%'}%;") : nil %>>
+<col<%= (attr? :itemwidth) ? %( style="width: #{(attr :itemwidth).chomp '%'}%;") : nil %>>
 </colgroup><%
   end
   items.each do |terms, dd| %>
