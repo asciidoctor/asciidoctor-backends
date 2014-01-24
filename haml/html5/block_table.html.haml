@@ -26,7 +26,7 @@
                 - else
                   - cell_content = cell.content
               - cell_css_style = (@document.attr? :cellbgcolor) ? %(background-color: #{@document.attr :cellbgcolor};) : nil
-              - haml_tag (tblsec == :head ? 'th' : 'td'), :<, :class=>['tableblock', "halign-#{cell.attr :halign}", "valign-#{cell.attr :valign}"],
+              - haml_tag (tblsec == :head || cell.style == :header ? 'th' : 'td'), :<, :class=>['tableblock', "halign-#{cell.attr :halign}", "valign-#{cell.attr :valign}"],
                   :colspan=>cell.colspan, :rowspan=>cell.rowspan, :style=>cell_css_style do
                 - if tblsec == :head
                   =cell_content
@@ -39,9 +39,6 @@
                   - when :literal
                     .literal
                       %pre=cell_content
-                  - when :header
-                    - cell_content.each do |text|
-                      %p.tableblock.header<=text
                   - else
                     - cell_content.each do |text|
                       %p.tableblock<=text

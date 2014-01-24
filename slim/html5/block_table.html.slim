@@ -24,7 +24,7 @@ table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :gri
                   - cell_content = cell.text
                 - else
                   - cell_content = cell.content
-              *{:tag=>(tblsec == :head ? 'th' : 'td'), :class=>['tableblock',"halign-#{cell.attr :halign}","valign-#{cell.attr :valign}"],
+              *{:tag=>(tblsec == :head || cell.style == :header ? 'th' : 'td'), :class=>['tableblock',"halign-#{cell.attr :halign}","valign-#{cell.attr :valign}"],
                   :colspan=>cell.colspan, :rowspan=>cell.rowspan,
                   :style=>((@document.attr? :cellbgcolor) ? %(background-color:#{@document.attr :cellbgcolor};) : nil)}
                 - if tblsec == :head
@@ -37,9 +37,6 @@ table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :gri
                     .verse=cell_content
                   - when :literal
                     .literal: pre=cell_content
-                  - when :header
-                    - cell_content.each do |text|
-                      p.tableblock.header=text
                   - else
                     - cell_content.each do |text|
                       p.tableblock=text
