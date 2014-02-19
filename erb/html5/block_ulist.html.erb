@@ -9,7 +9,7 @@ if (checklist = (option? :checklist) ? 'checklist' : nil)
       marker_unchecked = '<i class="icon-check-empty"></i>'
     else 
       marker_checked = '&#10003;'
-      marker_unchecked = '&#10065;'
+      marker_unchecked = '&#10063;'
     end
   end
 end %><div<%= @id && %( id="#{@id}") %> class="<%= ['ulist',checklist,@style,role].compact * ' ' %>"><%
