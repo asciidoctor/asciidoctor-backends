@@ -8,9 +8,8 @@ if (checklist = (option? :checklist) ? 'checklist' : nil)
       marker_checked = '<i class="icon-check"></i>'
       marker_unchecked = '<i class="icon-check-empty"></i>'
     else 
-      # could use &#9745 (checked ballot) and &#9744 (ballot) w/o font instead
-      marker_checked = '<input type="checkbox" data-item-complete="1" checked disabled>'
-      marker_unchecked = '<input type="checkbox" data-item-complete="0" disabled>'
+      marker_checked = '&#10003;'
+      marker_unchecked = '&#10065;'
     end
   end
 end %><div<%= @id && %( id="#{@id}") %> class="<%= ['ulist',checklist,@style,role].compact * ' ' %>"><%
