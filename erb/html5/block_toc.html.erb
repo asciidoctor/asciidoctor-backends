@@ -13,5 +13,5 @@ if @document.attr? :toc
   if toc_title %>
 <div class="title"<%= toc_title_id && %( id="#{toc_title_id}") %>><%= toc_title %></div><%
   end %>
-<%= Asciidoctor::HTML5::DocumentTemplate.outline @document, toc_levels %><%
+<%= converter.convert_with_options @document, 'outline', :toclevels => toc_levels %><%
 end %>

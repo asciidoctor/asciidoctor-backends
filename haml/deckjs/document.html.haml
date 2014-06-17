@@ -26,13 +26,13 @@
         - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
           %link(rel='stylesheet'){:href=>normalize_web_path('asciidoctor-coderay.css', (attr :stylesdir, ''))}
         - else
-          %style=Asciidoctor::HTML5.default_coderay_stylesheet
+          =Asciidoctor::Stylesheets.instance.embed_coderay_stylesheet
     - when 'pygments'
       - if (attr 'pygments-css', 'class') == 'class'
         - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
           %link(rel='stylesheet'){:href=>normalize_web_path('asciidoctor-pygments.css', (attr :stylesdir, ''))}
         - else
-          %style=Asciidoctor::HTML5.pygments_stylesheet(attr 'pygments-style')
+          =Asciidoctor::Stylesheets.instance.embed_pygments_stylesheet(attr 'pygments-style')
     - when 'highlightjs'
       %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/styles/#{attr 'highlightjs-theme', 'default'}.min.css")
       %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3'}/highlight.min.js")

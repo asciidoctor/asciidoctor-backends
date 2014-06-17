@@ -8,4 +8,4 @@
     - toc_title_id = 'toctitle'
   %div{:id=>toc_id, :class=>toc_role}
     .title{:id=>toc_title_id}=toc_title
-    =Asciidoctor::HTML5::DocumentTemplate.outline(@document, (attr? :levels) ? (attr :levels).to_i : (@document.attr :toclevels, 2).to_i)
+    =converter.convert_with_options @document, 'outline', :toclevels => ((attr? :levels) ? (attr :levels).to_i : nil)

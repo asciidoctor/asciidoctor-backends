@@ -5,7 +5,7 @@
 if (attr? :toc) && (attr? 'toc-placement', 'preamble') %>
 <div id="toc" class="<%= attr 'toc-class', 'toc' %>">
 <div id="toctitle"><%= attr 'toc-title' %></div>
-<%= ::Asciidoctor::HTML5::DocumentTemplate.outline @document, (attr :toclevels, 2).to_i %>
+<%= converter.convert @document, 'outline' %>
 </div><%
 end %>
 </div>

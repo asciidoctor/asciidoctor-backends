@@ -12,7 +12,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
       - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
         link rel='stylesheet' href=normalize_web_path(Asciidoctor::DEFAULT_STYLESHEET_NAME, (attr :stylesdir, ''))
       - else
-        style=Asciidoctor::HTML5.default_asciidoctor_stylesheet
+        style=Asciidoctor::Stylesheets.instance.primary_stylesheet_data
     - elsif attr? :stylesheet
       - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
         link rel='stylesheet' href=normalize_web_path((attr :stylesheet), (attr :stylesdir, ''))
@@ -29,13 +29,13 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
         - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
           link rel='stylesheet' href=normalize_web_path('asciidoctor-coderay.css', (attr :stylesdir, ''))
         - else
-          style=Asciidoctor::HTML5.default_coderay_stylesheet
+          style=Asciidoctor::Stylesheets.instance.coderay_stylesheet_data
     - when 'pygments'
       - if (attr 'pygments-css', 'class') == 'class'
         - if @safe >= Asciidoctor::SafeMode::SECURE || (attr? :linkcss)
           link rel='stylesheet' href=normalize_web_path('asciidoctor-pygments.css', (attr :stylesdir, ''))
         - else
-          style=Asciidoctor::HTML5.pygments_stylesheet(attr 'pygments-style')
+          style=Asciidoctor::Stylesheets.instance.pygments_stylesheet_data(attr 'pygments-style')
     - when 'highlightjs'
       link rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4'}/styles/#{attr 'highlightjs-theme', 'googlecode'}.min.css"
       script src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4'}/highlight.min.js"
@@ -93,8 +93,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
         - if (attr? :toc) && (attr? 'toc-placement', 'auto')
           #toc class=(attr 'toc-class', 'toc')
             #toctitle=attr 'toc-title'
-            / hackish, find a way to make the toc generator more generic
-            =Asciidoctor::HTML5::DocumentTemplate.outline(self, (attr :toclevels, 2).to_i)
+            =converter.convert self, 'outline'
     #content=content
     - unless !footnotes? || attr?(:nofootnotes)
       #footnotes
