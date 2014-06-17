@@ -4,4 +4,4 @@
 - elsif @document.attr? :icons
   %img{:src=>icon_uri("callouts/#{@text}"), :alt=>@text}
 - else
-  %b="(#{@text})"
+  %b.conum="(#{@text})"

@@ -59,7 +59,7 @@
     - unless attr :deckjs_transition == 'none'
       %link(rel='stylesheet' media='screen' href="deck.js/themes/transition/#{attr :deckjs_transition, 'fade'}.css")
     - if attr? :customcss
-      %link(rel='stylesheet' href="#{:customcss}.css")
+      %link(rel='stylesheet' href="#{attr :customcss, 'customcss.css'}")
     %link(rel='stylesheet' media='print' href='deck.js/core/print.css')
     %script(src='deck.js/modernizr.custom.js')
   %body{:id=>@id, :class=>['deck-container', doctype], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
@@ -122,7 +122,7 @@
       %script(src='deck.js/extensions/toc/deck.toc.js')
       %div(class='deck-toc')
     - if attr? :customjs
-      %script(src="#{:customjs}.js")
+      %script(src="#{attr :customjs, 'customjs.js'}")
     :javascript
       (function($, deck, undefined) {
         $.deck.defaults.keys['previous'] = [8, 33, 37, 39];
