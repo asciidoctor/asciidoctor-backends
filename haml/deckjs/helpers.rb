@@ -1,4 +1,4 @@
-require 'asciidoctor/backends/_stylesheets'
+require 'asciidoctor/stylesheets'
 #Asciidoctor::BASEBACKENDS['deckjs'] = 'html'
 # Add custom functions to this module that you want to use in your Haml
 # templates. Within the template you can invoke them as top-level functions
