@@ -1,3 +1,4 @@
+- deckjs_version = (attr :deckjs_version, '1.1.0')
 !!! 5
 %html{:lang=>(attr :lang, 'en')}
   %head
@@ -42,7 +43,8 @@
       %script(src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js")
       %script document.addEventListener('DOMContentLoaded', prettyPrint)
     %link(rel='stylesheet' href='deck.js/core/deck.core.css')
-    %link(rel='stylesheet' media='screen' href='deck.js/extensions/hash/deck.hash.css')
+    - if deckjs_version <= '1.0.0'
+      %link(rel='stylesheet' media='screen' href='deck.js/extensions/hash/deck.hash.css')
     %link(rel='stylesheet' media='screen' href='deck.js/extensions/scale/deck.scale.css')
     - if attr? :goto
       %link(rel='stylesheet' media='screen' href='deck.js/extensions/goto/deck.goto.css')
@@ -62,49 +64,53 @@
       %link(rel='stylesheet' href="#{attr :customcss, 'customcss.css'}")
     %link(rel='stylesheet' media='print' href='deck.js/core/print.css')
     %script(src='deck.js/modernizr.custom.js')
-  %body{:id=>@id, :class=>['deck-container', doctype], :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
-    - unless noheader
-      %section(class='slide' id='title-slide')
-        - unless notitle
-          %h1=@header.title
-        - if attr? :author
-          %span#author=attr :author
-          %br
-          - if attr? :email
-            %span#email=sub_macros(attr :email)
+  %body{:id=>@id, :class=>doctype, :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
+    .deck-container
+      - unless noheader
+        %section(class='slide' id='title-slide')
+          - unless notitle
+            %h1=@header.title
+          - if attr? :author
+            %span#author=attr :author
             %br
-          - if (authorcount = (attr :authorcount).to_i) > 1
-            - (2..authorcount).each do |idx|
-              %span{:id=>"author#{idx}", :class=>"author"}=(attr "author_#{idx}")
+            - if attr? :email
+              %span#email=sub_macros(attr :email)
               %br
-              - if attr? "email_#{idx}"
-                %span{:id=>"email#{idx}", :class=>"email"}=sub_macros(attr "email_#{idx}")
-        - if attr? :revnumber
-          %span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if (attr? :revdate)}
-        - if attr? :revdate
-          %span#revdate=attr :revdate
-        - if attr? :revremark
-          %br
-          %span#revremark=attr :revremark
-      =content
-    - if attr? :navigation
-      %a(href='#' class='deck-prev-link' title='Previous') &#8592;
-      %a(href='#' class='deck-next-link' title='Next') &#8594;
-    - if attr? :status
-      %p.deck-status
-        %span.deck-status-current
-        \/
-        %span.deck-status-total
-    - if attr? :goto
-      %form(action='.' method='get' class='goto-form')
-        %label(for='goto-slide') Go to Slide:
-        %input(type='text' name='slidenum' id='goto-slide' list='goto-datalist')
-        %datalist(id='goto-data-list')
-        %input(type='submit' value='Go')
-    %a(href='.' title='Permalink to this slide' class='deck-permalink') #
+            - if (authorcount = (attr :authorcount).to_i) > 1
+              - (2..authorcount).each do |idx|
+                %span{:id=>"author#{idx}", :class=>"author"}=(attr "author_#{idx}")
+                %br
+                - if attr? "email_#{idx}"
+                  %span{:id=>"email#{idx}", :class=>"email"}=sub_macros(attr "email_#{idx}")
+          - if attr? :revnumber
+            %span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if (attr? :revdate)}
+          - if attr? :revdate
+            %span#revdate=attr :revdate
+          - if attr? :revremark
+            %br
+            %span#revremark=attr :revremark
+        =content
+      - if attr? :navigation
+        %div(aria-role='navigation')
+          %a(href='#' class='deck-prev-link' title='Previous') &#8592;
+          %a(href='#' class='deck-next-link' title='Next') &#8594;
+      - if attr? :status
+        %p.deck-status(aria-role='status')
+          %span.deck-status-current
+          \/
+          %span.deck-status-total
+      - if attr? :goto
+        %form(action='.' method='get' class='goto-form')
+          %label(for='goto-slide') Go to Slide:
+          %input(type='text' name='slidenum' id='goto-slide' list='goto-datalist')
+          %datalist(id='goto-data-list')
+          %input(type='submit' value='Go')
+      - if deckjs_version <= '1.0.0'
+        %a(href='.' title='Permalink to this slide' class='deck-permalink') #
     %script(src='deck.js/jquery.min.js')
     %script(src='deck.js/core/deck.core.js')
-    %script(src='deck.js/extensions/hash/deck.hash.js')
+    - if deckjs_version <= '1.0.0'
+      %script(src='deck.js/extensions/hash/deck.hash.js')
     %script(src='deck.js/extensions/scale/deck.scale.js')
     - if attr? :blank
       %script(src='deck.js/extensions/blank/deck.blank.js')
