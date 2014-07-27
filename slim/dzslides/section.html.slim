@@ -1,4 +1,11 @@
-section class=role
-  - if has_role? 'topic'
-    h2 class=(attr :hrole) =title
+/FIXME remove this bgcolor hack and do it the right way
+- if attr? :bgcolor
+  - styles = %(background-color: #{attr :bgcolor})
+- else
+  - styles=nil
+section class=role style=styles
+  - unless (t = title) == '!'
+    h2 class=(attr :hrole) =t
+  //- if has_role? 'topic'
+  //  h2 class=(attr :hrole) =title
   =content

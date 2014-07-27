@@ -12,17 +12,17 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
     link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts', 'family=Oswald'}"
     - if attr? :icons, 'font'
       - if !(attr 'iconfont-remote', '').nil?
-        link rel='stylesheet' href=(attr 'iconfont-cdn', 'http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css')
+        link rel='stylesheet' href=(attr 'iconfont-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css')
       - else
         link rel='stylesheet' href=normalize_web_path("#{attr 'iconfont-name', 'font-awesome'}.css", (attr :stylesdir, ''))
     - if attr? 'source-highlighter'
       link rel='stylesheet' href="./dzslides/themes/highlight/#{attr 'dzslides-highlight', 'default'}.css"
     link rel='stylesheet' href="./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
     /FIXME move this CSS into stylesheet
-    style
-      |section:not(.topic) > h2 {
-      |  display: none;
-      |}
+    /style
+    /  |section:not(.topic) > h2 {
+    /  |  display: none;
+    /  |}
     /bug in full screen image if include dzslides.css before ours
     link rel='stylesheet' href='./dzslides/core/dzslides.css'
     link rel='stylesheet' href="./dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
