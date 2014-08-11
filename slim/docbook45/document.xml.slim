@@ -47,7 +47,7 @@
 | <!DOCTYPE #{doctype} PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 - if attr? :toc
   <?asciidoc-toc?>
-- if attr? :numbered
+- if attr? :sectnums
   <?asciidoc-numbered?>
 - case doctype
 - when 'book'

@@ -102,29 +102,33 @@ unless noheader %>
       unless notitle %>
 <h1><%= @header.title %></h1><%
       end
-      if attr? :author %>
+      if (attr? :author) || (attr? :revnumber) || (attr? :revdate) || (attr? :revremark) %>
+<div class="details"><%
+        if attr? :author %>
 <span id="author" class="author"><%= attr :author %></span><br><%
-        if attr? :email %>
+          if attr? :email %>
 <span id="email" class="email"><%= sub_macros(attr :email) %></span><br><%
-        end
-        if (authorcount = (attr :authorcount).to_i) > 1
-          (2..authorcount).each do |idx| %>
+          end
+          if (authorcount = (attr :authorcount).to_i) > 1
+            (2..authorcount).each do |idx| %>
 <span id="author<%= idx %>" class="author"><%= attr %(author_#{idx}) %></span><br><%
-            if attr?  %(email_#{idx}) %>
+              if attr?  %(email_#{idx}) %>
 <span id="email<%= idx %>" class="email"><%= sub_macros(attr %(email_#{idx})) %></span><br><%
+              end
             end
           end
         end
-      end
-      if attr? :revnumber %>
+        if attr? :revnumber %>
 <span id="revnumber"><%= ((attr 'version-label') || '').downcase %> <%= attr :revnumber %><%= attr?(:revdate) ? ',' : '' %></span><%
-      end
-      if attr? :revdate %>
+        end
+        if attr? :revdate %>
 <span id="revdate"><%= attr :revdate %></span><%
-      end
-      if attr? :revremark %>
+        end
+        if attr? :revremark %>
 <br>
 <span id="revremark"><%= attr :revremark %></span><%
+        end %>
+</div><%
       end
     end
     if (attr? :toc) && (attr? 'toc-placement', 'auto') %>
