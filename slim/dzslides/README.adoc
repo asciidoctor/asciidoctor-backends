@@ -28,6 +28,10 @@ There are some attributes that can be set at the top of the document which they 
 |===
 |Attribute |Description |Example
 
+|:link-assets:
+|Link instead of embed the dzslides assets
+|
+
 |:dzslides-style: <style>
 |sets the CSS theme
 |watermelon
