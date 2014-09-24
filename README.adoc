@@ -141,6 +141,44 @@ the [reveal.js] repository.
 
   git clone git://github.com/hakimel/reveal.js.git
 
+=== Examples
+
+// FIXME: incomplete
+
+Let's see some examples of +revealjs+ backend features:
+
+----
+= Title Slide
+
+== Slide One
+
+* Foo
+* Bar
+* World
+
+== Slide Two
+
+Hello World - Good Bye Cruel World
+
+[NOTE.speaker]
+--
+Actually things aren't that bad
+--
+
+[data-background="yellow"]
+== Slide Three
+
+Is very yellow
+----
+
+In previous snippet we are creating a slide titled Slide One with bullets and
+another one titled Slide Two with centered text (reveal.js' default behavior)
+with https://github.com/hakimel/reveal.js#speaker-notes[speaker notes].
+
+Slide Three applies the attribute data-background to the `reveal.js` <section>
+tag. Anything accepted by CSS color formats works. Here is the
+https://github.com/hakimel/reveal.js#slide-backgrounds[upstream documentation].
+
 === Rendering
 
 First, make sure Asciidoctor is installed:
