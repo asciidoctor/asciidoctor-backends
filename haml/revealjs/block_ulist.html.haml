@@ -1,6 +1,6 @@
 %ul
   - content.each do |item|
-    %li{:class=>('fragment' if attr? 'step-option')}
+    %li{:class=>('fragment' if (option? 'step') or (has_role? 'step')}
       - if item.blocks?
         %p=item.text
         =item.content.chomp
