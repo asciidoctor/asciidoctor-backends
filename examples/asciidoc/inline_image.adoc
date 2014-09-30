@@ -1,0 +1,5 @@
+// .basic
+Click image:icons/play.png[] to get the party started.
+
+// .with-alt-text
+Click image:icons/play.png[Play] to get the party started.

@@ -1,0 +1,35 @@
+// .level1
+== Section Level 1
+
+// .level2
+=== Section Level 2
+
+// .level3
+==== Section Level 3
+
+// .level4
+===== Section Level 4
+
+// .level5
+====== Section Level 5
+
+// .max-nesting
+== Section Level 1
+
+=== Section Level 2
+
+==== Section Level 3
+
+===== Section Level 4
+
+====== Section Level 5
+
+=== Section Level 2
+
+// .title-with-sectanchors
+:sectanchors:
+== Title with anchor
+
+// .title-with-sectlinks
+:sectlinks:
+== Linked title

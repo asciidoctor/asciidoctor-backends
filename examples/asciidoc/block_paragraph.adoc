@@ -1,0 +1,24 @@
+// .basic
+Paragraphs don't require any special markup in AsciiDoc.
+A paragraph is just one or more lines of consecutive text.
+
+To begin a new paragraph, separate it by at least one blank line.
+
+// .line-break-plus
+Rubies are red, +
+Topazes are blue.
+
+// .line-break-hardbreaks
+[%hardbreaks]
+Ruby is red.
+Java is black.
+
+// .literal
+A normal paragraph.
+
+ A sequence of lines that begin with at least one space is a literal paragraph.
+ Literal paragraphs are treated as preformatted text.
+ The text is shown in a fixed-width font
+ and endlines are preserved.
+
+Another normal paragraph.

@@ -1,0 +1,17 @@
+// .title-only
+= Document Title
+
+My document provides
+
+// .title-with-author
+= Document Title
+Doc Writer <doc.writer@asciidoctor.org>
+
+My document provides
+
+// .title-with-author-revision
+= Document Title
+Doc Writer <doc.writer@asciidoctor.org>
+v1.0, 2014-01-01
+
+My document provides

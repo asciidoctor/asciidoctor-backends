@@ -1,0 +1,21 @@
+// .paragraph
+WARNING: Watch out for dragons!
+
+// .paragraph-multiline
+NOTE: An admonition paragraph draws the reader's attention to
+auxiliary information.
+Its purpose is determined by the label
+at the beginning of the paragraph.
+
+// .block
+[IMPORTANT]
+====
+While werewolves are hardy community members, keep in mind some dietary concerns.
+====
+
+// .block-with-title
+[IMPORTANT]
+.Feeding the Werewolves
+====
+While werewolves are hardy community members, keep in mind some dietary concerns.
+====

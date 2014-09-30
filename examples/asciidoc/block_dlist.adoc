@@ -1,0 +1,35 @@
+// .single-line
+first term:: definition of first term
+section term:: definition of second term
+
+// .multi-line
+first term::
+definition of first term
+section term::
+definition of second term
+
+// .qanda
+[qanda]
+What is Asciidoctor?::
+  An implementation of the AsciiDoc processor in Ruby.
+What is the answer to the Ultimate Question?:: 42
+
+// .mixed
+Operating Systems::
+  Linux:::
+    . Fedora
+      * Desktop
+    . Ubuntu
+      * Desktop
+      * Server
+  BSD:::
+    . FreeBSD
+    . NetBSD
+
+Cloud Providers::
+  PaaS:::
+    . OpenShift
+    . CloudBees
+  IaaS:::
+    . Amazon EC2
+    . Rackspace

@@ -1,0 +1,16 @@
+// .basic
+image::sunset.jpg[]
+
+// .with-alt-text
+image::sunset.jpg[Sunset]
+
+// .with-title-and-id
+[[img-sunset]]
+.A mountain sunset
+image::sunset.jpg[Sunset]
+
+// .with-dimensions
+image::sunset.jpg[Sunset, 300, 200, role="right"]
+
+// .with-link
+image::sunset.jpg[Sunset, link="http://www.flickr.com/photos/javh/5448336655"]
