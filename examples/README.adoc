@@ -1,0 +1,65 @@
+= AdocSpec examples
+
+This directory contains example suites for testing Asciidoctor backends (templates).
+
+TODO
+
+.Directory structure
+----
+examples
+|-- asciidoc
+|   |-- block_admonition.adoc
+|   |-- block_audio.adoc
+|   |-- ...
+|   +-- section.adoc
++-- {backend-name}
+|   |-- block_admonition.{suffix}
+|   |-- block_audio.{suffix}
+|   |-- ...
+|   +-- section.{suffix}
++-- README.adoc
+----
+
+== /asciidoc
+
+The reference examples in Asciidoc(tor) syntax.
+
+[source, asciidoc]
+.Syntax
+----
+// .first-example
+// Each block must be preceded by a comment; the first line must contain the
+// example's name prefixed with a dot.
+The example's content in *Asciidoc*.
+
+NOTE: The trailing new line (below this) will be removed.
+
+// .second-example
+* List item level 1
+** List item level 2
+
+----
+
+== /html5
+
+[source, html]
+.Syntax
+----
+<!-- .first-example
+  Each block must be preceded by a comment; the first line must contain the
+  example's name prefixed with a dot.
+-->
+<p>The example's content in <strong>HTML</strong>.</p>
+
+<div class="note">The trailing new line (below this) will be removed.</div>
+
+<!-- .second-example -->
+<ol>
+  <li>List item level 1
+    <ol>
+      <li>List item level 2</li>
+    </ol>
+  </li>
+</ol>
+
+----

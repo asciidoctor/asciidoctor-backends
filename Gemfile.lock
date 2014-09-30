@@ -1,0 +1,36 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    asciidoctor (1.5.1)
+    colorize (0.7.3)
+    diffy (3.0.6)
+    equivalent-xml (0.5.1)
+      nokogiri (>= 1.4.3)
+    haml (4.0.5)
+      tilt
+    htmlbeautifier (0.0.10)
+    mini_portile (0.6.0)
+    minitest (5.4.0)
+    minitest-rg (5.1.0)
+      minitest (~> 5.0)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
+    rake (10.0.4)
+    thread_safe (0.3.4)
+    tilt (2.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  asciidoctor (~> 1.5.1)
+  colorize
+  diffy
+  equivalent-xml
+  haml
+  htmlbeautifier (>= 0.0.10)
+  minitest (~> 5.4.0)
+  minitest-rg (~> 5.1.0)
+  rake
+  thread_safe
+  tilt
