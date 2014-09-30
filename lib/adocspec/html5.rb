@@ -27,6 +27,13 @@ module AdocSpec
       suite
     end
 
+    def self.render_suite(data)
+      data.map { |key, hash|
+        html = tidy_html(render_adoc(hash[:content]))
+        "<!-- .#{key} -->\n#{html}\n"
+      }.join("\n")
+    end
+
     def self.tidy_html(input)
       output = []
       HtmlBeautifier::Beautifier.new(output).scan(input.to_s)

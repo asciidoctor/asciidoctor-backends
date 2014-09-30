@@ -71,6 +71,19 @@ module AdocSpec
       end
 
       ##
+      # Writes the examples suite to file.
+      # The file path is composed as +#{examples_dir}/#{suite_name}.#{file_suffix}+.
+      #
+      # @param suite_name [String] the name of the examples suite.
+      # @param data [Hash] the examples suite ({parse_suite format}).
+      #
+      def write_suite(suite_name, data)
+        File.open(File.join(@examples_dir, suite_name + @file_suffix), 'w') do |file|
+          file << render_suite(data)
+        end
+      end
+
+      ##
       # Renders the given Asciidoc string with Asciidoctor using the template
       # specified by the {template_dir}.
       #
@@ -94,6 +107,20 @@ module AdocSpec
       # @return [Hash] the parsed examples suite.
       #
       def parse_suite(input)
+        raise NotImplementedError
+      end
+
+      ##
+      # Renders the given suite of examples in Asciidoc syntax to the target
+      # syntax. This method is used when bootstrapping examples for an existing
+      # backend (templates).
+      #
+      # @abstract
+      # @param adoc_suite [Hash] the examples suite in Asciidoc syntax
+      #                          ({parse_suite format}).
+      # @return [String] the examples suite rendered in the target syntax.
+      #
+      def render_suite(adoc_suite)
         raise NotImplementedError
       end
     end
