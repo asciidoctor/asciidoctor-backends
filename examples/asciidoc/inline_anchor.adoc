@@ -1,0 +1,28 @@
+// .basic
+The homepage for the Asciidoctor Project is http://www.asciidoctor.org.
+
+// .basic-with-text
+Chat with other Asciidoctor users in the irc://irc.freenode.org/#asciidoctor[Asciidoctor IRC channel].
+
+// .basic-with-target-blank
+Let's view the raw HTML of the link:view-source:asciidoctor.org[Asciidoctor homepage^].
+
+// .basic-with-role
+:linkattrs:
+Chat with other Asciidoctor users on the http://discuss.asciidoctor.org/[*mailing list*, role="green"].
+
+// .xref
+The section <<page-break>> describes how to add a page break.
+
+// .xref-with-text
+The section <<page-break, Page break>> describes how to add a page break.
+
+// .xref-resolved-text
+Refer to <<Section A>>.
+
+== Section A
+
+// .bibref
+[bibliography]
+- [[[prag]]] Andy Hunt & Dave Thomas. The Pragmatic Programmer:
+  From Journeyman to Master. Addison-Wesley. 1999.

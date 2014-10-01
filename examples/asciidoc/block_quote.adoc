@@ -1,17 +1,29 @@
 // .basic
-____
+[quote]
 Four score and seven years ago our fathers brought forth
 on this continent a new nation...
-____
 
 // .basic-with-attribution
 [quote, Albert Einstein]
 A person who never made a mistake never tried anything new.
 
-// .basic-with-attribution-and-info
-.After landing the cloaked Klingon bird of prey in Golden Gate park:
+// .basic-with-attribution-and-citetitle
 [quote, Captain James T. Kirk, Star Trek IV: The Voyage Home]
 Everybody remember where we parked.
+
+// .basic-with-title
+.After landing the cloaked Klingon bird of prey in Golden Gate park:
+[quote]
+Everybody remember where we parked.
+
+// .block
+____
+Dennis: Come and see the violence inherent in the system. Help! Help! I'm being repressed!
+
+King Arthur: Bloody peasant!
+
+Dennis: Oh, what a giveaway! Did you hear that? Did you hear that, eh? That's what I'm on about! Did you see him repressing me? You saw him, Didn't you?
+____
 
 // .block-with-attribution
 [quote, Monty Python and the Holy Grail]

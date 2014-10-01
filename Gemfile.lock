@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     asciidoctor (1.5.1)
+    coderay (1.1.0)
     colorize (0.7.3)
     diffy (3.0.6)
     equivalent-xml (0.5.1)
@@ -15,15 +16,21 @@ GEM
       minitest (~> 5.0)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
+    posix-spawn (0.3.9)
+    pygments.rb (0.5.4)
+      posix-spawn (~> 0.3.6)
+      yajl-ruby (~> 1.1.0)
     rake (10.0.4)
     thread_safe (0.3.4)
     tilt (2.0.1)
+    yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   asciidoctor (~> 1.5.1)
+  coderay
   colorize
   diffy
   equivalent-xml
@@ -31,6 +38,7 @@ DEPENDENCIES
   htmlbeautifier (>= 0.0.10)
   minitest (~> 5.4.0)
   minitest-rg (~> 5.1.0)
+  pygments.rb
   rake
   thread_safe
   tilt
