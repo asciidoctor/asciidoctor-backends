@@ -17,6 +17,9 @@ module AdocSpec
           suite[$1.to_sym] = current = {content: ''}
           in_comment = ! line.chomp.end_with?('-->')
         elsif in_comment
+          if line =~ /^\s*:([^:]+):(.*)/
+            (current[$1.to_sym] ||= []) << $2.strip
+          end
           in_comment = ! line.chomp.end_with?('-->')
         else
           current[:content] << line
@@ -29,8 +32,13 @@ module AdocSpec
 
     def self.render_suite(data)
       data.map { |key, hash|
-        html = tidy_html(render_adoc(hash[:content]))
-        "<!-- .#{key} -->\n#{html}\n"
+        html = tidy_html(render_adoc(hash.delete(:content)))
+        if hash.empty?
+          "<!-- .#{key} -->\n#{html}\n"
+        else
+          opts = hash.map { |k, v| ":#{k}: #{v}" }.join("\n")
+          "<!-- .#{key}\n#{opts}\n-->\n#{html}\n"
+        end
       }.join("\n")
     end
 

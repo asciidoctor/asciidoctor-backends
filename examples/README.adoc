@@ -53,7 +53,9 @@ NOTE: The trailing new line (below this) will be removed.
 
 <div class="note">The trailing new line (below this) will be removed.</div>
 
-<!-- .second-example -->
+<!-- .second-example
+:option name: value
+-->
 <ol>
   <li>List item level 1
     <ol>

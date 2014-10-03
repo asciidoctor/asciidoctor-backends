@@ -91,11 +91,12 @@ module AdocSpec
           test_name = "#{name} : #{key}"
 
           if suite && suite.has_key?(key)
-            expected = suite[key][:content]
+            opts = suite[key]
+            expected = opts.delete(:content)
             asciidoc = data[:content]
 
             define_test(test_name) do
-              assert_example expected, render_adoc(asciidoc)
+              assert_example expected, render_adoc(asciidoc), opts
             end
           else
             define_test(test_name) do
@@ -121,9 +122,10 @@ module AdocSpec
     #
     # @param expected [String] the expected output.
     # @param actual [String] the actual rendered output.
+    # @param opts [Hash] options.
     # @raise [Minitest::Assertion] if the assertion fails
     #
-    def assert_example(expected, actual)
+    def assert_example(expected, actual, opts={})
       assert_equal expected, actual
     end
   end
