@@ -1,5 +1,6 @@
-require 'htmlbeautifier'
+require 'active_support/core_ext/hash'
 require 'adocspec/base'
+require 'htmlbeautifier'
 
 module AdocSpec
   class HTML5 < Base
@@ -40,12 +41,14 @@ module AdocSpec
 
     def self.render_suite(data)
       data.map { |key, hash|
-        html = tidy_html(render_adoc(hash.delete(:content), hash))
-        if hash.empty?
+        opts = hash.except(:content)
+        html = tidy_html(render_adoc(hash[:content], opts))
+
+        if opts.empty?
           "<!-- .#{key} -->\n#{html}\n"
         else
-          opts = hash.map { |k, v| ":#{k}: #{v}" }.join("\n")
-          "<!-- .#{key}\n#{opts}\n-->\n#{html}\n"
+          opts_str = opts.map { |k, v| ":#{k}: #{v}" }.join("\n")
+          "<!-- .#{key}\n#{opts_str}\n-->\n#{html}\n"
         end
       }.join("\n")
     end

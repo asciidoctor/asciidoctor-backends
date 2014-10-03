@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :test do
+  gem 'activesupport', '~> 4.1.6'
   gem 'asciidoctor', '~> 1.5.1'
   gem 'colorize'
   gem 'coderay'

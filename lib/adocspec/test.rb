@@ -1,4 +1,5 @@
 require 'thread_safe'
+require 'active_support/core_ext/object'
 require 'asciidoctor'
 require 'adocspec'
 require 'diffy'
@@ -84,16 +85,15 @@ module AdocSpec
     # Generates the test methods.
     # @note This macro must be called as the last statement of a subclass!
     def self.generate_tests!
-      AdocSpec.suite_names.each do |name|
-        suite = read_suite(name)
+      AdocSpec.suite_names.each do |suite_name|
+        suite = read_suite(suite_name)
 
-        AdocSpec::Asciidoc.read_suite(name).each do |key, data|
-          test_name = "#{name} : #{key}"
+        AdocSpec::Asciidoc.read_suite(suite_name).each do |exmpl_name, adoc|
+          test_name = "#{suite_name} : #{exmpl_name}"
 
-          if suite && suite.has_key?(key)
-            opts = suite[key]
+          if opts = suite.try(:[], exmpl_name)
             expected = opts.delete(:content)
-            asciidoc = data[:content]
+            asciidoc = adoc[:content]
 
             define_test(test_name) do
               actual = render_adoc(asciidoc, opts)
