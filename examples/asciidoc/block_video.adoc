@@ -1,0 +1,33 @@
+// .basic
+video::video_file.mp4[]
+
+// .basic-with-all-attributes
+video::video_file.mp4[width=640, height=480, poster=sunset.jpg]
+
+// .basic-with-all-options
+video::video_file.mp4[options="autoplay, loop, nocontrols"]
+
+// .basic-with-title
+.Must watch!
+video::video_file.mp4[]
+
+// .basic-with-role
+video::video_file.mp4[role="watch"]
+
+// .youtube
+video::rPQoq7ThGAU[youtube]
+
+// .youtube-iframe-params
+video::rPQoq7ThGAU[youtube, width=640, height=480, options="nofullscreen"]
+
+// .youtube-url-params
+video::rPQoq7ThGAU[youtube, start=60, end=140, options="autoplay, loop, nocontrol"]
+
+// .vimeo
+video::32255377[vimeo]
+
+// .vimeo-iframe-params
+video::32255377[vimeo, width=640, height=480]
+
+// .vimeo-url-params
+video::32255377[vimeo, start=60, options="autoplay, loop"]
