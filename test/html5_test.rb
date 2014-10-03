@@ -8,6 +8,11 @@ class TestHTML5 < AdocSpec::Test
   adocspec AdocSpec::HTML5
 
   def assert_example(expected, actual, opts={})
+    # When asserting inline examples, ignore paragraph "wrapper".
+    if name.start_with?('inline_') && ! opts.has_key?(:include)
+      opts[:include] = ['.//p/node()']
+    end
+
     opts.fetch(:include, []).each do |xpath|
       actual = html_include(actual, xpath)
     end
