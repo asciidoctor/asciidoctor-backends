@@ -30,9 +30,17 @@ module AdocSpec
       suite
     end
 
+    def self.write_suite(suite_name, data)
+      # render 'document' as a document (with header and footer)
+      if suite_name == 'document'
+        data.each_value { |opts| opts[:header_footer] = [true] }
+      end
+      super
+    end
+
     def self.render_suite(data)
       data.map { |key, hash|
-        html = tidy_html(render_adoc(hash.delete(:content)))
+        html = tidy_html(render_adoc(hash.delete(:content), hash))
         if hash.empty?
           "<!-- .#{key} -->\n#{html}\n"
         else

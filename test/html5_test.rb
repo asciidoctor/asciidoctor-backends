@@ -7,6 +7,11 @@ class TestHTML5 < AdocSpec::Test
 
   adocspec AdocSpec::HTML5
 
+  def render_adoc(asciidoc, opts)
+    opts[:header_footer] = [true] if name.start_with? 'document'
+    AdocSpec::HTML5.render_adoc(asciidoc, opts)
+  end
+
   def assert_example(expected, actual, opts={})
     # When asserting inline examples, ignore paragraph "wrapper".
     if name.start_with?('inline_') && ! opts.has_key?(:include)
