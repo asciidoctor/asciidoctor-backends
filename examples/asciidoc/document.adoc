@@ -1,17 +1,36 @@
-// .title-only
-= Document Title
-
-My document provides
+// .title
+= The Dangerous and Thrilling Documentation Chronicles
 
 // .title-with-author
+= The Dangerous and Thrilling Documentation Chronicles
+Kismet Rainbow Chameleon <kismet@asciidoctor.org>
+
+// .title-with-author-no-email
+= The Dangerous and Thrilling Documentation Chronicles
+Kismet Rainbow Chameleon
+
+// .title-with-multiple-authors
+= The Dangerous and Thrilling Documentation Chronicles
+Kismet Rainbow Chameleon <kismet@asciidoctor.org>; Lazarus het_Draeke <lazarus@asciidoctor.org>
+
+// .title-with-revnumber
 = Document Title
-Doc Writer <doc.writer@asciidoctor.org>
+Kismet Chameleon
+v1.0
 
-My document provides
-
-// .title-with-author-revision
+// .title-with-revdate
 = Document Title
-Doc Writer <doc.writer@asciidoctor.org>
-v1.0, 2014-01-01
+Kismet Chameleon
+v1.0, 2013-10-02
 
-My document provides
+// .title-with-revremark
+= Document Title
+Kismet Chameleon
+v1.0, October 2, 2013: First incarnation
+
+// .footnotes
+The hail-and-rainbow protocol can be initiated at five levels: double, tertiary, supernumerary,
+supermassive, and apocalyptic party.footnote:[The double hail-and-rainbow level makes my toes tingle.]
+A bold statement.footnoteref:[disclaimer,Opinions are my own.]
+
+Another outrageous statement.footnoteref:[disclaimer]
