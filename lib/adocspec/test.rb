@@ -96,7 +96,8 @@ module AdocSpec
             asciidoc = data[:content]
 
             define_test(test_name) do
-              assert_example expected, render_adoc(asciidoc), opts
+              actual = render_adoc(asciidoc, opts)
+              assert_example expected, actual, opts
             end
           else
             define_test(test_name) do

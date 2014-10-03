@@ -88,10 +88,16 @@ module AdocSpec
       # specified by the {template_dir}.
       #
       # @param asciidoc [String] the input text in Asciidoc syntax.
+      # @param opts [Hash] options.
       # @return [String] the input text rendered in the target syntax.
       #
-      def render_adoc(asciidoc)
-        Asciidoctor.render(asciidoc, safe: :safe, in_place: true, template_dir: @template_dir)
+      def render_adoc(asciidoc, opts = {})
+        renderer_opts = {
+          safe: :safe,
+          template_dir: @template_dir,
+          header_footer: opts.has_key?(:header_footer)
+        }
+        Asciidoctor.render(asciidoc, renderer_opts)
       end
 
 
@@ -100,7 +106,7 @@ module AdocSpec
       #
       # @example
       #   { :heading-h1 => { :content => "= Title" },
-      #     :heading-h2 => { :content => "== Title"} }
+      #     :heading-h2 => { :content => "== Title", :include => ["//body"] } }
       #
       # @abstract
       # @param input [String] the suite's content to parse.
