@@ -4,4 +4,4 @@
   - if (attr? :toc) && (attr? 'toc-placement', 'preamble')
     #toc{:class=>(attr 'toc-class', 'toc')}
       #toctitle=(attr 'toc-title')
-      =converters.convert @document, 'outline'
+      =converter.convert @document, 'outline'
