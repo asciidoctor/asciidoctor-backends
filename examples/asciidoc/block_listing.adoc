@@ -19,6 +19,14 @@ echo "Hello, $name!"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ----
 
+// .basic-with-id-and-role
+[#code.example]
+----
+echo -n "Please enter your name: "
+read name
+echo "Hello, $name!"
+----
+
 // .source
 [source]
 ----
@@ -59,7 +67,7 @@ public class ApplicationConfigurationProvider extends HttpConfigurationProvider 
 }
 ----
 
-// .highlighter-coderay
+// .source-highlighter-coderay
 :source-highlighter: coderay
 
 [source, ruby]
@@ -69,7 +77,7 @@ public class ApplicationConfigurationProvider extends HttpConfigurationProvider 
 end
 ----
 
-// .highlighter-pygments
+// .source-highlighter-pygments
 :source-highlighter: pygments
 
 [source, ruby]
@@ -79,7 +87,7 @@ end
 end
 ----
 
-// .highlighter-prettify
+// .source-highlighter-prettify
 :source-highlighter: prettify
 
 [source, ruby]
@@ -89,7 +97,7 @@ end
 end
 ----
 
-// .highlighter-html-pipeline
+// .source-highlighter-html-pipeline
 // nowrap should be ignored
 :source-highlighter: html-pipeline
 

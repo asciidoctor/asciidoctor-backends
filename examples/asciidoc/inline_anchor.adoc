@@ -1,15 +1,15 @@
 // .basic
-The homepage for the Asciidoctor Project is http://www.asciidoctor.org.
+http://www.asciidoctor.org
 
 // .basic-with-text
-Chat with other Asciidoctor users in the irc://irc.freenode.org/#asciidoctor[Asciidoctor IRC channel].
+irc://irc.freenode.org/#asciidoctor[Asciidoctor IRC channel]
 
 // .basic-with-target-blank
-Let's view the raw HTML of the link:view-source:asciidoctor.org[Asciidoctor homepage^].
+link:view-source:asciidoctor.org[Asciidoctor homepage^]
 
 // .basic-with-role
 :linkattrs:
-Chat with other Asciidoctor users on the http://discuss.asciidoctor.org/[*mailing list*, role="green"].
+http://discuss.asciidoctor.org/[*mailing list*, role="green"]
 
 // .xref
 The section <<page-break>> describes how to add a page break.

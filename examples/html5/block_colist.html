@@ -1,15 +1,7 @@
-<!-- .basic -->
-<div class="listingblock">
-  <div class="content">
-    <pre class="highlight"><code class="ruby language-ruby">require 'sinatra'
-        <b>(1)</b>
-        get '/hi' do
-        <b>(2)</b>
-        "Hello World!"
-        <b>(3)</b>
-        end</code></pre>
-  </div>
-</div>
+<!-- .basic
+// callouts inside a listing block are tested in inline_callout
+:exclude: ./div[@class="listingblock"]
+-->
 <div class="colist arabic">
   <ol>
     <li>
@@ -24,18 +16,10 @@
   </ol>
 </div>
 
-<!-- .with-title -->
-<div class="listingblock">
-  <div class="content">
-    <pre class="highlight"><code class="ruby language-ruby">require 'sinatra'
-        <b>(1)</b>
-        get '/hi' do
-        <b>(2)</b>
-        "Hello World!"
-        <b>(3)</b>
-        end</code></pre>
-  </div>
-</div>
+<!-- .with-title
+// callouts inside a listing block are tested in inline_callout
+:exclude: ./div[@class="listingblock"]
+-->
 <div class="colist arabic">
   <div class="title">Description</div>
   <ol>
@@ -51,18 +35,28 @@
   </ol>
 </div>
 
-<!-- .icons-image -->
-<div class="listingblock">
-  <div class="content">
-    <pre class="highlight"><code class="ruby language-ruby">require 'sinatra'
-        <img alt="1" src="./images/icons/callouts/1.png">
-        get '/hi' do
-        <img alt="2" src="./images/icons/callouts/2.png">
-        "Hello World!"
-        <img alt="3" src="./images/icons/callouts/3.png">
-        end</code></pre>
-  </div>
+<!-- .with-id-and-role
+// callouts inside a listing block are tested in inline_callout
+:exclude: ./div[@class="listingblock"]
+-->
+<div class="colist arabic sinatra" id="call">
+  <ol>
+    <li>
+      <p>Library import</p>
+    </li>
+    <li>
+      <p>URL mapping</p>
+    </li>
+    <li>
+      <p>Content for response</p>
+    </li>
+  </ol>
 </div>
+
+<!-- .icons-image
+// callouts inside a listing block are tested in inline_callout
+:exclude: ./div[@class="listingblock"]
+-->
 <div class="colist arabic">
   <table>
     <tr>
@@ -80,18 +74,10 @@
   </table>
 </div>
 
-<!-- .icons-font -->
-<div class="listingblock">
-  <div class="content">
-    <pre class="highlight"><code class="ruby language-ruby">require 'sinatra'
-        <i class="conum" data-value="1"></i><b>(1)</b>
-        get '/hi' do
-        <i class="conum" data-value="2"></i><b>(2)</b>
-        "Hello World!"
-        <i class="conum" data-value="3"></i><b>(3)</b>
-        end</code></pre>
-  </div>
-</div>
+<!-- .icons-font
+// callouts inside a listing block are tested in inline_callout
+:exclude: ./div[@class="listingblock"]
+-->
 <div class="colist arabic">
   <table>
     <tr>

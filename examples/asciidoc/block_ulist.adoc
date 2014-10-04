@@ -3,13 +3,25 @@
 * Sheri S. Tepper
 * Bill Bryson
 
+// .with-title
+.Writers
+* Edgar Allen Poe
+* Sheri S. Tepper
+* Bill Bryson
+
+// .with-id-and-role
+[#authors.green]
+* Edgar Allen Poe
+* Sheri S. Tepper
+* Bill Bryson
+
 // .max-nesting
 * level 1
 ** level 2
 *** level 3
 **** level 4
 ***** level 5
-* level 1
+** level 2
 
 // .complex-content
 * Every list item has at least one paragraph of content,
@@ -24,21 +36,21 @@ list continuation:: a plus sign (`{plus}`) on a line by itself
 
  $ gem install asciidoctor
 
-* AsciiDoc lists may contain any complex content.
-+
-[cols="2", options="header"]
-|===
-|Application
-|Language
-
-|AsciiDoc
-|Python
-
-|Asciidoctor
-|Ruby
-|===
-
 // .checklist
+- [*] checked
+- [x] also checked
+- [ ] not checked
+-     normal list item
+
+// .checklist-icons-font
+:icons: font
+- [*] checked
+- [x] also checked
+- [ ] not checked
+-     normal list item
+
+// .checklist-interactive
+[options="interactive"]
 - [*] checked
 - [x] also checked
 - [ ] not checked

@@ -26,10 +26,49 @@
 
 === Section Level 2
 
-// .title-with-sectanchors
+// .with-custom-id
+[#foo]
+== Section Title
+
+// .with-roles
+[.center.red]
+== Section Title
+
+// .sectanchors
 :sectanchors:
 == Title with anchor
 
-// .title-with-sectlinks
+// .sectlinks
 :sectlinks:
 == Linked title
+
+// .numbered
+:numbered:
+== Introduction to Asciidoctor
+
+== Quick Starts
+
+=== Usage
+
+==== Using the Command Line Interface
+
+===== Processing Your Content
+
+=== Syntax
+
+== Terms and Concepts
+
+// .numbered-sectnumlevels-1
+:numbered:
+:sectnumlevels: 1
+== Introduction to Asciidoctor
+
+== Quick Starts
+
+=== Usage
+
+==== Using the Command Line Interface
+
+=== Syntax
+
+== Terms and Concepts

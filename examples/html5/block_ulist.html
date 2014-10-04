@@ -13,6 +13,37 @@
   </ul>
 </div>
 
+<!-- .with-title -->
+<div class="ulist">
+  <div class="title">Writers</div>
+  <ul>
+    <li>
+      <p>Edgar Allen Poe</p>
+    </li>
+    <li>
+      <p>Sheri S. Tepper</p>
+    </li>
+    <li>
+      <p>Bill Bryson</p>
+    </li>
+  </ul>
+</div>
+
+<!-- .with-id-and-role -->
+<div class="ulist green" id="authors">
+  <ul>
+    <li>
+      <p>Edgar Allen Poe</p>
+    </li>
+    <li>
+      <p>Sheri S. Tepper</p>
+    </li>
+    <li>
+      <p>Bill Bryson</p>
+    </li>
+  </ul>
+</div>
+
 <!-- .max-nesting -->
 <div class="ulist">
   <ul>
@@ -44,11 +75,11 @@
               </ul>
             </div>
           </li>
+          <li>
+            <p>level 2</p>
+          </li>
         </ul>
       </div>
-    </li>
-    <li>
-      <p>level 1</p>
     </li>
   </ul>
 </div>
@@ -80,31 +111,6 @@ a list continuation on a line adjacent to both blocks.</p>
         </div>
       </div>
     </li>
-    <li>
-      <p>AsciiDoc lists may contain any complex content.</p>
-      <table class="tableblock frame-all grid-all" style="width: 100%;">
-        <colgroup>
-          <col style="width: 50%;">
-          <col style="width: 50%;">
-        </colgroup>
-        <thead>
-          <tr>
-            <th class="tableblock halign-left valign-top">Application</th>
-            <th class="tableblock halign-left valign-top">Language</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="tableblock halign-left valign-top"><p class="tableblock">AsciiDoc</p></td>
-            <td class="tableblock halign-left valign-top"><p class="tableblock">Python</p></td>
-          </tr>
-          <tr>
-            <td class="tableblock halign-left valign-top"><p class="tableblock">Asciidoctor</p></td>
-            <td class="tableblock halign-left valign-top"><p class="tableblock">Ruby</p></td>
-          </tr>
-        </tbody>
-      </table>
-    </li>
   </ul>
 </div>
 
@@ -121,6 +127,48 @@ a list continuation on a line adjacent to both blocks.</p>
     </li>
     <li>
       <p><input type="checkbox" data-item-complete="0" disabled>
+        not checked</p>
+    </li>
+    <li>
+      <p>normal list item</p>
+    </li>
+  </ul>
+</div>
+
+<!-- .checklist-icons-font -->
+<div class="ulist checklist">
+  <ul class="checklist">
+    <li>
+      <p><i class="icon-check"></i>
+        checked</p>
+    </li>
+    <li>
+      <p><i class="icon-check"></i>
+        also checked</p>
+    </li>
+    <li>
+      <p><i class="icon-check-empty"></i>
+        not checked</p>
+    </li>
+    <li>
+      <p>normal list item</p>
+    </li>
+  </ul>
+</div>
+
+<!-- .checklist-interactive -->
+<div class="ulist checklist">
+  <ul class="checklist">
+    <li>
+      <p><input type="checkbox" data-item-complete="1" checked>
+        checked</p>
+    </li>
+    <li>
+      <p><input type="checkbox" data-item-complete="1" checked>
+        also checked</p>
+    </li>
+    <li>
+      <p><input type="checkbox" data-item-complete="0">
         not checked</p>
     </li>
     <li>

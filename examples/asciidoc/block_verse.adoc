@@ -19,8 +19,8 @@ on little cat feet.
 The fog comes
 on little cat feet.
 
-// .basic-with-role
-[verse, role="green"]
+// .basic-with-id-and-role
+[verse, id="sandburg", role="center"]
 The fog comes
 on little cat feet.
 

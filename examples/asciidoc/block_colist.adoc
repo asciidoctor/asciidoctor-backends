@@ -25,6 +25,20 @@ end
 <2> URL mapping
 <3> Content for response
 
+// .with-id-and-role
+[source, ruby]
+----
+require 'sinatra' // <1>
+
+get '/hi' do  # <2>
+  "Hello World!" ;; <3>
+end
+----
+[#call.sinatra]
+<1> Library import
+<2> URL mapping
+<3> Content for response
+
 // .icons-image
 :icons:
 [source, ruby]

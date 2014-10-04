@@ -27,6 +27,13 @@
 . Step 2
 . Step 3
 
+// .with-id-and-role
+[#steps.green]
+.Steps
+. Step 1
+. Step 2
+. Step 3
+
 // .max-nesting
 . level 1
 .. level 2
@@ -47,17 +54,3 @@ list continuation:: a plus sign (`{plus}`) on a line by itself
 . A literal paragraph does not require a list continuation.
 
  $ gem install asciidoctor
-
-. AsciiDoc lists may contain any complex content.
-+
-[cols="2", options="header"]
-|===
-|Application
-|Language
-
-|AsciiDoc
-|Python
-
-|Asciidoctor
-|Ruby
-|===

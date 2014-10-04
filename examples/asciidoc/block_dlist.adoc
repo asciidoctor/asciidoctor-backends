@@ -22,6 +22,10 @@ Definition without a description::
 .Asciidoctor
 License:: MIT
 
+// .basic-with-id-and-role
+[#licenses.open]
+License:: MIT
+
 // .qanda
 [qanda]
 What is Asciidoctor?::
@@ -49,6 +53,10 @@ Who knows the answer?::
 .The most important questions
 What is the answer to the Ultimate Question?:: 42
 
+// .qanda-with-id-and-role
+[qanda, id=faq, role=galaxy]
+What is the answer to the Ultimate Question?:: 42
+
 // .horizontal
 [horizontal]
 Hard drive:: Permanent storage for operating system and/or user files.
@@ -62,6 +70,11 @@ RAM:: Temporarily stores information the CPU uses during operation.
 // .horizontal-with-title
 [horizontal]
 .Computer terminology for noobs
+Hard drive:: Permanent storage for operating system and/or user files.
+RAM:: Temporarily stores information the CPU uses during operation.
+
+// .horizontal-with-id-and-role
+[horizontal, id=computer, role=terms]
 Hard drive:: Permanent storage for operating system and/or user files.
 RAM:: Temporarily stores information the CPU uses during operation.
 
