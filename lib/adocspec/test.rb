@@ -55,6 +55,26 @@ module AdocSpec
     end
 
     ##
+    # Sets instance of AdocSpec reader to be used for reading the reference
+    # AsciiDoc examples.
+    #
+    # @param reader [AdocSpec::Base]
+    #
+    def self.asciidoc_suite_reader(reader)
+      @asciidoc_suite_reader = reader
+    end
+
+    ##
+    # Sets instance of AdocSpec reader to be used for reading the tested
+    # examples.
+    #
+    # @param reader [AdocSpec::Base]
+    #
+    def self.tested_suite_reader(reader)
+      @tested_suite_reader = reader
+    end
+
+    ##
     # @note Overrides method from +Minitest::Test+.
     # @return [Array] names of the test methods to run.
     def self.runnable_methods
@@ -62,41 +82,40 @@ module AdocSpec
     end
 
     ##
-    # Helper class for the examples suite that provides the class methods
-    # +read_suite+ and +render_adoc+ (usually a subclass of {AdocSpec::Base}).
-    #
-    # @param klass [Class]
-    # @raise [RuntimeError] if +klass+ doesn't respond to +read_suite+ or +render_adoc+.
-    #
-    def self.adocspec(klass)
-      [:read_suite, :render_adoc].each do |name|
-        raise "Class #{klass} doesn't respond to #{name}." unless klass.respond_to? name
-      end
+    # @see AdocSpec::Base#read_suite
+    def self.read_asciidoc_suite(suite_name)
+      @asciidoc_suite_reader.read_suite(suite_name)
+    end
 
-      define_singleton_method(:read_suite) do |suite_name|
-        klass.read_suite(suite_name)
-      end
-      define_method(:render_adoc) do |asciidoc|
-        klass.render_adoc(asciidoc)
-      end
+    ##
+    # Returns names of all testing suites.
+    # @return [Array<String>]
+    def self.suite_names
+      @asciidoc_suite_reader.suite_names
+    end
+
+    ##
+    # @see AdocSpec::Base#read_suite
+    def self.read_tested_suite(suite_name)
+      @tested_suite_reader.read_suite(suite_name)
     end
 
     ##
     # Generates the test methods.
     # @note This macro must be called as the last statement of a subclass!
     def self.generate_tests!
-      AdocSpec.suite_names.each do |suite_name|
-        suite = read_suite(suite_name)
+      suite_names.each do |suite_name|
+        tested_suite = read_tested_suite(suite_name)
 
-        AdocSpec::Asciidoc.read_suite(suite_name).each do |exmpl_name, adoc|
+        read_asciidoc_suite(suite_name).each do |exmpl_name, adoc|
           test_name = "#{suite_name} : #{exmpl_name}"
 
-          if opts = suite.try(:[], exmpl_name)
+          if opts = tested_suite.try(:[], exmpl_name)
             expected = opts.delete(:content)
             asciidoc = adoc[:content]
 
             define_test(test_name) do
-              actual = render_adoc(asciidoc, opts)
+              actual = render_asciidoc(asciidoc, opts)
               assert_example expected, actual, opts
             end
           else
@@ -106,6 +125,18 @@ module AdocSpec
           end
         end
       end
+    end
+
+
+    ##
+    # Renders the given text in AsciiDoc syntax with Asciidoctor using the
+    # tested backend (templates).
+    #
+    # @see AdocSpec::Base#render_asciidoc
+    #
+    def render_asciidoc(text, opts = {})
+      reader = self.class.instance_variable_get(:@tested_suite_reader)
+      reader.render_asciidoc(text, opts)
     end
 
     ##

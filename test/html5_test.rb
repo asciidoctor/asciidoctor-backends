@@ -5,11 +5,13 @@ require 'tilt/haml'
 
 class TestHTML5 < AdocSpec::Test
 
-  adocspec AdocSpec::HTML5
+  asciidoc_suite_reader AdocSpec::Asciidoc.new
+  tested_suite_reader AdocSpec::HTML.new(backend_name: :html5)
 
-  def render_adoc(asciidoc, opts)
+
+  def render_asciidoc(adoc, opts)
     opts[:header_footer] = [true] if name.start_with? 'document'
-    AdocSpec::HTML5.render_adoc(asciidoc, opts)
+    super
   end
 
   def assert_example(expected, actual, opts={})
@@ -34,7 +36,7 @@ class TestHTML5 < AdocSpec::Test
   end
 
   def mu_pp(str)
-    AdocSpec::HTML5.tidy_html str
+    AdocSpec::HTML.tidy_html str
   end
 
   # Returns filtered HTML without nodes specified by the XPath expression.

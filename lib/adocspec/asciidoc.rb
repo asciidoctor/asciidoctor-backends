@@ -3,9 +3,9 @@ require 'adocspec/base'
 module AdocSpec
   class Asciidoc < Base
 
-    file_suffix '.adoc'
+    FILE_SUFFIX = '.adoc'
 
-    def self.parse_suite(adoc)
+    def parse_suite(adoc)
       suite = {}
       current = {}
 

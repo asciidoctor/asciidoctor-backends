@@ -3,11 +3,11 @@ require 'adocspec/base'
 require 'htmlbeautifier'
 
 module AdocSpec
-  class HTML5 < Base
+  class HTML < Base
 
-    file_suffix '.html'
+    FILE_SUFFIX = '.html'
 
-    def self.parse_suite(html)
+    def parse_suite(html)
       suite = {}
       current = {}
       in_comment = false
@@ -31,7 +31,7 @@ module AdocSpec
       suite
     end
 
-    def self.write_suite(suite_name, data)
+    def write_suite(suite_name, data)
       # render 'document' as a document (with header and footer)
       if suite_name == 'document'
         data.each_value { |opts| opts[:header_footer] = [true] }
@@ -39,10 +39,10 @@ module AdocSpec
       super
     end
 
-    def self.render_suite(data)
+    def render_suite(data)
       data.map { |key, hash|
         opts = hash.except(:content)
-        html = tidy_html(render_adoc(hash[:content], opts))
+        html = HTML.tidy_html(render_asciidoc(hash[:content], opts))
 
         if opts.empty?
           "<!-- .#{key} -->\n#{html}\n"

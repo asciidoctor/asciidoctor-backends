@@ -9,21 +9,23 @@ namespace :adocspec do
 
     desc 'Generate testing examples for HTML5 backend'
     task :html5, [:suite_name] do |task, args|
-      generate AdocSpec::HTML5, args[:suite_name]
+      generate AdocSpec::HTML.new(backend_name: :html5), args[:suite_name]
     end
 
-    def generate(adocspec, suite=nil)
-      if suite && ! AdocSpec.suite_names.include?(suite)
+    def generate(reader, suite=nil)
+      adoc_reader = AdocSpec::Asciidoc.new
+
+      if suite && ! adoc_reader.suite_names.include?(suite)
         fail "Unknown suite name: #{suite}"
       end
-      suites = suite ? [suite] : AdocSpec.suite_names
+      suites = suite ? [suite] : adoc_reader.suite_names
       force = !! ENV['force']
 
       suites.each do |name|
-        file_name = File.basename(adocspec.suite_path(name))
+        file_name = File.basename(reader.suite_path(name))
         message = "Generating #{file_name}".green
 
-        if File.exist? adocspec.suite_path(name)
+        if File.exist? reader.suite_path(name)
           unless force
             answer = prompt("File #{file_name} already exist! Overwrite? (yes/no/all) ".blue, %w{yes no all})
             force = answer == 'all'
@@ -33,8 +35,8 @@ namespace :adocspec do
         end
 
         puts message
-        adoc = AdocSpec::Asciidoc.read_suite(name)
-        adocspec.write_suite(name, adoc)
+        adoc = adoc_reader.read_suite(name)
+        reader.write_suite(name, adoc)
       end
     end
   end
