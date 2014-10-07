@@ -13,7 +13,7 @@ def manify(str, append_newline = true, preserve_space = false)
       .gsub('&lt;', '<')
       .gsub('&gt;', '>')
       .gsub('&#8201;&#8212;&#8201;', ' \\(em ')
-      .gsub('&#8203;', '')
+      .gsub('&#8203;', '') # NOTE remove zero-width space as it's something specific for HTML output
       .gsub('&#8212;', '\\-\\-')
       .gsub('&#8217;', '\\(cq')
       .gsub('&#8230;', '\\\&...')
