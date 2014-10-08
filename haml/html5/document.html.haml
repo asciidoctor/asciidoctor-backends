@@ -74,25 +74,25 @@
             %h1=@header.title
           - if (attr? :author) || (attr? :revnumber) || (attr? :revdate) || (attr? :revremark)
             .details
-            - if attr? :author
-              %span#author.author=attr :author
-              %br
-              - if attr? :email
-                %span#email.email=sub_macros(attr :email)
+              - if attr? :author
+                %span#author.author=attr :author
                 %br
-              - if (authorcount = (attr :authorcount).to_i) > 1
-                - (2..authorcount).each do |idx|
-                  %span{:id=>"author#{idx}", :class=>"author"}=(attr "author_#{idx}")
+                - if attr? :email
+                  %span#email.email=sub_macros(attr :email)
                   %br
-                  - if attr? "email_#{idx}"
-                    %span{:id=>"email#{idx}", :class=>"email"}= sub_macros(attr "email_#{idx}")
-            - if attr? :revnumber
-              %span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if (attr? :revdate)}
-            - if attr? :revdate
-              %span#revdate=attr :revdate
-            - if attr? :revremark
-              %br
-              %span#revremark=attr :revremark
+                - if (authorcount = (attr :authorcount).to_i) > 1
+                  - (2..authorcount).each do |idx|
+                    %span{:id=>"author#{idx}", :class=>"author"}=(attr "author_#{idx}")
+                    %br
+                    - if attr? "email_#{idx}"
+                      %span{:id=>"email#{idx}", :class=>"email"}= sub_macros(attr "email_#{idx}")
+              - if attr? :revnumber
+                %span#revnumber #{((attr 'version-label') || '').downcase} #{attr :revnumber}#{',' if (attr? :revdate)}
+              - if attr? :revdate
+                %span#revdate=attr :revdate
+              - if attr? :revremark
+                %br
+                %span#revremark=attr :revremark
         - if (attr? :toc) && (attr? 'toc-placement', 'auto')
           #toc{:class=>(attr 'toc-class', 'toc')}
             #toctitle=attr 'toc-title'
