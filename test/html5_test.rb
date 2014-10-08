@@ -20,35 +20,33 @@ class TestHTML5 < AdocSpec::Test
       opts[:include] = ['.//p/node()']
     end
 
+    actual = parse_html(actual)
+    expected = parse_html(expected)
+
+    # Select nodes specified by the XPath expression.
     opts.fetch(:include, []).each do |xpath|
-      actual = html_include(actual, xpath)
+      # xpath returns NodeSet, but we need DocumentFragment, so convert it again
+      actual = parse_html(actual.xpath(xpath).to_html)
     end
 
+    # Remove nodes specified by the XPath expression.
     opts.fetch(:exclude, []).each do |xpath|
-      actual = html_exclude(actual, xpath)
+      actual.xpath(xpath).each { |node| node.remove }
     end
 
     msg = message('Asciidoctor output is not equivalent to the expected HTML') do
       diff expected, actual
     end
 
-    assert EquivalentXml.equivalent?(expected, actual, {element_order: false}), msg
+    assert EquivalentXml.equivalent?(expected, actual), msg
   end
 
   def mu_pp(str)
     AdocSpec::HTML.tidy_html str
   end
 
-  # Returns filtered HTML without nodes specified by the XPath expression.
-  def html_exclude(html, xpath)
-    Nokogiri::HTML::DocumentFragment.parse(html).tap { |doc|
-      doc.xpath(xpath).each { |node| node.remove }
-    }.to_html
-  end
-
-  # Returns filtered HTML with nodes specified by the XPath expression.
-  def html_include(html, xpath)
-    Nokogiri::HTML::DocumentFragment.parse(html).xpath(xpath).to_html
+  def parse_html(str)
+    Nokogiri::HTML::DocumentFragment.parse(str)
   end
 
   generate_tests!
