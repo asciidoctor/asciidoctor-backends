@@ -8,18 +8,16 @@ class TestHTML5 < AdocSpec::Test
   asciidoc_suite_reader AdocSpec::Asciidoc.new
   tested_suite_reader AdocSpec::HTML.new(backend_name: :html5)
 
-
-  def render_asciidoc(adoc, opts)
-    opts[:header_footer] = [true] if name.start_with? 'document'
-    super
+  def self.read_tested_suite(suite_name)
+    super.each_value do |opts|
+      # Render 'document' examples as a full document with header and footer.
+      opts[:header_footer] = [true] if suite_name.start_with? 'document'
+      # When asserting inline examples, ignore paragraph "wrapper".
+      opts[:include] ||= ['.//p/node()'] if suite_name.start_with? 'inline_'
+    end
   end
 
-  def assert_example(expected, actual, opts={})
-    # When asserting inline examples, ignore paragraph "wrapper".
-    if name.start_with?('inline_') && ! opts.has_key?(:include)
-      opts[:include] = ['.//p/node()']
-    end
-
+  def assert_example(expected, actual, opts = {})
     actual = parse_html(actual)
     expected = parse_html(expected)
 
@@ -41,8 +39,11 @@ class TestHTML5 < AdocSpec::Test
     assert EquivalentXml.equivalent?(expected, actual), msg
   end
 
+  ##
+  # Returns a human-readable (formatted) version of +str+.
+  # @note Overrides method from +Minitest::Assertions+.
   def mu_pp(str)
-    AdocSpec::HTML.tidy_html str
+    AdocSpec::HTML.tidy_html(str)
   end
 
   def parse_html(str)
