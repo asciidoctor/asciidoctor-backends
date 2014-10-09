@@ -1,4 +1,4 @@
-span class=[@type,role] style=("float: #{attr :float}" if attr? :float)
+span class=[@type,role] style=Helpers.style_value(float: (attr :float))
   - if @type == 'icon' && (@document.attr? :icons, 'font')
     - style_class = ["fa fa-#{@target}"]
     - style_class << "fa-#{attr :size}" if attr? :size

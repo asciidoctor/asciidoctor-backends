@@ -1,5 +1,4 @@
-.imageblock(id=@id class=[@style,role]
-    style=[("text-align: #{attr :align}" if attr? :align),("float: #{attr :float}" if attr? :float)].compact.join('; '))
+.imageblock(id=@id class=[@style,role] style=Helpers.style_value(text_align: (attr :align), float: (attr :float)))
   .content
     - if attr? :link
       a.image href=(attr :link)
