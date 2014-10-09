@@ -5,9 +5,6 @@ require 'tilt/haml'
 
 class TestHTML5 < AdocSpec::Test
 
-  asciidoc_suite_reader AdocSpec::Asciidoc.new
-  tested_suite_reader AdocSpec::HTML.new(backend_name: :html5)
-
   def self.read_tested_suite(suite_name)
     super.each_value do |opts|
       # Render 'document' examples as a full document with header and footer.
@@ -16,6 +13,9 @@ class TestHTML5 < AdocSpec::Test
       opts[:include] ||= ['.//p/node()'] if suite_name.start_with? 'inline_'
     end
   end
+
+  generate_tests! AdocSpec::Asciidoc.new, AdocSpec::HTML.new(backend_name: :html5)
+
 
   def assert_example(expected, actual, opts = {})
     actual = parse_html(actual)
@@ -49,6 +49,4 @@ class TestHTML5 < AdocSpec::Test
   def parse_html(str)
     Nokogiri::HTML::DocumentFragment.parse(str)
   end
-
-  generate_tests!
 end

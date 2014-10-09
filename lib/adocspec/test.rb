@@ -55,26 +55,6 @@ module AdocSpec
     end
 
     ##
-    # Sets instance of AdocSpec reader to be used for reading the reference
-    # AsciiDoc examples.
-    #
-    # @param reader [AdocSpec::Base]
-    #
-    def self.asciidoc_suite_reader(reader)
-      @asciidoc_suite_reader = reader
-    end
-
-    ##
-    # Sets instance of AdocSpec reader to be used for reading the tested
-    # examples.
-    #
-    # @param reader [AdocSpec::Base]
-    #
-    def self.tested_suite_reader(reader)
-      @tested_suite_reader = reader
-    end
-
-    ##
     # @note Overrides method from +Minitest::Test+.
     # @return [Array] names of the test methods to run.
     def self.runnable_methods
@@ -102,8 +82,17 @@ module AdocSpec
 
     ##
     # Generates the test methods.
-    # @note This macro must be called as the last statement of a subclass!
-    def self.generate_tests!
+    #
+    # @param asciidoc_suite_reader [AdocSpec::Base] instance of AdocSpec reader
+    #        to be used for reading the reference AsciiDoc examples.
+    #
+    # @param tested_suite_reader [AdocSpec::Base] instance of AdocSpec reader
+    #        to be used for reading the tested examples.
+    #
+    def self.generate_tests!(asciidoc_suite_reader, tested_suite_reader)
+      @asciidoc_suite_reader = asciidoc_suite_reader
+      @tested_suite_reader = tested_suite_reader
+
       suite_names.each do |suite_name|
         tested_suite = read_tested_suite(suite_name)
 
