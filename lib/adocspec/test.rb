@@ -43,6 +43,10 @@ module AdocSpec
   class Test < Minitest::Test
     include Minitest::Diffy
 
+    class << self
+      attr_reader :asciidoc_suite_reader, :tested_suite_reader
+    end
+
     ##
     # Defines a new test method.
     #
@@ -78,6 +82,17 @@ module AdocSpec
     # @see AdocSpec::Base#read_suite
     def self.read_tested_suite(suite_name)
       @tested_suite_reader.read_suite(suite_name)
+    end
+
+    ##
+    # Sets path of the directory where to look for the backend's templates.
+    # When no path is provided, then
+    # +{AdocSpec.templates_path}/{tested_suite_reader.backend_name}+ will be used.
+    #
+    # @param path [String, Pathname]
+    #
+    def self.templates_dir(path)
+      @templates_dir = File.expand_path(path)
     end
 
     ##
@@ -119,13 +134,33 @@ module AdocSpec
 
     ##
     # Renders the given text in AsciiDoc syntax with Asciidoctor using the
-    # tested backend (templates).
+    # tested backend, i.e. templates in {#templates_dir}.
     #
-    # @see AdocSpec::Base#render_asciidoc
+    # @param text [String] the input text in Asciidoc syntax.
+    # @param opts [Hash]
+    # @option opts :header_footer whether to render a full document.
+    # @return [String] the input text rendered in the tested syntax.
     #
     def render_asciidoc(text, opts = {})
-      reader = self.class.instance_variable_get(:@tested_suite_reader)
-      reader.render_asciidoc(text, opts)
+      renderer_opts = {
+        safe: :safe,
+        template_dir: templates_dir,
+        header_footer: opts.has_key?(:header_footer)
+      }
+      Asciidoctor.render(text, renderer_opts)
+    end
+
+    ##
+    # @return [String] path of the directory where to look for the backend's templates.
+    # @raise [StandardError] if the directory doesn't exist.
+    def templates_dir
+      templates_dir = self.class.instance_variable_get(:@templates_dir) ||
+          File.join(AdocSpec.templates_path, self.class.tested_suite_reader.backend_name)
+
+      unless Dir.exist? templates_dir
+        raise "Templates directory '#{templates_dir}' doesn't exist!"
+      end
+      templates_dir
     end
 
     ##
@@ -146,7 +181,7 @@ module AdocSpec
     # @param opts [Hash] options.
     # @raise [Minitest::Assertion] if the assertion fails
     #
-    def assert_example(expected, actual, opts={})
+    def assert_example(expected, actual, opts = {})
       assert_equal expected, actual
     end
   end

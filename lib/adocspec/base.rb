@@ -4,35 +4,29 @@ require 'pathname'
 module AdocSpec
   class Base
 
-    attr_accessor :backend_name, :templates_dir, :examples_dir, :file_suffix
+    attr_accessor :backend_name, :examples_dir, :file_suffix
 
     ##
     # Relative paths are referenced from the current working directory.
     #
     # @param backend_name [String] name of the tested Asciidoctor backend.
+    #        The default is this class name (without module) in lowercase.
     #
     # @param file_suffix [String] filename extension of the suite files in
     #        {#examples_dir}. The default value may be specified with class
     #        constant +FILE_SUFFIX+. If not defined, +backend_name+ will be
     #        used instead.
     #
-    # @param templates_dir [String, Pathname] path of the directory where to
-    #        look for the backend's templates. The default is
-    #        {AdocSpec.templates_path}/{#backend_name}.
-    #
     # @param examples_dir [String, Pathname] path of the directory where to
     #        look for suites of testing examples. The default is
     #        {AdocSpec.examples_path}/{#backend_name}.
     #
-    def initialize(backend_name: nil, file_suffix: nil, templates_dir: nil, examples_dir: nil)
-      backend_name  ||= self.class.name.split('::').last.downcase
-      @backend_name = backend_name.to_s
+    def initialize(backend_name: nil, file_suffix: nil, examples_dir: nil)
+      @backend_name = (backend_name || self.class.name.split('::').last.downcase).to_s
 
       file_suffix   ||= file_suffix || self.class::FILE_SUFFIX rescue @backend_name
-      templates_dir ||= File.join(AdocSpec.templates_path, @backend_name)
       examples_dir  ||= File.join(AdocSpec.examples_path, @backend_name)
 
-      @templates_dir = File.expand_path(templates_dir)
       @examples_dir  = File.expand_path(examples_dir)
       @file_suffix   = file_suffix.start_with?('.') ? file_suffix : '.' + file_suffix
     end
@@ -83,25 +77,6 @@ module AdocSpec
         file << render_suite(data)
       end
     end
-
-    ##
-    # Renders the given Asciidoc string with Asciidoctor using the backend's
-    # templates in {#templates_dir}.
-    #
-    # @param text [String] the input text in Asciidoc syntax.
-    # @param opts [Hash]
-    # @option opts :header_footer whether to render a full document.
-    # @return [String] the input text rendered in the tested syntax.
-    #
-    def render_asciidoc(text, opts = {})
-      renderer_opts = {
-        safe: :safe,
-        template_dir: templates_dir,
-        header_footer: opts.has_key?(:header_footer)
-      }
-      Asciidoctor.render(text, renderer_opts)
-    end
-
 
     ##
     # Parses an examples suite and returns it as a hash.
