@@ -1,7 +1,7 @@
 require 'test_helper'
-require 'equivalent-xml'
 require 'nokogiri'
 require 'tilt/haml'
+require 'adocspec/html_normalizer'
 
 class TestHTML5 < AdocSpec::Test
 
@@ -32,25 +32,22 @@ class TestHTML5 < AdocSpec::Test
       actual.xpath(xpath).each { |node| node.remove }
     end
 
-    msg = message('Asciidoctor output is not equivalent to the expected HTML') do
+    msg = message 'Asciidoctor output is not equivalent to the expected HTML' do
       diff expected, actual
     end
 
-    assert EquivalentXml.equivalent?(expected, actual), msg
+    assert expected.to_html.chomp == actual.to_html.chomp, msg
   end
 
   ##
-  # Returns a human-readable (formatted) version of +str+.
+  # Returns a human-readable (formatted) version of +html+.
   # @note Overrides method from +Minitest::Assertions+.
-  def mu_pp(str)
-    AdocSpec::HTML.tidy_html(str)
+  def mu_pp(html)
+    AdocSpec::HTML.tidy_html(html)
   end
 
   def parse_html(str, fragment = true)
-    if fragment
-      Nokogiri::HTML::DocumentFragment.parse(str)
-    else
-      Nokogiri::HTML.parse(str)
-    end
+    nokogiri = fragment ? Nokogiri::HTML::DocumentFragment : Nokogiri::HTML
+    nokogiri.parse(str).normalize!
   end
 end

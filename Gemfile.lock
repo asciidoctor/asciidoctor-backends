@@ -11,8 +11,6 @@ GEM
     coderay (1.1.0)
     colorize (0.7.3)
     diffy (3.0.6)
-    equivalent-xml (0.5.1)
-      nokogiri (>= 1.4.3)
     haml (4.0.5)
       tilt
     htmlbeautifier (0.0.10)
@@ -44,11 +42,11 @@ DEPENDENCIES
   coderay
   colorize
   diffy
-  equivalent-xml
   haml
   htmlbeautifier (>= 0.0.10)
   minitest (~> 5.4.0)
   minitest-rg (~> 5.1.0)
+  nokogiri (~> 1.6.0)
   pygments.rb
   rake
   thread_safe
