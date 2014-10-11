@@ -18,7 +18,7 @@ class TestHTML5 < AdocSpec::Test
 
 
   def assert_example(expected, actual, opts = {})
-    actual = parse_html(actual)
+    actual = parse_html(actual, !opts.has_key?(:header_footer))
     expected = parse_html(expected)
 
     # Select nodes specified by the XPath expression.
@@ -46,7 +46,11 @@ class TestHTML5 < AdocSpec::Test
     AdocSpec::HTML.tidy_html(str)
   end
 
-  def parse_html(str)
-    Nokogiri::HTML::DocumentFragment.parse(str)
+  def parse_html(str, fragment = true)
+    if fragment
+      Nokogiri::HTML::DocumentFragment.parse(str)
+    else
+      Nokogiri::HTML.parse(str)
+    end
   end
 end
