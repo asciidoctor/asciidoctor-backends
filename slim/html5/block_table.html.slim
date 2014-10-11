@@ -9,7 +9,7 @@ table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :gri
           col
       - else
         - @columns.each do |col|
-          col style="width:#{col.attr :colpcwidth}%"
+          col style="width:#{col.attr :colpcwidth}%;"
     - [:head, :foot, :body].select {|tblsec| !@rows[tblsec].empty? }.each do |tblsec|
       *{:tag=>"t#{tblsec}"}
         - @rows[tblsec].each do |row|
