@@ -11,3 +11,5 @@ end
 require 'adocspec/base'
 require 'adocspec/asciidoc'
 require 'adocspec/html'
+require 'adocspec/base_test'
+require 'adocspec/html_test'

@@ -40,7 +40,7 @@ module AdocSpec
 
   ###
   # Base class for integration tests of Asciidoctor backends.
-  class Test < Minitest::Test
+  class BaseTest < Minitest::Test
     include Minitest::Diffy
 
     class << self
