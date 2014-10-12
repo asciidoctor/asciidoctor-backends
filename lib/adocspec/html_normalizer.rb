@@ -55,7 +55,7 @@ module AdocSpec
     # Sorts CSS declarations in style attribute of the element +node+ by name.
     def sort_element_style_attr!(node)
       if node.has_attribute? 'style'
-        decls = node['style'].scan(/([\w-]+):\s*([^;]+);/).sort_by(&:first)
+        decls = node['style'].scan(/([\w-]+):\s*([^;]+);?/).sort_by(&:first)
         node['style'] = decls.map { |name, val| "#{name}: #{val};" }.join(' ')
       end
     end
