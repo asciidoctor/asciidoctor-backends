@@ -13,7 +13,7 @@
   =content
 - else
   div class=["sect#{slevel}",role]
-    - snum = @numbered && @caption.nil? && slevel <= @document.attr(:sectnumlevels, 3).to_i ? %(#{sectnum} ) : nil
+    - snum = @numbered && @caption.nil? && slevel <= (@document.attr :sectnumlevels, 3).to_i ? %(#{sectnum} ) : nil
     *{:tag=>"h#{slevel + 1}", :id=>@id} =%(#{anchor}#{link}#{snum}#{captioned_title}#{link && '</a>'})
     - if slevel == 1
       .sectionbody=content
