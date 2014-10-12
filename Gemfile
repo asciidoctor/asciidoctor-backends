@@ -13,6 +13,7 @@ group :test do
   gem 'nokogiri', '~> 1.6.0'
   gem 'pygments.rb'
   gem 'rake'
+  gem 'slim'
   gem 'thread_safe'
   gem 'tilt'
 end
