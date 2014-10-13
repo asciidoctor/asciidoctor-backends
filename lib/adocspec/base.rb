@@ -1,4 +1,3 @@
-require 'asciidoctor'
 require 'pathname'
 
 module AdocSpec
@@ -69,12 +68,12 @@ module AdocSpec
     # Writes the examples suite to a file.
     #
     # @param suite_name [String] the name of the examples suite.
-    # @param data [Hash] the examples suite data ({#parse_suite format}).
+    # @param data [Hash] the {#parse_suite examples suite}.
     # @see #suite_path
     #
     def write_suite(suite_name, data)
       File.open(suite_path(suite_name), 'w') do |file|
-        file << render_suite(data)
+        file << serialize_suite(data)
       end
     end
 
@@ -94,16 +93,14 @@ module AdocSpec
     end
 
     ##
-    # Renders the given suite of examples in Asciidoc syntax to the tested
-    # syntax. This method is used when bootstrapping examples for an existing
-    # backend (templates).
+    # Serializes the given examples suite into string.
+    # This method is used when bootstrapping examples for existing templates.
     #
     # @abstract
-    # @param adoc_suite [Hash] the examples suite in Asciidoc syntax
-    #        ({#parse_suite format}).
-    # @return [String] the examples suite rendered in the tested syntax.
+    # @param suite_hash [Hash] the {#parse_suite examples suite}.
+    # @return [String]
     #
-    def render_suite(adoc_suite)
+    def serialize_suite(suite_hash)
       raise NotImplementedError
     end
   end

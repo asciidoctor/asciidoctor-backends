@@ -1,6 +1,5 @@
 require 'active_support/core_ext/hash'
 require 'adocspec/base'
-require 'adocspec/html_beautifier'
 
 module AdocSpec
   class HTML < Base
@@ -31,18 +30,10 @@ module AdocSpec
       suite
     end
 
-    def write_suite(suite_name, data)
-      # render 'document' as a document (with header and footer)
-      if suite_name == 'document'
-        data.each_value { |opts| opts[:header_footer] = [true] }
-      end
-      super
-    end
-
-    def render_suite(data)
-      data.map { |key, hash|
+    def serialize_suite(suite_hash)
+      suite_hash.map { |key, hash|
+        html = hash[:content]
         opts = hash.except(:content)
-        html = HtmlBeautifier.beautify(render_asciidoc(hash[:content], opts))
 
         if opts.empty?
           "<!-- .#{key} -->\n#{html}\n"
