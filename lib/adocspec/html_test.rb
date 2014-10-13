@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'adocspec/base_test'
 require 'adocspec/html'
+require 'adocspec/html_beautifier'
 require 'adocspec/html_normalizer'
 
 module AdocSpec
@@ -41,7 +42,7 @@ module AdocSpec
     # Returns a human-readable (formatted) version of +html+.
     # @note Overrides method from +Minitest::Assertions+.
     def mu_pp(html)
-      AdocSpec::HTML.tidy_html(html)
+      HtmlBeautifier.beautify html
     end
 
     def parse_html(str, fragment = true)

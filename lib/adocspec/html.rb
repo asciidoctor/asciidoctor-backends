@@ -1,6 +1,6 @@
 require 'active_support/core_ext/hash'
 require 'adocspec/base'
-require 'htmlbeautifier'
+require 'adocspec/html_beautifier'
 
 module AdocSpec
   class HTML < Base
@@ -42,7 +42,7 @@ module AdocSpec
     def render_suite(data)
       data.map { |key, hash|
         opts = hash.except(:content)
-        html = HTML.tidy_html(render_asciidoc(hash[:content], opts))
+        html = HtmlBeautifier.beautify(render_asciidoc(hash[:content], opts))
 
         if opts.empty?
           "<!-- .#{key} -->\n#{html}\n"
@@ -51,12 +51,6 @@ module AdocSpec
           "<!-- .#{key}\n#{opts_str}\n-->\n#{html}\n"
         end
       }.join("\n")
-    end
-
-    def self.tidy_html(input)
-      output = []
-      HtmlBeautifier::Beautifier.new(output).scan(input.to_s)
-      output.join
     end
   end
 end
