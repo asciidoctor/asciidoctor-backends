@@ -1,4 +1,5 @@
 require 'active_support/core_ext/hash/except'
+require 'active_support/core_ext/array/wrap'
 require 'adocspec/base_suite_parser'
 
 module AdocSpec
@@ -32,13 +33,18 @@ module AdocSpec
 
     def serialize_suite(suite_hash)
       suite_hash.map { |key, hash|
-        html = hash[:content]
+        html = hash[:content].chomp
         opts = hash.except(:content)
 
         if opts.empty?
           "<!-- .#{key} -->\n#{html}\n"
         else
-          opts_str = opts.map { |k, v| ":#{k}: #{v}" }.join("\n")
+          opts_str = opts.map { |name, vals|
+            Array.wrap(vals).map do |val|
+              ['true', ''].include?(val.to_s) ? ":#{name}:" : ":#{name}: #{val}"
+            end
+          }.join("\n")
+
           "<!-- .#{key}\n#{opts_str}\n-->\n#{html}\n"
         end
       }.join("\n")

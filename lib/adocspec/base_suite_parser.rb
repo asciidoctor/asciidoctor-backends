@@ -55,6 +55,39 @@ module AdocSpec
     end
 
     ##
+    # Returns hash of testing examples that matches the +pattern+.
+    #
+    # @example
+    #   filter_examples '*list*:basic*'
+    #   => { block_colist: [ :basic ],
+    #        listing:      [ :basic, :basic-nowrap, ... ],
+    #        block_dlist:  [ :basic, :basic-block, ... ], ... }
+    #
+    # @param pattern [String] glob pattern to filter examples.
+    # @return [Hash<Symbol, Array<Symbol>>]
+    #
+    def filter_examples(pattern)
+      suite_glob, exmpl_glob = pattern.split(':')
+      exmpl_glob ||= '*'
+      results = {}
+
+      suite_names.select { |suite_name|
+        File.fnmatch(suite_glob, suite_name)
+
+      }.each do |suite_name|
+        suite = read_suite(suite_name)
+
+        suite.keys.select { |exmpl_name|
+          File.fnmatch(exmpl_glob, exmpl_name.to_s)
+        }.each do |exmpl_name|
+          (results[suite_name] ||= []) << exmpl_name
+        end
+      end
+
+      results
+    end
+
+    ##
     # @param suite_name [String]
     # @return [Hash] a parsed examples suite data ({#parse_suite format}),
     #         or an empty hash when no one exists.

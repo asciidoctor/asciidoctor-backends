@@ -1,43 +1,36 @@
-require 'thread_safe'
+require 'active_support/core_ext/object/try'
+require 'active_support/core_ext/string/strip'
 require 'adocspec'
-require 'asciidoctor'
-require 'colorize'
-require 'tilt/haml'
 
-namespace :adocspec do
-  namespace :generate do
+namespace :generate do
 
-    desc 'Generate testing examples for HTML5 backend'
-    task :html5, [:suite_name] do |task, args|
-      generate AdocSpec::HtmlSuiteParser.new(backend_name: :html5), args[:suite_name]
-    end
+  desc <<-EOS.strip_heredoc
+    Generate testing examples for HTML5 backend
 
-    def generate(parser, suite=nil)
-      adoc_parser = AdocSpec::AsciidocSuiteParser.new
+    Options (environment variables):
+      PATTERN   glob pattern to select examples to (re)generate. [default: *:*]
+                E.g. *:*, block_toc:basic, block*:*, *list:with*, ...
+      ENGINE    templates use. [default: slim]
+      FORCE     overwrite existing examples (yes/no)? [default: no]
 
-      if suite && ! adoc_parser.suite_names.include?(suite)
-        fail "Unknown suite name: #{suite}"
-      end
-      suites = suite ? [suite] : adoc_parser.suite_names
-      force = !! ENV['force']
+  EOS
+  task :html5 do |task|
+    AdocSpec::HtmlGenerator.new(
+      AdocSpec::AsciidocSuiteParser.new,
+      AdocSpec::HtmlSuiteParser.new(backend_name: 'html5', examples_dir: File.join('examples', 'html5')),
+      templates_dir('html5')
+    ).generate! pattern, force?
+  end
 
-      suites.each do |name|
-        file_name = File.basename(parser.suite_path(name))
-        message = "Generating #{file_name}".green
+  def pattern
+    ENV['PATTERN'] || '*:*'
+  end
 
-        if File.exist? parser.suite_path(name)
-          unless force
-            answer = prompt("File #{file_name} already exist! Overwrite? (yes/no/all) ".blue, %w{yes no all})
-            force = answer == 'all'
-            next if answer == 'no'
-          end
-          message = "Regenerating #{file_name}".yellow
-        end
+  def force?
+    ['yes', 'y', 'true'].include? ENV['FORCE'].try(:downcase)
+  end
 
-        puts message
-        adoc = adoc_parser.read_suite(name)
-        parser.write_suite(name, adoc)
-      end
-    end
+  def templates_dir(backend)
+    File.join (ENV['ENGINE'] || 'slim'), backend
   end
 end

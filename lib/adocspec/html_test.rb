@@ -31,11 +31,7 @@ module AdocSpec
         actual.xpath(xpath).each { |node| node.remove }
       end
 
-      msg = message 'Asciidoctor output is not equivalent to the expected HTML' do
-        diff expected, actual
-      end
-
-      assert expected.to_html.chomp == actual.to_html.chomp, msg
+      assert_equal expected.to_html, actual.to_html
     end
 
     ##
