@@ -1,8 +1,8 @@
-require 'active_support/core_ext/hash'
-require 'adocspec/base'
+require 'active_support/core_ext/hash/except'
+require 'adocspec/base_suite_parser'
 
 module AdocSpec
-  class HTML < Base
+  class HtmlSuiteParser < BaseSuiteParser
 
     FILE_SUFFIX = '.html'
 

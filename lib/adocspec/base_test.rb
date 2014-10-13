@@ -1,9 +1,9 @@
+require 'active_support/core_ext/object/try'
 require 'thread_safe'
-require 'active_support/core_ext/object'
 require 'asciidoctor'
-require 'adocspec'
 require 'diffy'
 require 'minitest'
+require 'tilt'
 
 module Minitest
   module Diffy
@@ -44,7 +44,7 @@ module AdocSpec
     include Minitest::Diffy
 
     class << self
-      attr_reader :asciidoc_suite_reader, :tested_suite_reader
+      attr_reader :asciidoc_suite_parser, :tested_suite_parser
     end
 
     ##
@@ -68,26 +68,26 @@ module AdocSpec
     ##
     # @see AdocSpec::Base#read_suite
     def self.read_asciidoc_suite(suite_name)
-      @asciidoc_suite_reader.read_suite(suite_name)
+      @asciidoc_suite_parser.read_suite(suite_name)
     end
 
     ##
     # Returns names of all testing suites.
     # @return [Array<String>]
     def self.suite_names
-      @asciidoc_suite_reader.suite_names
+      @asciidoc_suite_parser.suite_names
     end
 
     ##
     # @see AdocSpec::Base#read_suite
     def self.read_tested_suite(suite_name)
-      @tested_suite_reader.read_suite(suite_name)
+      @tested_suite_parser.read_suite(suite_name)
     end
 
     ##
     # Sets path of the directory where to look for the backend's templates.
     # When no path is provided, then
-    # +{AdocSpec.templates_path}/{tested_suite_reader.backend_name}+ will be used.
+    # +{AdocSpec.templates_path}/{tested_suite_parser.backend_name}+ will be used.
     #
     # @param path [String, Pathname]
     #
@@ -98,15 +98,15 @@ module AdocSpec
     ##
     # Generates the test methods.
     #
-    # @param asciidoc_suite_reader [AdocSpec::Base] instance of AdocSpec reader
+    # @param asciidoc_suite_parser [AdocSpec::Base] instance of AdocSpec parser
     #        to be used for reading the reference AsciiDoc examples.
     #
-    # @param tested_suite_reader [AdocSpec::Base] instance of AdocSpec reader
+    # @param tested_suite_parser [AdocSpec::Base] instance of AdocSpec parser
     #        to be used for reading the tested examples.
     #
-    def self.generate_tests!(asciidoc_suite_reader, tested_suite_reader)
-      @asciidoc_suite_reader = asciidoc_suite_reader
-      @tested_suite_reader = tested_suite_reader
+    def self.generate_tests!(asciidoc_suite_parser, tested_suite_parser)
+      @asciidoc_suite_parser = asciidoc_suite_parser
+      @tested_suite_parser = tested_suite_parser
 
       suite_names.each do |suite_name|
         tested_suite = read_tested_suite(suite_name)
@@ -155,7 +155,7 @@ module AdocSpec
     # @raise [StandardError] if the directory doesn't exist.
     def templates_dir
       templates_dir = self.class.instance_variable_get(:@templates_dir) ||
-          File.join(AdocSpec.templates_path, self.class.tested_suite_reader.backend_name)
+          File.join(AdocSpec.templates_path, self.class.tested_suite_parser.backend_name)
 
       unless Dir.exist? templates_dir
         raise "Templates directory '#{templates_dir}' doesn't exist!"

@@ -1,7 +1,7 @@
 require 'pathname'
 
 module AdocSpec
-  class Base
+  class BaseSuiteParser
 
     attr_accessor :backend_name, :examples_dir, :file_suffix
 
@@ -21,7 +21,8 @@ module AdocSpec
     #        {AdocSpec.examples_path}/{#backend_name}.
     #
     def initialize(backend_name: nil, file_suffix: nil, examples_dir: nil)
-      @backend_name = (backend_name || self.class.name.split('::').last.downcase).to_s
+      backend_name  ||= self.class.name.split('::').last.sub('SuiteParser', '').downcase
+      @backend_name = backend_name.to_s
 
       file_suffix   ||= file_suffix || self.class::FILE_SUFFIX rescue @backend_name
       examples_dir  ||= File.join(AdocSpec.examples_path, @backend_name)

@@ -8,8 +8,8 @@ module AdocSpec
   end
 end
 
-require 'adocspec/base'
-require 'adocspec/asciidoc'
-require 'adocspec/html'
+require 'adocspec/base_suite_parser'
+require 'adocspec/asciidoc_suite_parser'
+require 'adocspec/html_suite_parser'
 require 'adocspec/base_test'
 require 'adocspec/html_test'

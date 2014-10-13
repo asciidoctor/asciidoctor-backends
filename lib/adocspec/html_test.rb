@@ -1,8 +1,8 @@
 require 'nokogiri'
 require 'adocspec/base_test'
-require 'adocspec/html'
 require 'adocspec/html_beautifier'
 require 'adocspec/html_normalizer'
+require 'adocspec/html_suite_parser'
 
 module AdocSpec
   class HtmlTest < AdocSpec::BaseTest

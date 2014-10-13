@@ -1,7 +1,7 @@
-require 'adocspec/base'
+require 'adocspec/base_suite_parser'
 
 module AdocSpec
-  class Asciidoc < Base
+  class AsciidocSuiteParser < BaseSuiteParser
 
     FILE_SUFFIX = '.adoc'
 
