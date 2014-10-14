@@ -112,7 +112,7 @@ module AdocSpec
         tested_suite = read_tested_suite(suite_name)
 
         read_asciidoc_suite(suite_name).each do |exmpl_name, adoc|
-          test_name = "#{suite_name} : #{exmpl_name}"
+          test_name = "#{suite_name}:#{exmpl_name}"
 
           if opts = tested_suite.try(:[], exmpl_name)
             expected = opts.delete(:content)
@@ -167,7 +167,9 @@ module AdocSpec
     # @note Overrides method from +Minitest::Test+.
     # @return [String] the name of this test that will be printed in a report.
     def location
-      "#{self.class} :: #{self.name}"
+      prefix = File.relative_path(templates_dir)
+      name = self.name.sub(':', ' : ')
+      "#{prefix} :: #{name}"
     end
 
     ##
