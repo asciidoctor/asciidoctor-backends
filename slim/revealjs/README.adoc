@@ -1,0 +1,7 @@
+= slim/revealjs has moved!
+
+The reveal.js backend for Asciidoctor (based on Slim) has been graduated to its own repository.
+
+https://github.com/asciidoctor-reveal.js
+
+Please clone this repository individually to use it.
