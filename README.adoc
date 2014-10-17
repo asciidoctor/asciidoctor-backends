@@ -1,5 +1,7 @@
 = Asciidoctor Backends
 
+image:https://travis-ci.org/asciidoctor/asciidoctor-backends.svg?branch=master[Build Status, link="https://travis-ci.org/asciidoctor/asciidoctor-backends"]
+
 This repository hosts an assortment of backends (i.e., templates) for https://github.com/asciidoctor/asciidoctor[Asciidoctor], a pure Ruby port of the http://asciidoc.org[AsciiDoc] markup language.
 
 In this repository, you'll find replicas of both the html5 and docbook45 backends from AsciiDoc (and Asciidoctor) written in both http://haml.info[Haml] and http://slim-lang.com[Slim], as well as backends for generating HTML5 presentations from AsciiDoc.
