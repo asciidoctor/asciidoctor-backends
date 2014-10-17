@@ -1,0 +1,46 @@
+// .basic
+= The Dangerous and Thrilling Documentation Chronicles
+:toc:
+
+== Cavern Glow
+The river rages through the cavern, rattling its content.
+
+== The Ravages of Writing
+Her finger socks had been vaporized by crystalline nuggets of.
+
+=== A Recipe for Potion
+Two fresh Burdockian leaves, harvested by the light of the teal moons.
+
+==== Searching for Burdockian
+Crawling through the twisted understory.
+
+// .toc-title
+= The Dangerous and Thrilling Documentation Chronicles
+:toc:
+:toc-title: Table of Adventures
+
+== Cavern Glow
+The river rages through the cavern, rattling its content.
+
+// .toclevels-1
+= The Dangerous and Thrilling Documentation Chronicles
+:toc:
+:toclevels: 1
+
+== Cavern Glow
+The river rages through the cavern, rattling its content.
+
+=== A Recipe for Potion
+Two fresh Burdockian leaves, harvested by the light of the teal moons.
+
+// .custom-placement-role-and-id
+= The Dangerous and Thrilling Documentation Chronicles
+:toc:
+:toc-placement!:
+
+== Introduction
+
+toc::[id="my-toc", role="awesome-toc"]
+
+== Cavern Glow
+The river rages through the cavern, rattling its content.

@@ -1,0 +1,56 @@
+// .basic
+. Step 1
+. Step 2
+. Step 3
+
+// .with-start
+[start=6]
+. Step 1
+. Step 2
+. Step 3
+
+// .with-numeration-styles
+[decimal]
+. level 1
+[upperalpha]
+.. level 2
+[loweralpha]
+... level 3
+[lowerroman]
+.... level 4
+[lowergreek]
+..... level 5
+
+// .with-title
+.Steps
+. Step 1
+. Step 2
+. Step 3
+
+// .with-id-and-role
+[#steps.green]
+.Steps
+. Step 1
+. Step 2
+. Step 3
+
+// .max-nesting
+. level 1
+.. level 2
+... level 3
+.... level 4
+..... level 5
+.. level 2
+
+// .complex-content
+. Every list item has at least one paragraph of content,
+  which may be wrapped, even using a hanging indent.
++
+Additional paragraphs or blocks are adjoined by putting
+a list continuation on a line adjacent to both blocks.
++
+list continuation:: a plus sign (`{plus}`) on a line by itself
+
+. A literal paragraph does not require a list continuation.
+
+ $ gem install asciidoctor

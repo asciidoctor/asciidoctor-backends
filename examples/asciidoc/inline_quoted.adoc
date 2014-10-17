@@ -1,0 +1,53 @@
+// .italic-phrase
+_italic phrase_
+
+// .italic-letters
+__i__talic le__tt__ers
+
+// .bold-phrase
+*bold phrase*
+
+// .bold-letters
+**b**old le**tt**ers
+
+// .bold-italic-phrase
+*_bold italic phrase_*
+
+// .bold-italic-letters
+**__b__**old italic le**__tt__**ers
+
+// .monospace-phrase
+`monospace phrase`
+
+// .monospace-letters
+``m``onospace le``tt``ers
+
+// .monospace-italic
+`_monospace italic phrase_` and le``__tt__``ers
+
+// .monospace-bold
+`*monospace bold phrase*` and le``**tt**``ers
+
+// .monospace-bold-italic
+`*_monospace bold italic phrase_*` and le``**__tt__**``ers
+
+// .superscript
+^super^script phrase
+
+// .subscript
+~sub~script phrase
+
+// .single-curved-quoted
+'`single curved quotes`'
+
+// .double-curved-quoted
+"`double curved quotes`"
+
+// .apostrophe-in-middle
+Olaf's desk was a mess.
+
+// .apostrophe-at-end
+All of the werewolves`' desks were a mess.
+
+// .apostrophe-at-start
+Olaf had been with the company since the `'60s.

@@ -1,0 +1,74 @@
+// .level1
+== Section Level 1
+
+// .level2
+=== Section Level 2
+
+// .level3
+==== Section Level 3
+
+// .level4
+===== Section Level 4
+
+// .level5
+====== Section Level 5
+
+// .max-nesting
+== Section Level 1
+
+=== Section Level 2
+
+==== Section Level 3
+
+===== Section Level 4
+
+====== Section Level 5
+
+=== Section Level 2
+
+// .with-custom-id
+[#foo]
+== Section Title
+
+// .with-roles
+[.center.red]
+== Section Title
+
+// .sectanchors
+:sectanchors:
+== Title with anchor
+
+// .sectlinks
+:sectlinks:
+== Linked title
+
+// .numbered
+:numbered:
+== Introduction to Asciidoctor
+
+== Quick Starts
+
+=== Usage
+
+==== Using the Command Line Interface
+
+===== Processing Your Content
+
+=== Syntax
+
+== Terms and Concepts
+
+// .numbered-sectnumlevels-1
+:numbered:
+:sectnumlevels: 1
+== Introduction to Asciidoctor
+
+== Quick Starts
+
+=== Usage
+
+==== Using the Command Line Interface
+
+=== Syntax
+
+== Terms and Concepts
