@@ -1,21 +1,14 @@
-- slevel = @level == 0 && @special ? 1 : @level
-- anchor = nil
-- link = nil
-- if @id
-  - if @document.attr? :sectanchors
-    - anchor = %(<a class="anchor" href="##{@id}"></a>)
-    - link = nil
-  - elsif @document.attr? :sectlinks
-    - anchor = nil
-    - link = %(<a class="link" href="##{@id}">)
-- if slevel == 0
-  h1 id=@id class='sect0' =%(#{anchor}#{link}#{title}#{link && '</a>'})
-  =content
-- else
-  div class=["sect#{slevel}",role]
-    - snum = @numbered && @caption.nil? && slevel <= (@document.attr :sectnumlevels, 3).to_i ? %(#{sectnum} ) : nil
-    *{:tag=>"h#{slevel + 1}", :id=>@id} =%(#{anchor}#{link}#{snum}#{captioned_title}#{link && '</a>'})
-    - if slevel == 1
-      .sectionbody=content
+- sect0 = section_level == 0
+= html_tag_if !sect0, :div, :class=>["sect#{section_level}", role]
+  *{:tag=>"h#{section_level + 1}", :id=>id, :class=>('sect0' if sect0)}
+    - if id && (document.attr? :sectanchors)
+      a.anchor href="##{id}"
+      =section_title
+    - elsif id && (document.attr? :sectlinks)
+      a.link href="##{id}" =section_title
     - else
-      =content
+      =section_title
+  - if section_level == 1
+    .sectionbody =content
+  - else
+    =content

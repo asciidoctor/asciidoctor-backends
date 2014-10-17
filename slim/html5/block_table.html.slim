@@ -1,42 +1,36 @@
-table(id=@id class=['tableblock',"frame-#{attr :frame, 'all'}","grid-#{attr :grid, 'all'}",role]
-      style=Helpers.style_value(width: ("#{attr :tablepcwidth}%" unless option? 'autowidth'), float: (attr :float)))
+table(id=id
+      class=['tableblock', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", role]
+      style=style_value(width: ("#{attr :tablepcwidth}%" unless option? 'autowidth'), float: (attr :float)))
   - if title?
-    caption.title=captioned_title
+    caption.title =captioned_title
   - unless (attr :rowcount).zero?
     colgroup
       - if option? 'autowidth'
-        - @columns.each do
+        - columns.each do
           col
       - else
-        - @columns.each do |col|
-          col style="width:#{col.attr :colpcwidth}%;"
-    - [:head, :foot, :body].select {|tblsec| !@rows[tblsec].empty? }.each do |tblsec|
+        - columns.each do |col|
+          col style="width: #{col.attr :colpcwidth}%;"
+    - [:head, :foot, :body].reject { |tblsec| rows[tblsec].empty? }.each do |tblsec|
       *{:tag=>"t#{tblsec}"}
-        - @rows[tblsec].each do |row|
+        - rows[tblsec].each do |row|
           tr
             - row.each do |cell|
-              / store reference of content in advance to resolve attribute assignments in cells
-              - if tblsec == :head
-                - cell_content = cell.text
-              - else
-                - case cell.style
-                - when :verse, :literal
-                  - cell_content = cell.text
-                - else
-                  - cell_content = cell.content
-              *{:tag=>(tblsec == :head || cell.style == :header ? 'th' : 'td'), :class=>['tableblock',"halign-#{cell.attr :halign}","valign-#{cell.attr :valign}"],
-                  :colspan=>cell.colspan, :rowspan=>cell.rowspan,
-                  :style=>Helpers.style_value(background_color: @document.attr(:cellbgcolor))}
+              *{:tag=>(tblsec == :head || cell.style == :header ? 'th' : 'td'),
+                  :class=>['tableblock', "halign-#{cell.attr :halign}", "valign-#{cell.attr :valign}"],
+                  :colspan=>cell.colspan,
+                  :rowspan=>cell.rowspan,
+                  :style=>style_value(background_color: (document.attr :cellbgcolor))}
                 - if tblsec == :head
-                  =cell_content
+                  =cell.text
                 - else
                   - case cell.style
                   - when :asciidoc
-                    div=cell_content
+                    div =cell.content
                   - when :verse
-                    .verse=cell_content
+                    .verse =cell.text
                   - when :literal
-                    .literal: pre=cell_content
+                    .literal: pre =cell.text
                   - else
-                    - cell_content.each do |text|
-                      p.tableblock=text
+                    - cell.content.each do |text|
+                      p.tableblock =text

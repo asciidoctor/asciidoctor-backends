@@ -1,11 +1,10 @@
-- case @type
+- case type
 - when :xref
-  - refid = (attr :refid) || @target
-  a href=@target =(@text || @document.references[:ids].fetch(refid, "[#{refid}]")).tr_s("\n", ' ')
+  a href=target =(xref_text || "[#{attr :refid}]")
 - when :ref
-  a id=@target
+  a id=target
 - when :bibref
-  a id=@target
-  |[#{@target}]
+  a id=target
+  | [#{@target}]
 - else
-  a id=@id class=role href=@target target=(attr :window) title=(attr :title) =@text
+  a id=id class=role href=target target=(attr :window) title=(attr :title) =text

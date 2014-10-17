@@ -1,31 +1,13 @@
-.listingblock id=@id class=role
-  - if title?
-    .title=captioned_title
+= block_with_captitle 'listingblock'
   .content
-    - nowrap = !(@document.attr? :prewrap) || (option? 'nowrap')
-    - if @style == 'source'
-      - code_lang = attr :language, nil, false
-      - code_class = ["language-#{code_lang}"] if code_lang
-      - pre_class = ['highlight']
-      - pre_lang = nil
-      - case document.attr 'source-highlighter'
-      - when 'coderay'
-        - pre_class.unshift 'CodeRay'
-        - code_class = nil
-      - when 'pygments'
-        - pre_class.unshift 'pygments'
-        - code_class = nil
-      - when 'highlightjs', 'highlight.js'
-        - pre_class.unshift 'highlightjs'
-      - when 'prettify'
-        - pre_class.unshift 'prettyprint'
-        - pre_class << 'linenums' if attr? :linenums
-      - when 'html-pipeline'
-        - pre_lang = code_lang
-        - code_class = code_lang = pre_class = nil
-        - nowrap = false
-      - pre_class << 'nowrap' if nowrap
-      pre class=pre_class lang=pre_lang
-        code class=code_class data-lang=code_lang =content
+    - if style == 'source'
+      - if highlighter == 'html-pipeline'
+        pre lang=source_lang
+          code =content
+      - else
+        - unless ['CodeRay', 'pygments'].include? highlighter
+          - code_class = "language-#{source_lang}" if source_lang
+        pre class=[highlighter, 'highlight', ('linenums' if attr? :linenums), nowrap?]
+          code class=code_class data-lang=source_lang =content
     - else
-      pre class=('nowrap' if nowrap) =content
+      pre class=nowrap? =content
