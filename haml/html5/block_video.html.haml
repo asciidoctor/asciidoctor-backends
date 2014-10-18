@@ -10,7 +10,7 @@
       - delimiter = '&amp;' if autoplay_param
       - loop_param = (option? :loop) ? "#{delimiter}loop=1" : nil
       - src = %(//player.vimeo.com/video/#{attr :target}#{start_anchor}#{autoplay_param}#{loop_param})
-      %iframe{:width=>(attr :width), :height=>(attr :height), :src=>src, :frameborder=>0, :webkitAllowFullScreen=>true, :mozallowfullscreen=>true, :allowFullScreen=>true}
+      %iframe{:width=>(attr :width), :height=>(attr :height), :src=>src, :frameborder=>0, :allowFullScreen=>!(option? :nofullscreen)}
     - when 'youtube'
       - params = ['rel=0']
       - params << "start=#{attr :start}" if attr? :start
