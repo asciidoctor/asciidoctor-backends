@@ -7,9 +7,8 @@
       - marker_checked = '<i class="fa fa-check-square-o"></i>'
       - marker_unchecked = '<i class="fa fa-square-o"></i>'
     - else 
-      -# could use &#9745 (checked ballot) and &#9744 (ballot) w/o font instead
-      - marker_checked = '<input type="checkbox" data-item-complete="1" checked disabled>'
-      - marker_unchecked = '<input type="checkbox" data-item-complete="0" disabled>'
+      - marker_checked = '&#10003;'
+      - marker_unchecked = '&#10063;'
 %div{:id=>@id, :class=>['ulist', checklist, @style, role]}
   - if title?
     .title=title
