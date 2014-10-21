@@ -1,0 +1,5 @@
+- if @style == 'source' && (attr? :language, nil, false)
+  pre
+    code class="language-#{attr :language}" =content
+- else
+  pre =content

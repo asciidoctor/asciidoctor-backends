@@ -1,0 +1,13 @@
+doctype 5
+html lang=(attr :lang, 'en' unless attr? :nolang)
+  head
+    meta charset='utf-8'
+    meta name="viewport" content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui'
+    title=(doctitle sanitize: true, use_fallback: true)
+    link rel='stylesheet' type='text/css' href='bespoke.js/default.css'
+  body
+    article
+      section
+        h1=@header.title
+      =content
+    script src='bespoke.js/bespoke.js'
