@@ -15,6 +15,8 @@
       - when 'pygments'
         - pre_class.unshift 'pygments'
         - code_class = nil
+      - when 'highlightjs', 'highlight.js'
+        - pre_class.unshift 'highlightjs'
       - when 'prettify'
         - pre_class.unshift 'prettyprint'
         - pre_class << 'linenums' if attr? :linenums
@@ -22,7 +24,6 @@
         - pre_lang = code_lang
         - code_class = code_lang = pre_class = nil
         - nowrap = false
-      /- when 'highlightjs', 'highlight.js'
       - pre_class << 'nowrap' if nowrap
       pre class=pre_class lang=pre_lang
         code class=code_class data-lang=code_lang =content
