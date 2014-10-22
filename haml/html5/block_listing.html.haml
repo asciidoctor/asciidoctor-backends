@@ -4,27 +4,26 @@
   .content
     - nowrap = !(@document.attr? :prewrap) || (option? :nowrap)
     - if @style == 'source'
-      - language = attr :language
-      - code_class = language ? [language, "language-#{language}"] : nil
+      - code_lang = attr :language
+      - code_class = ["language-#{code_lang}"] if code_lang
       - pre_class = ['highlight']
       - pre_lang = nil
       - case attr 'source-highlighter'
       - when 'coderay'
-        - pre_class = ['CodeRay']
-      - when 'pygments'
-        - pre_class = ['pygments','highlight']
-      - when 'prettify'
-        - pre_class = ['prettyprint']
-        - pre_class << 'linenums' if attr? :linenums
-        - pre_class << language if language
-        - pre_class << "language-#{language}" if language
+        - pre_class.unshift 'CodeRay'
         - code_class = nil
+      - when 'pygments'
+        - pre_class.unshift 'pygments'
+        - code_class = nil
+      - when 'prettify'
+        - pre_class.unshift 'prettyprint'
+        - pre_class << 'linenums' if attr? :linenums
       - when 'html-pipeline'
-        - pre_lang = language
-        - pre_class = code_class = nil
+        - pre_lang = code_lang
+        - code_class = code_lang = pre_class = nil
         - nowrap = false
       - pre_class << 'nowrap' if nowrap
       %pre{:class=>pre_class, :lang=>pre_lang}
-        %code{:class=>code_class}=content
+        %code{:class=>code_class, 'data-lang'=>code_lang}=content
     - else
-      %pre{:class=>(nowrap ? 'nowrap' : nil)}=content
+      %pre{:class=>('nowrap' if nowrap)}=content
