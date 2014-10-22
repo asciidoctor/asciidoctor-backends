@@ -6,9 +6,9 @@
   - citetitle = (attr? :citetitle) ? (attr :citetitle) : nil
   - if attribution || citetitle
     .attribution
-      - if citetitle
-        cite=citetitle
       - if attribution
-        - if citetitle
-          br
         | &#8212; #{attribution}
+      - if citetitle
+        - if attribution
+          br
+        cite=citetitle

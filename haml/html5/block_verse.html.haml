@@ -4,9 +4,9 @@
   %pre.content=content
   - if (attr? :attribution) or (attr? :citetitle)
     .attribution
-      - if attr? :citetitle
-        %cite=attr :citetitle
       - if attr? :attribution
-        - if attr? :citetitle
-          %br
         &#8212; #{attr :attribution}
+      - if attr? :citetitle
+        - if attr? :attribution
+          %br
+        %cite=attr :citetitle
