@@ -18,7 +18,9 @@ namespace :generate do
 
   EOS
   task :html5 do |task|
-    Asciidoctor::DocTest.examples_path.unshift 'test/examples/html5'
+    %w(test/examples/html5 test/examples/asciidoc-html).each do |path|
+      Asciidoctor::DocTest.examples_path.unshift path
+    end
 
     Asciidoctor::DocTest::HtmlGenerator.new(
       Asciidoctor::DocTest::AsciidocSuiteParser.new,

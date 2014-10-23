@@ -1,0 +1,40 @@
+// .source-highlighter-coderay
+:source-highlighter: coderay
+
+[source, ruby]
+----
+5.times do
+  print "Odelay!"
+end
+----
+
+// .source-highlighter-pygments
+:source-highlighter: pygments
+
+[source, ruby]
+----
+5.times do
+  print "Odelay!"
+end
+----
+
+// .source-highlighter-prettify
+:source-highlighter: prettify
+
+[source, ruby]
+----
+5.times do
+  print "Odelay!"
+end
+----
+
+// .source-highlighter-html-pipeline
+// nowrap should be ignored
+:source-highlighter: html-pipeline
+
+[source, ruby, options="nowrap"]
+----
+5.times do
+  print "Odelay!"
+end
+----

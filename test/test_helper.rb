@@ -4,7 +4,9 @@ require 'minitest/autorun'
 require 'minitest/rg'
 require 'tilt'
 
-Asciidoctor::DocTest.examples_path.unshift 'test/examples/html5'
+%w(test/examples/html5 test/examples/asciidoc-html).each do |path|
+  Asciidoctor::DocTest.examples_path.unshift path
+end
 
 # Colorize diff!
 Diffy::Diff.default_format = :color
