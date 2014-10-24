@@ -45,18 +45,18 @@
       %link(rel='stylesheet' href="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/#{attr 'prettify-theme', 'prettify'}.min.css")
       %script(src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js")
       %script document.addEventListener('DOMContentLoaded', prettyPrint)
-    - if attr? 'math'
+    - if attr? 'stem'
       %script(type='text/x-mathjax-config')
         :plain
           MathJax.Hub.Config({
             tex2jax: {
               inlineMath: [['\\(','\\)']],
               displayMath: [['\\[','\\]']],
-              ignoreClass: 'nomath|nolatexmath'
+              ignoreClass: 'nostem|nolatexmath'
             },
             asciimath2jax: {
               delimiters: [['\\$','\\$']],
-              ignoreClass: 'nomath|noasciimath'
+              ignoreClass: 'nostem|noasciimath'
             }
           });
       %script(type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML')
