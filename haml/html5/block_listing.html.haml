@@ -4,11 +4,11 @@
   .content
     - nowrap = !(@document.attr? :prewrap) || (option? :nowrap)
     - if @style == 'source'
-      - code_lang = attr :language
+      - code_lang = attr :language, nil, false
       - code_class = ["language-#{code_lang}"] if code_lang
       - pre_class = ['highlight']
       - pre_lang = nil
-      - case attr 'source-highlighter'
+      - case document.attr 'source-highlighter'
       - when 'coderay'
         - pre_class.unshift 'CodeRay'
         - code_class = nil
