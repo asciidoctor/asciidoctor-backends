@@ -346,6 +346,18 @@ is book and it's a child of a book part. Excluding block content."
   end
 
   #--------------------------------------------------------
+  # block_table
+  #
+
+  def autowidth?
+    option? :autowidth
+  end
+
+  def spread?
+    'spread' if !(option? 'autowidth') && (attr :tablepcwidth) == 100
+  end
+
+  #--------------------------------------------------------
   # block_video
   #
 

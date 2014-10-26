@@ -1,11 +1,11 @@
 table(id=id
-      class=['tableblock', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", role]
-      style=style_value(width: ("#{attr :tablepcwidth}%" unless option? 'autowidth'), float: (attr :float)))
+      class=['tableblock', "frame-#{attr :frame, 'all'}", "grid-#{attr :grid, 'all'}", spread?, role]
+      style=style_value(width: ("#{attr :tablepcwidth}%" unless autowidth? || spread?), float: (attr :float)))
   - if title?
     caption.title =captioned_title
   - unless (attr :rowcount).zero?
     colgroup
-      - if option? 'autowidth'
+      - if autowidth?
         - columns.each do
           col
       - else
