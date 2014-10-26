@@ -375,16 +375,19 @@ is book and it's a child of a book part. Excluding block content."
       }
       start_anchor = "#at=#{attr :start}" if attr? :start
       "//player.vimeo.com/video/#{attr :target}#{start_anchor}#{url_query params}"
+
     when :youtube
+      video_id, list_id = (attr :target).split('/', 2)
       params = {
         :rel      => 0,
         :start    => (attr :start),
         :end      => (attr :end),
+        :list     => (attr :list, list_id),
         :autoplay => (1 if option? 'autoplay'),
         :loop     => (1 if option? 'loop'),
         :controls => (0 if option? 'nocontrols')
       }
-      "//www.youtube.com/embed/#{attr :target}#{url_query params}"
+      "//www.youtube.com/embed/#{video_id}#{url_query params}"
     else
       media_uri(attr :target)
     end
