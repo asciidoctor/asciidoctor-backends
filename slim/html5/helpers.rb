@@ -389,7 +389,9 @@ is book and it's a child of a book part. Excluding block content."
       }
       "//www.youtube.com/embed/#{video_id}#{url_query params}"
     else
-      media_uri(attr :target)
+      anchor = [(attr :start), (attr :end)].join(',').chomp(',')
+      anchor.prepend '#t=' unless anchor.empty?
+      media_uri "#{attr :target}#{anchor}"
     end
   end
 
