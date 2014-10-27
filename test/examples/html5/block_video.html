@@ -5,17 +5,53 @@
   </div>
 </div>
 
-<!-- .basic-with-all-attributes -->
+<!-- .with-poster -->
 <div class="videoblock">
   <div class="content">
-    <video controls height="480" poster="sunset.jpg" src="video_file.mp4#t=10,60" width="640">Your browser does not support the video tag.</video>
+    <video controls poster="sunset.jpg" src="video_file.mp4">Your browser does not support the video tag.</video>
   </div>
 </div>
 
-<!-- .basic-with-all-options -->
+<!-- .with-dimensions -->
+<div class="videoblock">
+  <div class="content">
+    <video controls height="480" src="video_file.mp4" width="640">Your browser does not support the video tag.</video>
+  </div>
+</div>
+
+<!-- .with-start -->
+<div class="videoblock">
+  <div class="content">
+    <video controls src="video_file.mp4#t=10">Your browser does not support the video tag.</video>
+  </div>
+</div>
+
+<!-- .with-end -->
+<div class="videoblock">
+  <div class="content">
+    <video controls src="video_file.mp4#t=,60">Your browser does not support the video tag.</video>
+  </div>
+</div>
+
+<!-- .with-options -->
 <div class="videoblock">
   <div class="content">
     <video autoplay loop src="video_file.mp4">Your browser does not support the video tag.</video>
+  </div>
+</div>
+
+<!-- .with-title -->
+<div class="videoblock">
+  <div class="title">Must watch!</div>
+  <div class="content">
+    <video controls src="video_file.mp4">Your browser does not support the video tag.</video>
+  </div>
+</div>
+
+<!-- .with-id-and-role -->
+<div class="videoblock watch" id="lindsey">
+  <div class="content">
+    <video controls src="video_file.mp4">Your browser does not support the video tag.</video>
   </div>
 </div>
 
@@ -58,20 +94,5 @@
 <div class="videoblock">
   <div class="content">
     <iframe allowFullScreen frameborder="0" src="//player.vimeo.com/video/32255377#at=60?autoplay=1&amp;loop=1"></iframe>
-  </div>
-</div>
-
-<!-- .with-title -->
-<div class="videoblock">
-  <div class="title">Must watch!</div>
-  <div class="content">
-    <video controls src="video_file.mp4">Your browser does not support the video tag.</video>
-  </div>
-</div>
-
-<!-- .with-id-and-role -->
-<div class="videoblock watch" id="lindsey">
-  <div class="content">
-    <video controls src="video_file.mp4">Your browser does not support the video tag.</video>
   </div>
 </div>

@@ -1,43 +1,26 @@
-require 'active_support/core_ext/object/try'
-require 'active_support/core_ext/string/strip'
 require 'asciidoctor/doctest'
 require 'thread_safe'
 require 'tilt'
 require 'tilt/haml'
 
+def engine
+  ENV['ENGINE'] || 'slim'
+end
+
+def pattern
+  ENV['PATTERN'] || '*:*'
+end
+
 namespace :generate do
 
-  desc <<-EOS.strip_heredoc
-    Generate testing examples for HTML5 backend
+  DocTest::GeneratorTask.new(:html5) do |task|
+    task.title = "Generate testing examples #{pattern} for HTML5 using #{engine.capitalize} templates."
 
-    Options (environment variables):
-      PATTERN   glob pattern to select examples to (re)generate. [default: *:*]
-                E.g. *:*, block_toc:basic, block*:*, *list:with*, ...
-      ENGINE    templates use. [default: slim]
-      FORCE     overwrite existing examples (yes/no)? [default: no]
-
-  EOS
-  task :html5 do |task|
-    %w(test/examples/html5 test/examples/asciidoc-html).each do |path|
-      Asciidoctor::DocTest.examples_path.unshift path
-    end
-
-    Asciidoctor::DocTest::HtmlGenerator.new(
-      Asciidoctor::DocTest::AsciidocSuiteParser.new,
-      Asciidoctor::DocTest::HtmlSuiteParser.new(backend_name: 'html5'),
-      templates_dir('html5')
-    ).generate! pattern, force?
-  end
-
-  def pattern
-    ENV['PATTERN'] || '*:*'
-  end
-
-  def force?
-    ['yes', 'y', 'true'].include? ENV['FORCE'].try(:downcase)
-  end
-
-  def templates_dir(backend)
-    File.join (ENV['ENGINE'] || 'slim'), backend
+    task.output_suite = DocTest::HTML::ExamplesSuite.new(
+      examples_path: 'test/examples/html5',
+      paragraph_xpath: './div/p/node()'
+    )
+    task.renderer_opts[:template_dirs] = File.join engine, 'html5'
+    task.examples_path.unshift 'test/examples/asciidoc-html'
   end
 end

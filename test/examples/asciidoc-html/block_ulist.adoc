@@ -4,3 +4,10 @@
 - [x] also checked
 - [ ] not checked
 -     normal list item
+
+// .checklist-icons-font
+:icons: font
+- [*] checked
+- [x] also checked
+- [ ] not checked
+-     normal list item

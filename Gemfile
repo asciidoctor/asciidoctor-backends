@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 group :test do
   gem 'asciidoctor', '~> 1.5', '>= 1.5.2'
-  gem 'asciidoctor-doctest', '1.0.0.rc.3'
+  gem 'asciidoctor-doctest', '~> 1.5'
   gem 'coderay', '~> 1.1'
   gem 'haml', '~> 4.0'
   gem 'pygments.rb', '~> 0.6'

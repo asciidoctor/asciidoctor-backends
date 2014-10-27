@@ -1,6 +1,6 @@
 #!/usr/bin/env rake
 
-Dir.glob('test/tasks/*.rake').each do |file|
+Dir['test/tasks/*.rake'].each do |file|
   import file
 end
 
