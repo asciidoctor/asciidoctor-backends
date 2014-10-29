@@ -11,6 +11,8 @@
   %sup{:class=>role}=@text
 - when :subscript
   %sub{:class=>role}=@text
+- when :mark
+  %mark{:class=>role}=@text
 - when :double
   =(role? ? %(<span class="#{role}">&#8220;#{@text}&#8221;</span>) : %(&#8220;#{@text}&#8221;))
 - when :single
