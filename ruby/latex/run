@@ -1,4 +1,6 @@
 #!/bin/sh
 
-asciidoctor -a subs=none -r ./latex_converter.rb -b latex test/algebraic_varieities.ad -o foo.tex 
+preprocess_tex test/$1 test/tmp
+asciidoctor -r ./latex_converter.rb -b latex test/tmp -o foo.tex 
 xelatex foo.tex
+open -a /Applications/Preview.app foo.pdf

@@ -89,7 +89,8 @@ class LaTeXConverter
   BLOCK_TYPES = %w(admonition listing literal page_break paragraph stem pass open quote)    
   NODE_TYPES = TOP_TYPES + LIST_TYPES + INLINE_TYPES + BLOCK_TYPES
   
-  $latex_environment_names = []  
+  $latex_environment_names = [] 
+  $label_counter = 0 
   
   def convert node, transform = nil
     
@@ -100,9 +101,6 @@ class LaTeXConverter
     end
         
     if NODE_TYPES.include? node.node_name
-      if node.node_name == 'document'
-        write_environments
-      end
       node.tex_process
     else
       warn %(Node to implement: #{node.node_name}, class = #{node.class}).magenta
@@ -110,17 +108,7 @@ class LaTeXConverter
     
   end
   
-  def write_environments
-       puts "LATEX ENVIRONMENTS DETECTED:"
-       definitions = ""
-       $latex_environment_names.each do |name|
-         puts name
-         definitions << "\\newtheorem\{#{name}\}\{#{name}\}" << "\n"
-       end
-       File.open('new_environments.tex', 'w') { |f| f.write(definitions) }
-   end
-  
-  
+   
 end
 
 
