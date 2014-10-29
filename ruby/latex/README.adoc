@@ -14,7 +14,7 @@ Please see the file [red]#manual.ad#
 in this repository for a more details than presented 
 here.
 
-Lalatex_converter supports two closely-related math formats, [blue]#asciimath#
+Latex_converter supports two closely-related math formats, [blue]#asciimath#
 and [blue]#LaTeX#. With the latex_converter you can render expressions
 such as stem:[ a^2 + b^2 = c^2 ] and
 
@@ -104,6 +104,8 @@ The HTML is rendered at  http://epsilon.my.noteshare.io/notebook/195/?note=782[n
 * `sample1.ad` -- math in conventonal LaTeX form, `$ ... $`, etc.
 * `sample2.ad` -- like sample1, but the math is as in `stem:[a^ + b^2 = c^2]`, etc.
 * `elliptic.ad`
+* `algebraic_varieties.ad` -- a draft, very rough, but
+more like a real math article.
 
 One should use all four files in testing the code.
 
@@ -163,6 +165,47 @@ The TeXBlock package addresses the points made
 above in the case of both conventional LaTeX syntax
  and the `[stem]` block
 syntax.
+
+=== LaTeX Environments
+
+The converter transforms open blocks into 
+LaTeX environments.  Thus the source
+text
+
+----
+.Comment
+[foobar]
+--
+This is merely a test.
+--
+----
+
+is mapped to
+
+----
+\begin{Comment}
+\label{foobar}
+This is merely a test.
+\end{Comment}
+----
+
+The converter has little knowlege of LaTeX, so
+it compiles a file of dumb definitions of environments
+corresponding to the open blocks it encounters, e.g.,
+
+----
+\newtheorem{Comment}{Comment}
+----
+
+These definitions are found in the file `new_environments.tex`.
+The definition  above has no necessary connection with
+theorem-proving, but it does provide an easy
+way to define a serviceable environment: "Comment"
+is in bold, and it is followed by an automatically
+generated number.  The body of the block is italicized.
+The user will likely want to replace theses environment
+definitions better suited to the task at hand.
+
 
 
 === Issues

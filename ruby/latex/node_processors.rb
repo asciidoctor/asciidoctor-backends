@@ -3,8 +3,7 @@ require_relative 'colored_text'
 VERBOSE=true
 QUIET=false
 
-class Asciidoctor::Document
-  
+class Asciidoctor::Document 
   
   # Write preamble for tex file, write closing
   # \end{document}
@@ -217,8 +216,10 @@ class Asciidoctor::Block
      title = title.strip
      puts ["Title: ".magenta, title.cyan].join(" ")
      puts ["Content:".magenta, "#{self.content}".yellow].join(" ") if VERBOSE
+     if !$latex_environment_names.include? title
+       $latex_environment_names << title
+     end
      "\\begin\{#{title}\}\n\\label\{#{self.id}\}\n#{self.content}\n\\end\{#{title}\}\n"
-         
   end
   
   def listing_process

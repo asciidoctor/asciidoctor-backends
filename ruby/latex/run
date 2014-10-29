@@ -1,10 +1,4 @@
 #!/bin/sh
-#
-# Example: ./run sample1
-#
-# Effect: run asciidoctor on test/ample1.adoc
-# to create test/sample1.texple1.tex
 
-clean
-asciidoctor -r ./latex_converter.rb -b latex test/$1 -o test/foo.tex
-
+asciidoctor -a subs=none -r ./latex_converter.rb -b latex test/algebraic_varieities.ad -o foo.tex 
+xelatex foo.tex
