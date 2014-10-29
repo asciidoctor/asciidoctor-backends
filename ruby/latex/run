@@ -1,4 +1,4 @@
 #!/bin/sh
 
-asciidoctor -a subs=none -r ./latex_converter.rb -b latex test/algebraic_varieities.ad -o foo.tex 
+asciidoctor -a subs=none -r ./latex_converter.rb -b latex test/algebraic_varieties.ad -o foo.tex 
 xelatex foo.tex
