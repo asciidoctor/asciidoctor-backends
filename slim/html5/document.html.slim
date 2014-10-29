@@ -45,22 +45,20 @@ html lang=(attr :lang, 'en' unless attr? :nolang)
       link rel='stylesheet' href="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/#{attr 'prettify-theme', 'prettify'}.min.css"
       script src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js"
       script document.addEventListener('DOMContentLoaded', prettyPrint)
-    - if attr? 'math'
+    - if attr? 'stem'
       script type='text/x-mathjax-config'
         |MathJax.Hub.Config({
            tex2jax: {
              inlineMath: [['\\(','\\)']],
              displayMath: [['\\[','\\]']],
-             ignoreClass: 'nomath|nolatexmath'
+             ignoreClass: 'nostem|nolatexmath'
            },
            asciimath2jax: {
              delimiters: [['\\$','\\$']],
-             ignoreClass: 'nomath|noasciimath'
+             ignoreClass: 'nostem|noasciimath'
            }
          });
       script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML'
-      script type='text/javascript'
-        |document.addEventListener('DOMContentLoaded', MathJax.Hub.TypeSet)
     - unless (docinfo_content = docinfo).empty?
       =docinfo_content
   body id=@id class=[(attr :doctype),((attr? 'toc-class') && (attr? :toc) && (attr? 'toc-placement', 'auto') ? "#{attr 'toc-class'} toc-#{attr 'toc-position', 'left'}" : nil)] style=("max-width: #{attr 'max-width'};" if attr? 'max-width')
