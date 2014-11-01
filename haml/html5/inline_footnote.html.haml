@@ -1,8 +1,11 @@
-- if @type == :xref
-  %span.footnoteref<
-    = surround '[', ']' do
-      %a.footnote(href="#_footnote_#{attr :index}" title="View footnote.")=attr :index
-- else
-  %span.footnote{:id=>(['_footnote', @id] if @id)}<
-    = surround '[', ']' do
-      %a.footnote(href="#_footnote_#{attr :index}" title="View footnote."){:id=>['_footnoteref', (attr :index)]}=attr :index
+- if (index = attr :index)
+  - if @type == :xref
+    %span.footnoteref<
+      = surround '[', ']' do
+        %a.footnote(href="#_footnote_#{index}" title="View footnote.")=index
+  - else
+    %span.footnote{:id=>(['_footnote', @id] if @id)}<
+      = surround '[', ']' do
+        %a.footnote(href="#_footnote_#{index}" title="View footnote."){:id=>['_footnoteref', index]}=index
+- elsif @type == :xref
+  %span.footnoteref.red(title="Unresolved footnote reference.")="[#{text}]"
