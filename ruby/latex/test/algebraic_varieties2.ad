@@ -5,10 +5,6 @@
 
 :latex:
 
-
-
-
-
 == Algebraic Varieties
 
 Let $\CC^n$ denote complex $n$-space with coordinates 
@@ -16,7 +12,7 @@ $(z_1, \ldots, z_n)$,
 let $f(z_1, \ldots, z_n)$  be a polynomial of degree $d$ with complex
 coefficients,  and let $X$ be the set of solutions to the equation
 $f(z) = 0$.  Such a set  an _affine algebraic hypersurface
-of degree_ $d$:
+of degree_ $d$  --
 a special kind _affine algebraic set_  A general affine
 variety is the set of common zeroes of an arbitrary collection of polynomials.
 By two deep theorems in commutative algebra (the Hilbert Nullstellensatz
@@ -29,7 +25,6 @@ and we say that the set is an _algebraic variety_.
 
 .Comment
 [click]
-[[connection_com_alg]]
 --
 Again,
 there is a connection with commutatiive algebra.  Let 
@@ -50,7 +45,7 @@ algebraic variety of degree one.  It is isomorphic to $\CC^{n-1}$.
 The set defined by $z_1^2 + \cdots + z_n^2 =1$ is an affine
 algebraic variety of degree two, a so-called _smooth quadric_.
 It has dimension $n-1$.  (How would we define dimension?)
-The set $X$ defined by $z_1^2 + \cdots + z_n^2 = 0$ is also a quadric:
+The set $X$ defined by $z_1^2 + \cdots + z_n^2 = 0$ is also a quadric --
 this is the generic term for a variety of degree two.  IT is a _cone_,
 since the line joining the origin to a point $P$ of $X$  is also in $X$.
 The origin is a _singular point_ of $X$: it looks different
@@ -61,7 +56,6 @@ of smooth and singular are discussed below.
 
 
 .Problem {counter:problem}
-[[double_points]]
 --
 _In how many points does a line $L \subset \CC^n$ meet
 an hypersurface of $X$ of degree $d$?_
@@ -73,10 +67,9 @@ an hypersurface of $X$ of degree $d$?_
 To make the notion of number of intersection point precise,
 consider a parameterization $t \mapsto \ell(t)$ of a line $L$.
 Let $f(z) = 0$ be the equation of $X$.  The composition
-$f(\ell(t)$ is a polynomial function of one variable.  Its degree
+$f(\ell(t)$ is a polynomial function of one variable.  It's degree
 is a measure of the number of points of intersection.
 -- 
-
 .Problem {counter:problem}
 --
 _Consider the variety $X \subset \CC^n$ defined by the equation
@@ -100,7 +93,7 @@ Fix a point of $X$, say $A = (0,0)$.  Given $P \in X$, let $L$
 be the line joining $A$ to $P$, and note that $L$ meets $X$ _only_
 in $A$ and $P$.  Let $\Pi$ be the plane tangent to $X$ at $B = (0,2)$,
 and let $Q$ be the intersection of $L$ and $\Pi$.  As  $P$ approaches $A$, 
-the point $Q$ approaches infinity.  Let $\bar \Pi$ be the _Riemann sphere_:
+the point $Q$ approaches infinity.  Let $\bar \Pi$ be the _Riemann sphere_ --
 the one-point compactification of the space of complex numbers:
 \[  
   S^2 = \bar \Pi = \Pi \cup \set{\infty}.
@@ -125,7 +118,7 @@ Consider next the plane curve $C$ with equation
 $z^3 + w^3 = 1$. It is an example of
 an  _affine elliptic curves_  These play an especially important role in the development
 of algebraic geometry and also number theory,  e.g., Andrew Wiles' 
-proof the Fermat theorem.   Because $C$ is of degree three, the
+proof of Fermat's last theorem.   Because $C$ is of degree three, the
 argement give earlier does not a apply, and we cannot conclude 
 that $C$ is isomorphic to a punctured Riemann sphere.   Nonetheless,
 there is information that we can extract from the line-drawing
@@ -319,8 +312,8 @@ This set is by definition a _projective algebraic hypersurface_.
 
 === Stop here
 
-Thus $\EEE$ is an algebraic curve.
-In fact, it is a projective algebraic curve.   It is an algebraic curve of degree three,
+Thus $\EEE$ is an algebraic curve --
+in fact a projective algebraic curve.   It is an algebraic curve of degree three,
 meaning that a generic line $L$ intersects $\EEE$ in three points.  Any line
 intersects $\EEE$ in three points counting multiplicity.  This fact allows
 one to define the structure of a group on $\EEE$.  The addition law
@@ -518,10 +511,10 @@ $k$-th singular cohomology group, $H^k_{sing}(M)$.
 
 .Theorem {counter:theorem}
 --
-Integration defines a functorial isomorphism $H^k_{DR}(M) \map H^k_{sing}(M)$.
+_Integration defines a functorial isomorphism $H^k_{DR}(M) \map H^k_{sing}(M)$._
 --
 
-TO BE CONTINUED
+TO BE CONTINUED ...
 
 and let $A^k(M)$ be the vector space of all
 such forms.  Let $d\phi$ be the exterior derivative of $\phi$.
@@ -548,7 +541,7 @@ where $d\phi$ is the exterior derivative.
 \]
 takes differential forms
 
-the deRham theorem tells us that the cohomology groups of a differentiable 
+deRham's theorem tells us that the cohomology groups of a differentiable 
 manifold can be computed as the quotient of the vector space
 of closed differential forms by the exact forms:
 \[

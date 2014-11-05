@@ -143,7 +143,7 @@ Thus the source text:
 
 ----
 .Comment
-[foobar]
+[[foobar]]
 --
 This is merely a test.
 --
@@ -158,7 +158,30 @@ This is merely a test.
 \end{Comment}
 ----
 
-The converter has little knowlege of LaTeX, so it compiles a file of dumb definitions of environments corresponding to the open blocks it encounters, e.g.,
+If an identifier as in `[[foobar]]` is not specified, then a label is generated automatically, as in the example below:
+
+----
+.Comment
+--
+This is merely a test.
+--
+----
+
+is mapped to
+
+----
+\begin{Comment}
+\label{comment:13}
+This is merely a test.
+\end{Comment}
+----
+
+In this case the "13" means that this
+was the 13th unlabeled comment.
+
+The converter has little knowlege of LaTeX, so
+it compiles a file of dumb definitions of environments
+corresponding to the open blocks it encounters, e.g.,
 
 ----
 \newtheorem{Comment}{Comment}

@@ -18,7 +18,7 @@ class Asciidoctor::Document
   #   macro definitions.  In noteshare there is a database
   #   field 
   #
-  def tex_process
+  def tex_process    
     warn "Node: #{self.class}".blue if $VERBOSE
     # warn "Attributes: #{self.attributes}".yellow
     # warn "#{self.methods}".magenta
@@ -42,13 +42,23 @@ class Asciidoctor::Document
       
     processed_content = TeXBlock.process_environments self.content
     doc << processed_content
-    # warn self.content
     
+    # Now write the defnitions of the new environments
+    # discovered to file
+    puts "Writing environment definitions to file: new_environments.tex"
+    definitions = ""
+    $latex_environment_names.each do |name|
+      puts name
+      definitions << "\\newtheorem\{#{name}\}\{#{name}\}" << "\n"
+    end
+    File.open('new_environments.tex', 'w') { |f| f.write(definitions) }
+    
+    # Output
     doc << "\n\n\\end{document}\n\n" 
+      
   end 
-  
-end
 
+end
 
 # Write TeX for each of five levels of Ascidoc section,
 # .e.g. \section{Introction} for == Introduction
@@ -71,7 +81,6 @@ class Asciidoctor::Section
   end
  
 end
-
 
 # Write TeX \itemize or \enumerate lists
 # for ulist and olist.  Recurses for
@@ -111,7 +120,6 @@ class Asciidoctor::List
   end
   
 end
-
 
 # Proces block elements of varios kinds
 class Asciidoctor::Block
@@ -211,12 +219,19 @@ class Asciidoctor::Block
      title = self.attributes["title"]
      title = title.gsub /\{.*?\}/, ""
      title = title.strip
-     warn ["Title: ".magenta, title.cyan].join(" ")
+     warn ["Title: ".magenta, title.cyan, "style:", self.style].join(" ")
      warn ["Content:".magenta, "#{self.content}".yellow].join(" ") if $VERBOSE
      if !$latex_environment_names.include? title
        $latex_environment_names << title
      end
-     "\\begin\{#{title}\}\n\\label\{#{self.id}\}\n#{self.content}\n\\end\{#{title}\}\n"
+     # Write unique labels, as informative as possible:
+     if self.id == nil
+       $label_counter += 1
+       label_text = "#{title.downcase}:#{$label_counter}"
+     else
+       label_text = self.id
+     end
+     "\\begin\{#{title}\}\n\\label\{#{label_text}\}\n#{self.content}\n\\end\{#{title}\}\n"
   end
   
   def listing_process
@@ -226,7 +241,6 @@ class Asciidoctor::Block
   end
  
 end
-
 
 # Process inline elements
 class Asciidoctor::Inline
@@ -278,7 +292,7 @@ class Asciidoctor::Inline
     when :link
       "\\href\{#{self.target}\}\{#{self.text}\}"
     when :ref
-      "\\label\{#{self.text.gsub(/\[(.*?)\]/, "\\1")}\}"
+      "\\label\{#{self.text.gsub(/\[(.*?)\]/, "\\1")}\}"    
     when :xref
       "\\ref\{#{self.target.gsub('#','')}\}"
     else
@@ -311,7 +325,6 @@ class String
   end
   
 end
-
 
 # TeXPostProcess cleans up undesired transformations
 # inside the TeX enveronment.  Strings
