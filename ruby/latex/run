@@ -1,6 +1,0 @@
-#!/bin/sh
-
-preprocess_tex test/$1 test/tmp
-asciidoctor -r ./latex_converter.rb -b latex test/tmp -o foo.tex 
-xelatex foo.tex
-open -a /Applications/Preview.app foo.pdf
