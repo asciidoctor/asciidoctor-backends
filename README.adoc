@@ -60,26 +60,19 @@ TIP: if leveraging https://pages.github.com/[GitHub Pages], plan ahead by keepin
 
 |===
 
+== Examples
 
-== deck.js Backend
+=== deck.js Backend
 
 The https://github.com/asciidoctor/asciidoctor-backends/tree/master/haml/deckjs[deck.js backend] is a collection of Haml templates which transform an AsciiDoc document to HTML5 slides animated by http://imakewebthings.com/deck.js[deck.js].
 
-=== Installation
+==== Notes
 
-First, you should download (or git clone) the https://github.com/asciidoctor/asciidoctor-backends[asciidoctor-backends] repository to a convenient location.
+* Follow the "General Usage Instructions", replacing `${presentation_lib}` and `${template_directory}` with the corresponding values from Table 1 above.
+* If you are planning to split your slides you also need to copy to +extensions+ directory the +deck.split.js+ file which can be downloaded from https://github.com/houqp/deck.split.js[GitHub]
+* Also if you want to use the fullscreen photo feature you must create an +images+ directory.
 
- git clone git://github.com/asciidoctor/asciidoctor-backends.git
-
-Then from your working directory (that is where your AsciiDoc document resides) you must create a +deck.js+ directory and copy there the +deck.js+ file with its directories (extensions, themes, ...). You could also just clone the [deck.js] repository.
-
- git clone git://github.com/imakewebthings/deck.js.git
-
-If you are planning to split your slides you also need to copy to +extensions+ directory the +deck.split.js+ file which can be downloaded from https://github.com/houqp/deck.split.js[GitHub].
-
-Also if you want to use the fullscreen photo feature you must create an +images+ directory.
-
-=== Settings
+==== deck.js Options
 
 There are some attributes that can be set at the top of the document which they are specific of +deckjs+ backend.
 
@@ -97,7 +90,7 @@ There are some attributes that can be set at the top of the document which they 
 
 NOTE: You can also specify a custom stylesheet using the +stylesheet+ attribute, which can be used to customize AsciiDoc elements like section, paragraph, images, etc...
 
-=== Examples
+==== deck.js Source Examples
 
 Let's see some examples of +deckjs+ backend features:
 
@@ -154,41 +147,15 @@ In this case each bullet will appear to screen each time you try to go to next s
 
 WARNING: The original deckjs backend for AsciiDoc used the option name 'incremental' instead of 'step'. We've changed it here to save you some typing :)
 
-=== Rendering
-
-First, make sure Asciidoctor is installed:
-
- gem install asciidoctor
-
-Then, to render your presentation as HTML5, simply execute the command:
-
- asciidoctor -T <backend directory> <asciidoc file>
-
-So for the above deckjs backend you'd use
-
- asciidoctor -T <base>/asciidoctor-backends/haml/deckjs <asciidoc file>
-
-
-=== Stay Connected
+==== Stay Connected
 
 If you need any other feature supported by +deckjs+ to be ported to this backend, any way to make it better or you find any bug do not hesitate to open an issue.
 
-== reveal.js Backend
+=== reveal.js Backend
 
 The https://github.com/asciidoctor/asciidoctor-backends/tree/master/slim/revealjs[reveal.js backend] is a collection of slim templates which transform an AsciiDoc document to HTML5 slides animated by http://lab.hakim.se/reveal-js/[reveal.js].
 
-=== Installation
-
-First, you should download (or git clone) the https://github.com/asciidoctor/asciidoctor-backends[asciidoctor-backends] repository to a convenient location.
-
-  git clone git://github.com/asciidoctor/asciidoctor-backends.git
-
-Then from your working directory (that is where your AsciiDoc document resides) you must create a +reveal.js+ directory and copy there the +reveal.js+ file with its directories (plugin, css, ...).
-You could also just clone the https://github.com/hakimel/reveal.js[reveal.js] repository.
-
-  git clone git://github.com/hakimel/reveal.js.git
-
-=== Settings
+==== reveal.js Options
 
 There are some attributes that can be set at the top of the document which they are specific of +revealjs+ backend.
 
@@ -236,7 +203,7 @@ Default settings are based on `reveal.js` default settings.
 
 If you want to build a custom theme or customize an existing one you should look at `reveal.js's` documentation and use `revealjs_theme` attribute: https://github.com/hakimel/reveal.js/blob/master/css/theme/README.md
 
-=== Examples
+==== reveal.js Source Examples
 
 // FIXME: incomplete
 
@@ -338,18 +305,3 @@ To use http://pygments.org[Pygments]:
 = Title slide
 :source-highlighter: pygments
 ----
-
-
-=== Rendering
-
-First, make sure Asciidoctor is installed:
-
-  gem install asciidoctor
-
-Then, to render your presentation as HTML5, simply execute the command:
-
-  asciidoctor -T <backend directory> <asciidoc file>
-
-So for the above revealjs backend you'd use
-
-  asciidoctor -T <base>/asciidoctor-backends/slim/revealjs <asciidoc file>
