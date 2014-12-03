@@ -8,7 +8,58 @@ In this repository, you'll find replicas of both the html5 and docbook45 backend
 
 == General Usage Instructions
 
-Coming soon...
+. Ensure Asciidoctor is installed
+
+ gem install asciidoctor
+
+. Clone `asciidoctor/asciidoctor-backends` to get templates for rendering presentation HTML.
+
+ git clone git://github.com/asciidoctor/asciidoctor-backends.git
+
+. Edit `${content_file}` ( *.adoc )
+** Slides & content per slide
+** [Optional] Set presentation "options" at top of `${content_file}`.  The options available & their values will depend on presentation library (some examples below).
+
+ ${option_key}: ${option_value}
+
+. Generate HTML from Asciidoctor Template
+
+
+** Command Line:
+
+ asciidoctor -T ${template_directory} ${options} ${content_file}
+
+** Build Script: use Ruby, JavaScript, Gradle, or your favorite build tool/script with presentation options
+. Copy or clone presentation library (to output destination/branch)
+
+ git clone ${presentation_lib}
+
+
+TIP: if leveraging https://pages.github.com/[GitHub Pages], plan ahead by keeping your source files on `master` branch and all output files on `gh-pages` branch.
+
+.Existing Backends Templates
+[options="header", cols="1a,2m,2m"]
+|===
+|Backend    |`${presentation_lib}`    |`${template_directory}`
+
+|http://imakewebthings.com/deck.js/[deck.js]
+|git://github.com/imakewebthings/deck.js.git
+|asciidoctor-backends/haml/deckjs
+
+|http://lab.hakim.se/reveal-js/#/[reveal.js]
+|git://github.com/hakimel/reveal.js.git
+|asciidoctor-backends/slim/revealjs
+
+|http://paulrouget.com/dzslides/[DZSlides]
+|git://github.com/paulrouget/dzslides.git
+|asciidoctor-backends/slim/dzslides
+
+|http://markdalgleish.com/projects/bespoke.js/[Bespoke.js]
+|git://github.com/markdalgleish/bespoke.js
+|asciidoctor-backends/slim/bespokejs
+
+|===
+
 
 == deck.js Backend
 
@@ -112,15 +163,15 @@ First, make sure Asciidoctor is installed:
 Then, to render your presentation as HTML5, simply execute the command:
 
  asciidoctor -T <backend directory> <asciidoc file>
- 
+
 So for the above deckjs backend you'd use
- 
- asciidoctor -T <base>/asciidoctor-backends/haml/deckjs <asciidoc file> 
- 
+
+ asciidoctor -T <base>/asciidoctor-backends/haml/deckjs <asciidoc file>
+
 
 === Stay Connected
 
-If you need any other feature supported by +deckjs+ to be ported to this backend, any way to make it better or you find any bug do not hesitate to open an issue. 
+If you need any other feature supported by +deckjs+ to be ported to this backend, any way to make it better or you find any bug do not hesitate to open an issue.
 
 == reveal.js Backend
 
