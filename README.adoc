@@ -10,29 +10,29 @@ In this repository, you'll find replicas of both the html5 and docbook45 backend
 
 . Ensure Asciidoctor is installed
 
- gem install asciidoctor
+ $ gem install asciidoctor
 
 . Clone `asciidoctor/asciidoctor-backends` to get templates for rendering presentation HTML.
 
- git clone git://github.com/asciidoctor/asciidoctor-backends.git
+ $ git clone git://github.com/asciidoctor/asciidoctor-backends.git
 
-. Edit `${content_file}` ( *.adoc )
+. Edit `CONTENT_FILE` ( *.adoc or *.ad or ...)
 ** Slides & content per slide
-** [Optional] Set presentation "options" at top of `${content_file}`.  The options available & their values will depend on presentation library (some examples below).
+** [Optional] Set presentation "options" at top of `CONTENT_FILE`.  The options available & their values will depend on presentation library (some examples below).
 
- ${option_key}: ${option_value}
+ ATTRIBUTE: ${value}
 
 . Generate HTML from Asciidoctor Template
 
 
 ** Command Line:
 
- asciidoctor -T ${template_directory} ${options} ${content_file}
+ $ asciidoctor -T TEMPLATE_DIRECTORY ${options} CONTENT_FILE
 
 ** Build Script: use Ruby, JavaScript, Gradle, or your favorite build tool/script with presentation options
 . Copy or clone presentation library (to output destination/branch)
 
- git clone ${presentation_lib}
+ $ git clone PRESENTATION_LIBRARY
 
 
 TIP: if leveraging https://pages.github.com/[GitHub Pages], plan ahead by keeping your source files on `master` branch and all output files on `gh-pages` branch.
@@ -40,7 +40,7 @@ TIP: if leveraging https://pages.github.com/[GitHub Pages], plan ahead by keepin
 .Existing Backends Templates
 [options="header", cols="1a,2m,2m"]
 |===
-|Backend    |`${presentation_lib}`    |`${template_directory}`
+|Backend    |`PRESENTATION_LIBRARY`    |`TEMPLATE_DIRECTORY`
 
 |http://imakewebthings.com/deck.js/[deck.js]
 |git://github.com/imakewebthings/deck.js.git
@@ -48,7 +48,8 @@ TIP: if leveraging https://pages.github.com/[GitHub Pages], plan ahead by keepin
 
 |http://lab.hakim.se/reveal-js/#/[reveal.js]
 |git://github.com/hakimel/reveal.js.git
-|asciidoctor-backends/slim/revealjs
+|replaced by: +
+https://github.com/asciidoctor/asciidoctor-reveal.js[asciidoctor/asciidoctor-reveal.js]
 
 |http://paulrouget.com/dzslides/[DZSlides]
 |git://github.com/paulrouget/dzslides.git
@@ -68,7 +69,7 @@ The https://github.com/asciidoctor/asciidoctor-backends/tree/master/haml/deckjs[
 
 ==== deck.js Notes
 
-* Follow the "General Usage Instructions", replacing `${presentation_lib}` and `${template_directory}` with the corresponding values from Table 1 above.
+* Follow the "General Usage Instructions", replacing `PRESENTATION_LIBRARY` and `TEMPLATE_DIRECTORY` with the corresponding values from Table 1 above.
 * If you are planning to split your slides you also need to copy to +extensions+ directory the +deck.split.js+ file which can be downloaded from https://github.com/houqp/deck.split.js[GitHub]
 * Also if you want to use the fullscreen photo feature you must create an +images+ directory.
 
@@ -135,7 +136,7 @@ There are some attributes that can be set at the top of the document which they 
 
 [options="header",cols="1m,1,2"]
 |===
-|Attribute    | Value(s)    |Description
+|ATTRIBUTE    | Value(s)    |Description
 
 |:deckjs_theme:
 |*none*, web-2.0, swiss, neon
