@@ -3,6 +3,32 @@
 # just like the built-in helper functions that Haml provides.
 module Haml::Helpers
 
+  ##
+  # Returns corrected section level.
+  #
+  # @param sec [Asciidoctor::Section] the section node (default: self).
+  # @return [Integer]
+  #
+  def section_level(sec = self)
+    @_section_level ||= (sec.level == 0 && sec.special) ? 1 : sec.level
+  end
+
+  ##
+  # Returns the captioned section's title, optionally numbered.
+  #
+  # @param sec [Asciidoctor::Section] the section node (default: self).
+  # @return [String]
+  #
+  def section_title(sec = self)
+    sectnumlevels = document.attr(:sectnumlevels, 3).to_i
+
+    if sec.numbered && !sec.caption && sec.level <= sectnumlevels
+      [sec.sectnum, sec.captioned_title].join(' ')
+    else
+      sec.captioned_title
+    end
+  end
+
   #--------------------------------------------------------
   # block_table
   #
