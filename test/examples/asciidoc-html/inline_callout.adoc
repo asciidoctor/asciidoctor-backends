@@ -1,11 +1,11 @@
-// .icons-image
+// .icons_image
 :icons:
 [source]
 ----
 "Hello world!" // <1>
 ----
 
-// .icons-font
+// .icons_font
 :icons: font
 [source]
 ----

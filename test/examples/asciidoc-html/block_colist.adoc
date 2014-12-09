@@ -1,4 +1,4 @@
-// .icons-image
+// .icons_image
 :icons:
 [source, ruby]
 ----
@@ -12,7 +12,7 @@ end
 <2> URL mapping
 <3> Content for response
 
-// .icons-font
+// .icons_font
 :icons: font
 [source, ruby]
 ----
