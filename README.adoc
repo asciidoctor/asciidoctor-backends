@@ -1,6 +1,6 @@
 = Asciidoctor Backends
 
-image:https://travis-ci.org/asciidoctor/asciidoctor-backends.svg?branch=master[Build Status, link="https://travis-ci.org/asciidoctor/asciidoctor-backends"]
+image:https://travis-ci.org/asciidoctor/asciidoctor-backends.svg?branch=master[Build Status,link=https://travis-ci.org/asciidoctor/asciidoctor-backends]
 
 This repository hosts an assortment of backends (i.e., templates) for https://github.com/asciidoctor/asciidoctor[Asciidoctor], a pure Ruby port of the http://asciidoc.org[AsciiDoc] markup language.
 
@@ -8,39 +8,39 @@ In this repository, you'll find replicas of both the html5 and docbook45 backend
 
 == General Usage Instructions
 
-. Ensure Asciidoctor is installed
+. Ensure Asciidoctor is installed:
 
  $ gem install asciidoctor
 
-. Clone `asciidoctor/asciidoctor-backends` to get templates for rendering presentation HTML.
+. Clone `asciidoctor/asciidoctor-backends` to get templates for rendering presentation HTML:
 
  $ git clone git://github.com/asciidoctor/asciidoctor-backends.git
 
-. Edit `CONTENT_FILE` ( *.adoc or *.ad or ...)
-** Slides & content per slide
-** [Optional] Set presentation "options" at top of `CONTENT_FILE`.  The options available & their values will depend on presentation library (some examples below).
+. Edit `CONTENT_FILE` ( *.adoc or *.ad or ...):
 
- ATTRIBUTE: ${value}
+  ** Slides & content per slide
+  ** [Optional] Set presentation "options" at top of `CONTENT_FILE`.  The options available & their values will depend on presentation library (some examples below).
 
-. Generate HTML from Asciidoctor Template
+  :${Attribute}: ${Value}
 
+. Generate HTML from Asciidoctor templates:
 
-** Command Line:
+  .. Command Line:
 
  $ asciidoctor -T TEMPLATE_DIRECTORY ${options} CONTENT_FILE
 
-** Build Script: use Ruby, JavaScript, Gradle, or your favorite build tool/script with presentation options
-. Copy or clone presentation library (to output destination/branch)
+  .. Build Script: use Ruby, JavaScript, Gradle, or your favorite build tool/script with presentation options
+
+. Copy or clone presentation library (to output destination/branch):
 
  $ git clone PRESENTATION_LIBRARY
 
-
-TIP: if leveraging https://pages.github.com/[GitHub Pages], plan ahead by keeping your source files on `master` branch and all output files on `gh-pages` branch.
+TIP: If you are using https://pages.github.com/[GitHub Pages], plan ahead by keeping your source files on `master` branch and all output files on the `gh-pages` branch.
 
 .Existing Backends Templates
-[options="header", cols="1a,2m,2"]
+[cols="1a,2m,2"]
 |===
-|Backend    |`PRESENTATION_LIBRARY`    |`TEMPLATE_DIRECTORY`
+|Backend |`PRESENTATION_LIBRARY` |`TEMPLATE_DIRECTORY`
 
 |http://imakewebthings.com/deck.js/[deck.js]
 |git://github.com/imakewebthings/deck.js.git
@@ -72,12 +72,12 @@ The https://github.com/asciidoctor/asciidoctor-backends/tree/master/haml/deckjs[
 ==== deck.js Notes
 
 * Follow the "General Usage Instructions", replacing `PRESENTATION_LIBRARY` and `TEMPLATE_DIRECTORY` with the corresponding values from Table 1 above.
-* If you are planning to split your slides you also need to copy to +extensions+ directory the +deck.split.js+ file which can be downloaded from https://github.com/houqp/deck.split.js[GitHub]
-* Also if you want to use the fullscreen photo feature you must create an +images+ directory.
+* If you are planning to split your slides you also need to copy to `extensions` directory the `deck.split.js` file which can be downloaded from https://github.com/houqp/deck.split.js[GitHub]
+* Also if you want to use the fullscreen photo feature you must create an `images` directory.
 
 ==== deck.js Source Examples
 
-Let's see some examples of +deckjs+ backend features:
+Let's see some examples of `deckjs` backend features:
 
 ----
 = Title Slide
@@ -98,12 +98,12 @@ World
 Hello World - Good Bye Cruel World
 ----
 
-In previous snippet we are creating a slide without a title (Slide One will not be shown), but a fullscreen image as background will be embedded, and centered at top of the slide and over the image the message ``Hello World - Good Bye Cruel World''.
+In previous snippet we are creating a slide without a title (Slide One will not be shown), but a fullscreen image as background will be embedded, and centered at top of the slide and over the image the message “Hello World - Good Bye Cruel World”.
 
 Some things to consider:
 
-* +canvas-image+ attribute receives as parameter the location of image we want to use and always must go before section.
-* if you are planning to add a message over the image, you can do it as usually, but probably won't be read good, using +position+ attribute which positions text into the slide (bottom-left, top-left, bottom-right, top-right, center-up, center-down) and +canvas-caption+ role will improve so much how text is rendered.
+* `canvas-image` attribute receives as parameter the location of image we want to use and always must go before section.
+* if you are planning to add a message over the image, you can do it as usually, but probably won't be read good, using `position` attribute which positions text into the slide (bottom-left, top-left, bottom-right, top-right, center-up, center-down) and `canvas-caption` role will improve so much how text is rendered.
 
 ----
 == Another Slide
@@ -130,11 +130,11 @@ And the same can be applied to lists, images, quotes, code:
 
 In this case each bullet will appear to screen each time you try to go to next slide.
 
-WARNING: The original deckjs backend for AsciiDoc used the option name 'incremental' instead of 'step'. We've changed it here to save you some typing :)
+WARNING: The original deckjs backend for AsciiDoc used the option name _incremental_ instead of _step_. We've changed it here to save you some typing :)
 
 ==== deck.js Options
 
-There are some attributes that can be set at the top of the document which they are specific of +deckjs+ backend.
+There are some attributes that can be set at the top of the document which they are specific of `deckjs` backend.
 
 [options="header",cols="1m,1,2"]
 |===
@@ -166,12 +166,12 @@ There are some attributes that can be set at the top of the document which they 
 
 |:split:
 | _N/A_
-|with this attribute we are registering the +deck.split.js+ file.
+|with this attribute we are registering the `deck.split.js` file.
 
 |===
 
-NOTE: You can also specify a custom stylesheet using the +stylesheet+ attribute, which can be used to customize AsciiDoc elements like section, paragraph, images, etc...
+NOTE: You can also specify a custom stylesheet using the `stylesheet` attribute, which can be used to customize AsciiDoc elements like section, paragraph, images, etc...
 
 ==== Stay Connected
 
-If you need any other feature supported by +deckjs+ to be ported to this backend, any way to make it better or you find any bug do not hesitate to open an issue.
+If you need any other feature supported by `deckjs` to be ported to this backend, any way to make it better or you find any bug do not hesitate to open an issue.
