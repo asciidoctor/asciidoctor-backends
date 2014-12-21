@@ -172,7 +172,7 @@ module Slim::Helpers
   # @yieldreturn [String] HTML fragment to be wrapped.
   # @return [String] HTML
   #
-  def block_with_captitle(klass = [], &block)
+  def block_with_captioned_title(klass = [], &block)
     block_with_title klass, captioned_title, &block
   end
 
