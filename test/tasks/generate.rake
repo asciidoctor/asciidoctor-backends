@@ -20,7 +20,7 @@ namespace :generate do
       examples_path: 'test/examples/html5',
       paragraph_xpath: './div/p/node()'
     )
-    task.renderer_opts[:template_dirs] = File.join engine, 'html5'
+    task.converter_opts[:template_dirs] = File.join(engine, 'html5')
     task.examples_path.unshift 'test/examples/asciidoc-html'
   end
 end
