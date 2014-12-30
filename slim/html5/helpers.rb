@@ -302,19 +302,6 @@ module Slim::Helpers
   # block_listing
   #
 
-  ##
-  # @return [String] a canonical name of the source-highlighter to be used as
-  #         a style class.
-  def highlighter
-    @_highlighter ||=
-      case (highlighter = document.attr 'source-highlighter')
-      when 'coderay'; 'CodeRay'
-      when 'highlight.js'; 'highlightjs'
-      when 'prettify'; 'prettyprint'
-      else highlighter
-      end
-  end
-
   def source_lang
     attr :language, nil, false
   end
