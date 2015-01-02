@@ -127,8 +127,12 @@ module Slim::Helpers
 
   ##
   # Wraps a block in a div element with the specified class and optionally
-  # the node's +id+ and +role+(s). If the node's +title+ is not empty, then a
-  # nested div with the class "title" and the title's content is added as well.
+  # the node's +id+ and +role+(s). If the node's +captioned_title+ is not
+  # empty, than a nested div with the class "title" and the title's content
+  # is added as well.
+  #
+  # Note: Every node has method +captioned_title+; if it doesn't have a
+  # caption, then this method returns just a naked title.
   #
   # @example When @id, @role and @title attributes are set.
   #   = block_with_title ['quoteblock', 'center']
@@ -148,32 +152,20 @@ module Slim::Helpers
   #   </div>
   #
   # @param klass [Array<String>, String] the tag's class (default: []).
-  # @param title [String, nil] the title (default: @title).
   # @yield The block of Slim/HTML code within the tag (optional).
   # @return [String] a rendered HTML fragment.
   #
-  def block_with_title(klass = [], title = @title, &block)
+  def block_with_title(klass = [], &block)
     klass = klass.split(' ') if klass.is_a? String
     attrs = { id: id, class: [klass, role].flatten.uniq }
 
     html_tag 'div', attrs do
-      if title.nil_or_empty?
+      if captioned_title.nil_or_empty?
         yield
       else
-        html_tag('div', class: 'title') { title } + yield
+        html_tag('div', class: 'title') { captioned_title } + yield
       end
     end
-  end
-
-  ##
-  # Same as {#block_with_title}, but uses +captioned_title+ as a title.
-  #
-  # @param klass [Array<String>, String] the style classes (default: [])
-  # @yieldreturn [String] HTML fragment to be wrapped.
-  # @return [String] HTML
-  #
-  def block_with_captioned_title(klass = [], &block)
-    block_with_title klass, captioned_title, &block
   end
 
   ##
