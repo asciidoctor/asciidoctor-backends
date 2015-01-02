@@ -3,5 +3,5 @@
     = block_with_title 'quoteblock abstract'
       blockquote =content
 - elsif style != 'partintro' || partintro_allowed?
-  = block_with_title ['openblock', (style if style != 'open')]
+  = block_with_title :class=>['openblock', (style if style != 'open')]
     .content =content

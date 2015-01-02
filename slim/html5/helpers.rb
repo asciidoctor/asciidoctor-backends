@@ -47,11 +47,12 @@ module Slim::Helpers
   # a block that will run between the opening and closing tags.
   #
   # @param name [#to_s] the name of the tag.
-  # @param attributes [Hash] (default: {})
+  # @param attributes [Hash]
+  # @param content [#to_s] the content; +nil+ to call the block.
   # @yield The block of Slim/HTML code within the tag (optional).
   # @return [String] a rendered HTML element.
   #
-  def html_tag(name, attributes = {})
+  def html_tag(name, attributes = {}, content = nil)
     attrs = attributes.reject { |_, v|
       v.nil? || (v.respond_to?(:empty?) && v.empty?)
     }.map do |k, v|
@@ -65,7 +66,7 @@ module Slim::Helpers
     if VOID_ELEMENTS.include? name.to_s
       %(<#{name}#{attrs_str}>)
     else
-      content = block_given? ? yield : ''
+      content ||= yield if block_given?
       %(<#{name}#{attrs_str}>#{content}</#{name}>)
     end
   end
@@ -135,7 +136,7 @@ module Slim::Helpers
   # caption, then this method returns just a naked title.
   #
   # @example When @id, @role and @title attributes are set.
-  #   = block_with_title ['quoteblock', 'center']
+  #   = block_with_title :class=>['quoteblock', 'center']
   #     blockquote =content
   #
   #   <div id="myid" class="quoteblock center myrole1 myrole2">
@@ -144,6 +145,14 @@ module Slim::Helpers
   #   </div>
   #
   # @example When @id, @role and @title attributes are empty.
+  #   = block_with_title(:class=>'quoteblock center', style=>style_value(float: 'left'))
+  #     blockquote =content
+  #
+  #   <div class="quoteblock center" style="float: left;">
+  #     <blockquote>Lorem ipsum</blockquote>
+  #   </div>
+  #
+  # @example When shorthand style for class attribute is used.
   #   = block_with_title 'quoteblock center'
   #     blockquote =content
   #
@@ -151,19 +160,30 @@ module Slim::Helpers
   #     <blockquote>Lorem ipsum</blockquote>
   #   </div>
   #
-  # @param klass [Array<String>, String] the tag's class (default: []).
+  # @param attributes [Hash, String] the tag's attributes as Hash),
+  #        or the tag's class if it's not a Hash.
+  # @param title_position [:top, :bottom] position of the title element.
   # @yield The block of Slim/HTML code within the tag (optional).
   # @return [String] a rendered HTML fragment.
   #
-  def block_with_title(klass = [], &block)
+  def block_with_title(attributes = {}, title_position = :top, &block)
+    if attributes.is_a? Hash
+      klass = attributes.delete(:class)
+    else
+      klass = attributes
+      attributes = {}
+    end
     klass = klass.split(' ') if klass.is_a? String
-    attrs = { id: id, class: [klass, role].flatten.uniq }
+    attributes[:class] = [klass, role].flatten.uniq
+    attributes[:id] = id
 
-    html_tag 'div', attrs do
+    html_tag 'div', attributes do
       if captioned_title.nil_or_empty?
         yield
       else
-        html_tag('div', class: 'title') { captioned_title } + yield
+        ary = [ html_tag('div', {class: 'title'}, captioned_title), yield ]
+        ary.reverse! if title_position == :bottom
+        ary.compact.join "\n"
       end
     end
   end
@@ -472,7 +492,7 @@ is book and it's a child of a book part. Excluding block content."
 
     styles.each do |item|
       if item.key?(:text)
-        tags << html_tag(:style) { item[:text] }
+        tags << html_tag(:style, {}, item[:text])
       else
         tags << html_tag(:link, rel: 'stylesheet', href: urlize(*item[:href]))
       end
@@ -480,7 +500,7 @@ is book and it's a child of a book part. Excluding block content."
 
     scripts.each do |item|
       if item.key? :text
-        tags << html_tag(:script, type: item[:type]) { item[:text] }
+        tags << html_tag(:script, {type: item[:type]}, item[:text])
       else
         tags << html_tag(:script, type: item[:type], src: urlize(*item[:src]))
       end
