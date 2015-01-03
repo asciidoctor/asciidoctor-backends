@@ -4,6 +4,10 @@ rvm:
   - 2.2.0
   - 2.0.0
   - jruby-head
+matrix:
+  allow_failures:
+    # fails due to missing pygments.rb
+    - rvm: jruby-head
 notifications:
   email: false
   irc: "irc.freenode.org#asciidoctor"
