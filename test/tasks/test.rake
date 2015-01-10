@@ -12,10 +12,10 @@ namespace :test do
     end
   end
 
-  test_task :html5, :haml
   test_task :html5, :slim
+  test_task :html5, :haml
 
-  task :html5 => ['html5:haml', 'html5:slim']
+  task :html5 => ['html5:slim', 'html5:haml']
   task :all   => ['html5']
 end
 

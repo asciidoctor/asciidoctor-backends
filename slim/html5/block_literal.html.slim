@@ -1,4 +1,2 @@
-.literalblock id=@id class=role
-  - if title?
-    .title=title
-  .content: pre class=(!(@document.attr? :prewrap) || (option? 'nowrap') ? 'nowrap' : nil) =content
+= block_with_title 'literalblock'
+  .content: pre class=nowrap? =content

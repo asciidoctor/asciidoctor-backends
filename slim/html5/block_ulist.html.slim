@@ -1,23 +1,23 @@
-- if (checklist = (option? 'checklist') ? 'checklist' : nil)
+- if (checklist = 'checklist' if option? 'checklist')
   - if option? 'interactive'
-    - marker_checked = '<input type="checkbox" data-item-complete="1" checked>'
-    - marker_unchecked = '<input type="checkbox" data-item-complete="0">'
+    - marker_checked = html_tag 'input', :type=>'checkbox', 'data-item-complete'=>'1', :checked=>true
+    - marker_unchecked = html_tag 'input', :type=>'checkbox', 'data-item-complete'=>'0'
+  - elsif icons_font?
+    - marker_checked = html_tag 'i', :class=>'fa fa-check-square-o'
+    - marker_unchecked = html_tag 'i', :class=>'fa fa-square-o'
   - else
-    - if @document.attr? :icons, 'font'
-      - marker_checked = '<i class="fa fa-check-square-o"></i>'
-      - marker_unchecked = '<i class="fa fa-square-o"></i>'
-    - else
-      - marker_checked = '&#10003;'
-      - marker_unchecked = '&#10063;'
-.ulist id=@id class=[checklist,@style,role]
-  - if title?
-    .title=title
-  ul class=(checklist || @style)
+    - marker_checked = '&#10003;'
+    - marker_unchecked = '&#10063;'
+= block_with_title :class=>['ulist', checklist, style]
+  ul class=(checklist || style)
     - items.each do |item|
       li
         p
           - if checklist && (item.attr? :checkbox)
-            =%(#{(item.attr? :checked) ? marker_checked : marker_unchecked} #{item.text})
+            - if item.attr? :checked
+              | #{marker_checked} #{item.text}
+            - else
+              | #{marker_unchecked} #{item.text}
           - else
             =item.text
         - if item.blocks?

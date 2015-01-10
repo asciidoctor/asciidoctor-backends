@@ -1,14 +1,3 @@
-.verseblock id=@id class=role
-  - if title?
-    .title=title
-  pre.content=content
-  - attribution = (attr? :attribution) ? (attr :attribution) : nil
-  - citetitle = (attr? :citetitle) ? (attr :citetitle) : nil
-  - if attribution || citetitle
-    .attribution
-      - if attribution
-        | &#8212; #{attribution}
-      - if citetitle
-        - if attribution
-          br
-        cite=citetitle
+= block_with_title 'verseblock'
+  pre.content =content
+  include _attribution.html
