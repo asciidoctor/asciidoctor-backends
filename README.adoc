@@ -11,7 +11,7 @@ In this repository, you'll find replicas of both the html5 and docbook45 backend
 . Ensure Asciidoctor, Slim, Haml and their dependencies are installed:
 
  $ gem install asciidoctor tilt haml thread_safe
-  gem install slim --version 2.1.0
+   gem install slim --version 2.1.0
 +
 WARNING: The Slim-based templates are not yet compatible with Slim 3.
 
