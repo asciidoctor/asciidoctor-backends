@@ -3,5 +3,6 @@
 - else
   kbd.keyseq
     - keys.each_with_index do |key, idx|
-      ="+" unless idx.zero?
+      - unless idx.zero?
+        |+
       kbd =key

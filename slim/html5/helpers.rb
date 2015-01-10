@@ -136,7 +136,7 @@ module Slim::Helpers
   # caption, then this method returns just a naked title.
   #
   # @example When @id, @role and @title attributes are set.
-  #   = block_with_title :class=>['quoteblock', 'center']
+  #   = block_with_title class: ['quoteblock', 'center']
   #     blockquote =content
   #
   #   <div id="myid" class="quoteblock center myrole1 myrole2">
@@ -145,7 +145,7 @@ module Slim::Helpers
   #   </div>
   #
   # @example When @id, @role and @title attributes are empty.
-  #   = block_with_title(:class=>'quoteblock center', style=>style_value(float: 'left'))
+  #   = block_with_title class: 'quoteblock center', style: style_value(float: 'left')
   #     blockquote =content
   #
   #   <div class="quoteblock center" style="float: left;">
@@ -242,7 +242,7 @@ module Slim::Helpers
         value = value.to_s + unit unless value.end_with? unit
       end
       prop = prop.to_s.gsub('_', '-')
-      decls << "#{prop}: #{value}"
+      decls << %(#{prop}: #{value})
     end
 
     decls.empty? ? nil : decls.join('; ') + ';'
@@ -252,7 +252,7 @@ module Slim::Helpers
     path = segments * '/'
     if path.start_with? '//'
       @_uri_scheme ||= document.attr 'asset-uri-scheme', 'https'
-      path = "#{@_uri_scheme}:#{path}" unless @_uri_scheme.empty?
+      path = %(#{@_uri_scheme}:#{path}) unless @_uri_scheme.empty?
     end
     normalize_web_path path
   end
@@ -262,14 +262,14 @@ module Slim::Helpers
   # @param index [Integer] the footnote's index.
   # @return [String] footnote id to be used in a link.
   def footnote_id(index = (attr :index))
-    "_footnote_#{index}"
+    %(_footnote_#{index})
   end
 
   ##
   # @param index (see #footnote_id)
   # @return [String] footnoteref id to be used in a link.
   def footnoteref_id(index = (attr :index))
-    "_footnoteref_#{index}"
+    %(_footnoteref_#{index})
   end
 
   def icons?
@@ -327,8 +327,7 @@ module Slim::Helpers
   # otherwise prints warning and returns +false+.
   def abstract_allowed?
     if result = (parent == document && document.doctype == 'book')
-      puts 'asciidoctor: WARNING: abstract block cannot be used in a document
-without a title when doctype is book. Excluding block content.'
+      puts 'asciidoctor: WARNING: abstract block cannot be used in a document without a title when doctype is book. Excluding block content.'
     end
     !result
   end
@@ -338,8 +337,7 @@ without a title when doctype is book. Excluding block content.'
   # prints warning and returns +false+.
   def partintro_allowed?
     if result = (level != 0 || parent.context != :section || document.doctype != 'book')
-      puts "asciidoctor: ERROR: partintro block can only be used when doctype
-is book and it's a child of a book part. Excluding block content."
+      puts 'asciidoctor: ERROR: partintro block can only be used when doctype is book and it\'s a child of a book part. Excluding block content.'
     end
     !result
   end
@@ -369,28 +367,28 @@ is book and it's a child of a book part. Excluding block content."
     case (attr :poster, '').to_sym
     when :vimeo
       params = {
-        :autoplay => (1 if option? 'autoplay'),
-        :loop     => (1 if option? 'loop')
+        autoplay: (1 if option? 'autoplay'),
+        loop: (1 if option? 'loop')
       }
-      start_anchor = "#at=#{attr :start}" if attr? :start
-      "//player.vimeo.com/video/#{attr :target}#{start_anchor}#{url_query params}"
+      start_anchor = %(#at=#{attr :start}) if attr? :start
+      %(//player.vimeo.com/video/#{attr :target}#{start_anchor}#{url_query params})
 
     when :youtube
       video_id, list_id = (attr :target).split('/', 2)
       params = {
-        :rel      => 0,
-        :start    => (attr :start),
-        :end      => (attr :end),
-        :list     => (attr :list, list_id),
-        :autoplay => (1 if option? 'autoplay'),
-        :loop     => (1 if option? 'loop'),
-        :controls => (0 if option? 'nocontrols')
+        rel: 0,
+        start: (attr :start),
+        end: (attr :end),
+        list: (attr :list, list_id),
+        autoplay: (1 if option? 'autoplay'),
+        loop: (1 if option? 'loop'),
+        controls: (0 if option? 'nocontrols')
       }
-      "//www.youtube.com/embed/#{video_id}#{url_query params}"
+      %(//www.youtube.com/embed/#{video_id}#{url_query params})
     else
       anchor = [(attr :start), (attr :end)].join(',').chomp(',')
       anchor.prepend '#t=' unless anchor.empty?
-      media_uri "#{attr :target}#{anchor}"
+      media_uri %(#{attr :target}#{anchor})
     end
   end
 
@@ -444,13 +442,13 @@ is book and it's a child of a book part. Excluding block content."
       if attr? 'iconfont-remote'
         styles << { href: (attr 'iconfont-cdn', FONT_AWESOME_URI) }
       else
-        styles << { href: [stylesdir, "#{attr 'iconfont-name', 'font-awesome'}.css"] }
+        styles << { href: [stylesdir, %(#{attr 'iconfont-name', 'font-awesome'}.css)] }
       end
     end
 
     if attr? 'stem'
       scripts << { src: MATHJAX_JS_URI }
-      scripts << { type: 'text/x-mathjax-config', text: "MathJax.Hub.Config(#{MATHJAX_CONFIG});" }
+      scripts << { type: 'text/x-mathjax-config', text: %(MathJax.Hub.Config(#{MATHJAX_CONFIG});) }
     end
 
     case attr 'source-highlighter'
@@ -479,7 +477,7 @@ is book and it's a child of a book part. Excluding block content."
       scripts << { src: [hjs_base, 'highlight.min.js'] }
       scripts << { src: [hjs_base, 'lang/common.min.js'] }
       scripts << { text: 'hljs.initHighlightingOnLoad()' }
-      styles  << { href: [hjs_base, "styles/#{hjs_theme}.min.css"] }
+      styles  << { href: [hjs_base, %(styles/#{hjs_theme}.min.css)] }
 
     when 'prettify'
       prettify_base = attr :prettifydir, PRETTIFY_BASE_URI
@@ -487,7 +485,7 @@ is book and it's a child of a book part. Excluding block content."
 
       scripts << { src: [prettify_base, 'prettify.min.js'] }
       scripts << { text: 'document.addEventListener("DOMContentLoaded", prettyPrint)' }
-      styles  << { href: [prettify_base, "#{prettify_theme}.min.css"] }
+      styles  << { href: [prettify_base, %(#{prettify_theme}.min.css)] }
     end
 
     styles.each do |item|
@@ -525,10 +523,10 @@ is book and it's a child of a book part. Excluding block content."
 
   # @return [Array] style classes for a Font Awesome icon.
   def icon_fa_classes
-    [ "fa fa-#{target}",
-      ("fa-#{attr :size}" if attr? :size),
-      ("fa-rotate-#{attr :rotate}" if attr? :rotate),
-      ("fa-flip-#{attr :flip}" if attr? :flip)
+    [ %(fa fa-#{target}),
+      (%(fa-#{attr :size}) if attr? :size),
+      (%(fa-rotate-#{attr :rotate}) if attr? :rotate),
+      (%(fa-flip-#{attr :flip}) if attr? :flip)
     ].compact
   end
 end

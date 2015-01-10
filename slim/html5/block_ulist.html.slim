@@ -3,12 +3,12 @@
     - marker_checked = html_tag 'input', :type=>'checkbox', 'data-item-complete'=>'1', :checked=>true
     - marker_unchecked = html_tag 'input', :type=>'checkbox', 'data-item-complete'=>'0'
   - elsif font_icons?
-    - marker_checked = html_tag 'i', :class=>'fa fa-check-square-o'
-    - marker_unchecked = html_tag 'i', :class=>'fa fa-square-o'
+    - marker_checked = html_tag 'i', class: 'fa fa-check-square-o'
+    - marker_unchecked = html_tag 'i', class: 'fa fa-square-o'
   - else
     - marker_checked = '&#10003;'
     - marker_unchecked = '&#10063;'
-= block_with_title :class=>['ulist', checklist, style]
+= block_with_title class: ['ulist', checklist, style]
   ul class=(checklist || style)
     - items.each do |item|
       li
