@@ -276,7 +276,7 @@ module Slim::Helpers
     document.attr? :icons
   end
 
-  def icons_font?
+  def font_icons?
     document.attr? :icons, 'font'
   end
 

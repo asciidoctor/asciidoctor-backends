@@ -5,7 +5,7 @@
 - [ ] not checked
 -     normal list item
 
-// .checklist_icons_font
+// .checklist_font_icons
 :icons: font
 - [*] checked
 - [x] also checked

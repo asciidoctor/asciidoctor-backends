@@ -2,7 +2,7 @@
   - if option? 'interactive'
     - marker_checked = html_tag 'input', :type=>'checkbox', 'data-item-complete'=>'1', :checked=>true
     - marker_unchecked = html_tag 'input', :type=>'checkbox', 'data-item-complete'=>'0'
-  - elsif icons_font?
+  - elsif font_icons?
     - marker_checked = html_tag 'i', :class=>'fa fa-check-square-o'
     - marker_unchecked = html_tag 'i', :class=>'fa fa-square-o'
   - else
