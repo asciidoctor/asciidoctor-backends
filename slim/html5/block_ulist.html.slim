@@ -15,9 +15,9 @@
         p
           - if checklist && (item.attr? :checkbox)
             - if item.attr? :checked
-              | #{marker_checked} #{item.text}
+              |#{marker_checked} #{item.text}
             - else
-              | #{marker_unchecked} #{item.text}
+              |#{marker_unchecked} #{item.text}
           - else
             =item.text
         - if item.blocks?
