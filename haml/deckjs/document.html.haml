@@ -1,4 +1,5 @@
 - deckjs_version = (attr :deckjs_version, '1.1.0')
+- deckjsdir = (attr :deckjsdir, 'deck.js')
 !!! 5
 %html{:lang=>(attr :lang, 'en')}
   %head
@@ -42,28 +43,28 @@
       %link(rel='stylesheet' href="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/#{attr 'prettify-theme', 'prettify'}.min.css")
       %script(src="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/prettify.min.js")
       %script document.addEventListener('DOMContentLoaded', prettyPrint)
-    %link(rel='stylesheet' href='deck.js/core/deck.core.css')
+    %link(rel='stylesheet' href="#{deckjsdir}/core/deck.core.css")
     - if deckjs_version <= '1.0.0'
-      %link(rel='stylesheet' media='screen' href='deck.js/extensions/hash/deck.hash.css')
-    %link(rel='stylesheet' media='screen' href='deck.js/extensions/scale/deck.scale.css')
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/extensions/hash/deck.hash.css")
+    %link(rel='stylesheet' media='screen' href="#{deckjsdir}/extensions/scale/deck.scale.css")
     - if attr? :goto
-      %link(rel='stylesheet' media='screen' href='deck.js/extensions/goto/deck.goto.css')
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/extensions/goto/deck.goto.css")
     - if attr? :menu
-      %link(rel='stylesheet' media='screen' href='deck.js/extensions/menu/deck.menu.css')
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/extensions/menu/deck.menu.css")
     - if attr? :navigation
-      %link(rel='stylesheet' media='screen' href='deck.js/extensions/navigation/deck.navigation.css')
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/extensions/navigation/deck.navigation.css")
     - if attr? :status
-      %link(rel='stylesheet' media='screen' href='deck.js/extensions/status/deck.status.css')
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/extensions/status/deck.status.css")
     - if attr? :toc
-      %link(rel='stylesheet' media='screen' href='deck.js/extensions/toc/deck.toc.css')
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/extensions/toc/deck.toc.css")
     - unless attr :deckjs_theme == 'none'
-      %link(rel='stylesheet' media='screen' href="deck.js/themes/style/#{attr :deckjs_theme, 'web-2.0'}.css")
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/themes/style/#{attr :deckjs_theme, 'web-2.0'}.css")
     - unless attr :deckjs_transition == 'none'
-      %link(rel='stylesheet' media='screen' href="deck.js/themes/transition/#{attr :deckjs_transition, 'fade'}.css")
+      %link(rel='stylesheet' media='screen' href="#{deckjsdir}/themes/transition/#{attr :deckjs_transition, 'fade'}.css")
     - if attr? :customcss
       %link(rel='stylesheet' href="#{attr :customcss, 'customcss.css'}")
-    %link(rel='stylesheet' media='print' href='deck.js/core/print.css')
-    %script(src='deck.js/modernizr.custom.js')
+    %link(rel='stylesheet' media='print' href="#{deckjsdir}/core/print.css")
+    %script(src="#{deckjsdir}/modernizr.custom.js")
   %body{:id=>@id, :class=>doctype, :style=>("max-width: #{attr 'max-width'};" if (attr? 'max-width'))}
     .deck-container
       - unless noheader
@@ -107,25 +108,25 @@
           %input(type='submit' value='Go')
       - if deckjs_version <= '1.0.0'
         %a(href='.' title='Permalink to this slide' class='deck-permalink') #
-    %script(src='deck.js/jquery.min.js')
-    %script(src='deck.js/core/deck.core.js')
+    %script(src="#{deckjsdir}/jquery.min.js")
+    %script(src="#{deckjsdir}/core/deck.core.js")
     - if deckjs_version <= '1.0.0'
-      %script(src='deck.js/extensions/hash/deck.hash.js')
-    %script(src='deck.js/extensions/scale/deck.scale.js')
+      %script(src="#{deckjsdir}/extensions/hash/deck.hash.js")
+    %script(src="#{deckjsdir}/extensions/scale/deck.scale.js")
     - if attr? :blank
-      %script(src='deck.js/extensions/blank/deck.blank.js')
+      %script(src="#{deckjsdir}/extensions/blank/deck.blank.js")
     - if attr? :goto
-      %script(src='deck.js/extensions/goto/deck.goto.js')
+      %script(src="#{deckjsdir}/extensions/goto/deck.goto.js")
     - if attr? :menu
-      %script(src='deck.js/extensions/menu/deck.menu.js')
+      %script(src="#{deckjsdir}/extensions/menu/deck.menu.js")
     - if attr? :navigation
-      %script(src='deck.js/extensions/navigation/deck.navigation.js')
+      %script(src="#{deckjsdir}/extensions/navigation/deck.navigation.js")
     - if attr? :split
-      %script(src='deck.js/extensions/split/deck.split.js')
+      %script(src="#{deckjsdir}/extensions/split/deck.split.js")
     - if attr? :status
-      %script(src='deck.js/extensions/status/deck.status.js')
+      %script(src="#{deckjsdir}/extensions/status/deck.status.js")
     - if attr? :toc
-      %script(src='deck.js/extensions/toc/deck.toc.js')
+      %script(src="#{deckjsdir}/extensions/toc/deck.toc.js")
       %div(class='deck-toc')
     - if attr? :customjs
       %script(src="#{attr :customjs, 'customjs.js'}")
