@@ -39,9 +39,8 @@
         - else
           %style=Asciidoctor::Stylesheets.instance.pygments_stylesheet_data(attr 'pygments-style')
     - when 'highlightjs'
-      %link(rel='stylesheet' href="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4'}/styles/#{attr 'highlightjs-theme', 'googlecode'}.min.css")
-      %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4'}/highlight.min.js")
-      %script(src="#{attr :highlightjsdir, 'http://cdnjs.cloudflare.com/ajax/libs/highlight.js/7.4'}/lang/common.min.js")
+      %link(rel='stylesheet' href="#{attr :highlightjsdir, '//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4'}/styles/#{attr 'highlightjs-theme', 'googlecode'}.min.css")
+      %script(src="#{attr :highlightjsdir, '//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4'}/highlight.min.js")
       %script hljs.initHighlightingOnLoad()
     - when 'prettify'
       %link(rel='stylesheet' href="#{attr :prettifydir, 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298'}/#{attr 'prettify-theme', 'prettify'}.min.css")
