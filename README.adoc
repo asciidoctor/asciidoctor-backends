@@ -17,7 +17,7 @@ WARNING: The Slim-based templates are not yet compatible with Slim 3.
 
 . Clone `asciidoctor/asciidoctor-backends` to get templates for rendering presentation HTML:
 
- $ git clone git://github.com/asciidoctor/asciidoctor-backends.git
+ $ git clone https://github.com/asciidoctor/asciidoctor-backends
 
 . Edit `CONTENT_FILE` ( *.adoc or *.ad or ...):
 
@@ -46,21 +46,21 @@ TIP: If you are using https://pages.github.com/[GitHub Pages], plan ahead by kee
 |Backend |`PRESENTATION_LIBRARY` |`TEMPLATE_DIRECTORY`
 
 |http://imakewebthings.com/deck.js/[deck.js]
-|git://github.com/imakewebthings/deck.js.git
+|https://github.com/imakewebthings/deck.js
 |replaced by: +
 https://github.com/asciidoctor/asciidoctor-deck.js[asciidoctor/asciidoctor-deck.js]
 
 |http://lab.hakim.se/reveal-js/#/[reveal.js]
-|git://github.com/hakimel/reveal.js.git
+|https://github.com/hakimel/reveal.js
 |replaced by: +
 https://github.com/asciidoctor/asciidoctor-reveal.js[asciidoctor/asciidoctor-reveal.js]
 
 |http://paulrouget.com/dzslides/[DZSlides]
-|git://github.com/paulrouget/dzslides.git
+|https://github.com/paulrouget/dzslides
 |`asciidoctor-backends/slim/dzslides`
 
 |http://markdalgleish.com/projects/bespoke.js/[Bespoke.js]
-|git://github.com/markdalgleish/bespoke.js
+|https://github.com/markdalgleish/bespoke.js
 |`asciidoctor-backends/slim/bespokejs`
 |===
 
