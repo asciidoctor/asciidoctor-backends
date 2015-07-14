@@ -1,0 +1,7 @@
+= haml/deckjs has moved!
+
+The deck.js backend for Asciidoctor (based on Haml) has been graduated to its own repository.
+
+https://github.com/asciidoctor/asciidoctor-deck.js
+
+Please clone this repository individually to use it.
