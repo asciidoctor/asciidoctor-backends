@@ -30,7 +30,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
           - else
             style
               =endline
-              =::IO.read %(#{attr 'stylesdir','.'}/#{attr 'stylesheet'})
+              =read_asset(normalize_system_path((attr 'stylesheet'), (attr :stylesdir, '')), :warn_on_failure => true)
     - if link_assets
       link rel='stylesheet' href="./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
     - else
