@@ -4,7 +4,7 @@ doctype 5
 / This should really be a media query in the css
 html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides-aspect', '4-3'}"
   head
-    meta charset=(attr :encoding)
+    meta charset=(attr :encoding, 'UTF-8')
     meta name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}, dzslides backend"
     title=((doctitle :sanitize => true) || (attr 'untitled-label'))
     - {:description => 'description', :author => 'author', :copyright => 'copyright',
