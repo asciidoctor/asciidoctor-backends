@@ -24,6 +24,13 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
         style
           =endline
           =::IO.read %(./dzslides/themes/highlight/#{attr 'dzslides-highlight', 'default'}.css)
+    - if attr? 'stylesheet'
+          - if link_assets
+            link rel='stylesheet' href=normalize_web_path("#{attr 'stylesheet'}", (attr :stylesdir, ''))
+          - else
+            style
+              =endline
+              =read_asset(normalize_system_path((attr 'stylesheet'), (attr :stylesdir, '')), :warn_on_failure => true)
     - if link_assets
       link rel='stylesheet' href="./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
     - else
@@ -33,7 +40,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
     /bug in full screen image if dzslides.css is included before ours
     - if link_assets
       link rel='stylesheet' href='./dzslides/core/dzslides.css'
-      link rel='stylesheet' href="./dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css" 
+      link rel='stylesheet' href="./dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css"
     - else
       style
         =endline
@@ -71,11 +78,11 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
             - if attr? "email_#{idx}"
               '
               span.email =sub_macros(attr "email_#{idx}")
-        - if attr? :hashtag 
+        - if attr? :hashtag
           span.hashtag=(attr :hashtag)
     =content
     - if link_assets
-      script src='./dzslides/core/dzslides.js' 
+      script src='./dzslides/core/dzslides.js'
     - else
       script
         =endline
@@ -85,6 +92,6 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
         script src='./dzslides/highlight/highlight.pack.js'
       - else
         script
-          =endline 
+          =endline
           =::IO.read './dzslides/highlight/highlight.pack.js'
       script hljs.initHighlightingOnLoad()
