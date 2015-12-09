@@ -24,6 +24,12 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
         style
           =endline
           =::IO.read %(./dzslides/themes/highlight/#{attr 'dzslides-highlight', 'default'}.css)
+    - if link_assets
+      link rel='stylesheet' href="./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
+    - else
+      style
+        =endline
+        =::IO.read %(./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css)
     - if attr? 'stylesheet'
           - if link_assets
             link rel='stylesheet' href=normalize_web_path("#{attr 'stylesheet'}", (attr :stylesdir, ''))
@@ -31,12 +37,6 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
             style
               =endline
               =read_asset(normalize_system_path((attr 'stylesheet'), (attr :stylesdir, '')), :warn_on_failure => true)
-    - if link_assets
-      link rel='stylesheet' href="./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css"
-    - else
-      style
-        =endline
-        =::IO.read %(./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css)
     /bug in full screen image if dzslides.css is included before ours
     - if link_assets
       link rel='stylesheet' href='./dzslides/core/dzslides.css'
