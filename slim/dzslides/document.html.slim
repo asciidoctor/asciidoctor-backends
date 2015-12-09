@@ -30,13 +30,13 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
       style
         =endline
         =::IO.read %(./dzslides/themes/style/#{attr 'dzslides-style', 'default'}.css)
-    - if attr? 'stylesheet'
-          - if link_assets
-            link rel='stylesheet' href=normalize_web_path("#{attr 'stylesheet'}", (attr :stylesdir, ''))
-          - else
-            style
-              =endline
-              =read_asset(normalize_system_path((attr 'stylesheet'), (attr :stylesdir, '')), :warn_on_failure => true)
+    - unless (attr :stylesheet).nil_or_empty?
+      - if link_assets
+        link rel='stylesheet' href=normalize_web_path((attr :stylesheet), (attr :stylesdir, ''))
+      - else
+        style
+          =endline
+          =read_asset(normalize_system_path((attr :stylesheet), (attr :stylesdir, '')), :warn_on_failure => true)
     /bug in full screen image if dzslides.css is included before ours
     - if link_assets
       link rel='stylesheet' href='./dzslides/core/dzslides.css'
@@ -48,7 +48,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
       style
         =endline
         =::IO.read %(./dzslides/themes/transition/#{attr 'dzslides-transition', 'horizontal-slide'}.css)
-    - if attr? 'math'
+    - if attr? :math
       script type='text/x-mathjax-config'
         |MathJax.Hub.Config({
            tex2jax: {
