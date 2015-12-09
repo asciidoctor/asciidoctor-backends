@@ -55,7 +55,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
            }
          });
       script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML'
-    =docinfo '.html'
+    =docinfo :head, '.html'
   body id=@id
     section.title
       h1=@header.title
