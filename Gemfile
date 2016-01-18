@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 group :test do
-  gem 'asciidoctor', '~> 1.5.2'
-  gem 'asciidoctor-doctest', '~> 1.5.1.2'
+  gem 'asciidoctor', '~> 1.5.4'
+  gem 'asciidoctor-doctest', '~> 1.5.2.0'
   gem 'coderay', '~> 1.1'
   gem 'haml', '~> 4.0'
   gem 'rake', '~> 10.0'
