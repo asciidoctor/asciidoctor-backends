@@ -14,7 +14,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
     link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts', 'family=Oswald'}"
     - if attr? :icons, 'font'
       - if (attr 'iconfont-remote', '')
-        link rel='stylesheet' href=(attr 'iconfont-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css')
+        link rel='stylesheet' href=(attr 'iconfont-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')
       - else
         link rel='stylesheet' href=normalize_web_path("#{attr 'iconfont-name', 'font-awesome'}.css", (attr :stylesdir, ''))
     - if attr? 'source-highlighter'
