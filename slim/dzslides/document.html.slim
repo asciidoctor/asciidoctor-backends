@@ -11,7 +11,7 @@ html lang=(attr :lang, 'en' unless attr? :nolang) class="aspect-#{attr 'dzslides
        :revdate => 'presdate', :corpname => 'company'}.each do |key, name|
       - if attr? key
         meta name=name content=(attr key)
-    link rel='stylesheet' href="http://fonts.googleapis.com/css?#{attr 'dzslides-fonts', 'family=Oswald'}"
+    link rel='stylesheet' href="https://fonts.googleapis.com/css?#{attr 'dzslides-fonts', 'family=Oswald'}"
     - if attr? :icons, 'font'
       - if (attr 'iconfont-remote', '')
         link rel='stylesheet' href=(attr 'iconfont-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')
