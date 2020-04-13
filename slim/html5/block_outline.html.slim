@@ -1,5 +1,5 @@
 - unless sections.empty?
-  - toclevels ||= (document.attr 'toclevels', DEFAULT_TOCLEVELS).to_i
+  - toclevels ||= (document.attr 'toclevels', ::Slim::Helpers::DEFAULT_TOCLEVELS).to_i
   - slevel = section_level sections.first
   ul class="sectlevel#{slevel}"
     - sections.each do |sec|
