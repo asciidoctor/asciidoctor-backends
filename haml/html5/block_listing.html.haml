@@ -26,6 +26,8 @@
         - nowrap = false
       - pre_class << 'nowrap' if nowrap
       %pre{:class=>pre_class, :lang=>pre_lang}
-        %code{:class=>code_class, 'data-lang'=>code_lang}=content
+        %code{:class=>code_class, 'data-lang'=>code_lang}
+          :preserve
+            #{content}
     - else
       %pre{:class=>('nowrap' if nowrap)}=content
