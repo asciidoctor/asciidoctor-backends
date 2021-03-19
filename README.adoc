@@ -3,11 +3,20 @@ ifdef::env-github[:outfilesuffix: .adoc]
 
 image:https://travis-ci.org/asciidoctor/asciidoctor-backends.svg?branch=master[Build Status,link=https://travis-ci.org/asciidoctor/asciidoctor-backends]
 
-This repository hosts an assortment of backends (i.e., templates) for https://github.com/asciidoctor/asciidoctor[Asciidoctor], a pure Ruby port of the http://asciidoc.org[AsciiDoc] markup language.
+In this repository, you'll find an assortment of backend templates for generating different output formats from AsciiDoc that you can use with the template converter in https://github.com/asciidoctor/asciidoctor[Asciidoctor].
+These examples demonstrate how to make an html5 or docbook45 converter similar to the ones in Asciidoctor using purely templates, as well as how to use templates to generate HTML5 presentations from AsciiDoc.
 
-In this repository, you'll find replicas of both the html5 and docbook45 backends from AsciiDoc (and Asciidoctor) written in both http://haml.info[Haml] and http://slim-lang.com[Slim], as well as backends for generating HTML5 presentations from AsciiDoc.
+Please note that these templates are only meant to be examples.
+They are not activately maintained, are not production ready, and are not intended to be a drop-in replacement for the official converters.
+They are provided merely as a reference and starting point for creating your own template-based converter.
+
+Since the template converter in Asciidoctor works on a per-element basis, you can pull out one or more of these templates for customizing part of the HTML.
+Asciidoctor will then dropback to the built-in converter to handle the other elements in the document.
+Thus, you don't have to feed in the whole directory of templates at once.
 
 == General Usage Instructions
+
+CAUTION: These usage instructions are out of date, so follow with caution.
 
 . Ensure Asciidoctor, Slim, Haml and their dependencies are installed:
 
