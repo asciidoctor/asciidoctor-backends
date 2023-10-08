@@ -1,7 +1,5 @@
 = Asciidoctor Backends
 
-image:https://travis-ci.org/asciidoctor/asciidoctor-backends.svg?branch=master[Build Status,link=https://travis-ci.org/asciidoctor/asciidoctor-backends]
-
 In this repository, you'll find an assortment of backend templates for generating different output formats from AsciiDoc that you can use with the template converter in https://github.com/asciidoctor/asciidoctor[Asciidoctor].
 These examples demonstrate how to make an html5 or docbook45 converter similar to the ones in Asciidoctor using purely templates, as well as how to use templates to generate HTML5 presentations from AsciiDoc.
 
