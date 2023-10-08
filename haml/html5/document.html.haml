@@ -2,8 +2,7 @@
 %html{:lang=>(attr :lang, 'en')}
   %head
     %meta(charset="#{attr :encoding, 'UTF-8'}")
-    /[if IE]
-      %meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    %meta(http-equiv="X-UA-Compatible" content="IE=edge")
     %meta(name='viewport' content='width=device-width, initial-scale=1.0')
     %meta(name='generator' content="Asciidoctor #{attr 'asciidoctor-version'}")
     - { 'app-name'=>'application-name', 'description'=>nil, 'keywords'=>nil, 'authors'=>'author', 'copyright'=>nil }.each do |key, meta|
