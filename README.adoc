@@ -8,8 +8,8 @@ They are not activately maintained, are not production ready, and are not intend
 They are provided merely as a reference and starting point for creating your own template-based converter.
 
 Since the template converter in Asciidoctor works on a per-element basis, you can pull out one or more of these templates for customizing part of the HTML.
-Asciidoctor will then dropback to the built-in converter to handle the other elements in the document.
-Thus, you don't have to feed in the whole directory of templates at once.
+Asciidoctor will drop back to the built-in converter to handle other elements in the document.
+You don't have to feed in the whole directory of templates at once.
 
 == General Usage Instructions
 
