@@ -1,5 +1,4 @@
 = Asciidoctor Backends
-ifdef::env-github[:outfilesuffix: .adoc]
 
 image:https://travis-ci.org/asciidoctor/asciidoctor-backends.svg?branch=master[Build Status,link=https://travis-ci.org/asciidoctor/asciidoctor-backends]
 
